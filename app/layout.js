@@ -8,7 +8,6 @@ import Footer from './components/footer';
 import NavbarWrapper from './components/Navbar/NavbarWrapper';
 import StructuredData from './components/helper/StructuredData';
 import Head from 'next/head';
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
   title: 'Moinul Islam - Full Stack Software Developer',
@@ -37,9 +36,9 @@ export const metadata = {
     card: 'summary_large_image',
     title: 'Moinul Islam - Full Stack Developer',
     description: 'Official portfolio and projects of Moinul Islam.',
-    site: '@yourTwitterHandle',
-    creator: '@yourTwitterHandle',
-    images: ['https://yourdomain.com/og-image.png'],
+    site: '@Moinul7',
+    creator: '@Moinul7',
+    images: ['https://moinulislam7.vercel.app/profile.png'],
   },
 };
 
@@ -51,7 +50,7 @@ export default function RootLayout({ children }) {
         <meta name="google-site-verification" content="KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs" />
       </Head>
       <StructuredData />
-      <body className={inter.className}>
+      <body>
         <ToastContainer />
         <NavbarWrapper />
         <main className="pt-20 min-h-screen relative container z-10">
