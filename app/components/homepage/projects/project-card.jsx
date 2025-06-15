@@ -16,8 +16,8 @@ function ProjectCard({ project }) {
       <hr className="line" />
       <ul className="card__list">
         {
-          project.shortDescripton.map((tool) => (
-            <li className="card__list_item">
+          project.shortDescripton.map((tool, index) => (
+            <li key={index} className="card__list_item">
               <span className="check">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
