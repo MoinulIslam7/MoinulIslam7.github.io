@@ -14,7 +14,7 @@ export default function NavbarWrapper() {
 
   return (
     <div
-      className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
+      className={`md:fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${
         scrolled ? 'bg-[#001428] shadow' : 'bg-transparent'
       }`}
     >
