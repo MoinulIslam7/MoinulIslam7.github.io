@@ -6,16 +6,51 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
 import NavbarWrapper from './components/Navbar/NavbarWrapper';
+import StructuredData from './components/helper/StructuredData';
+import Head from 'next/head';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'Moinul Islam - Software Developer',
-  description: 'This is the portfolio of Moinul Islam. I am a full stack developer and a self taught developer. I love to learn new things and I am always open to collaborating with others. I am a quick learner and I am always looking for new challenges.',
+  title: 'Moinul Islam - Full Stack Software Developer',
+  description: 'Portfolio of Moinul Islam, a full stack developer with 3 years of experience. Skilled in JavaScript, Vue, React, Node.js, and modern web technologies.',
+  keywords: ['Moinul Islam', 'Software Engineer', 'Full Stack Developer', 'JavaScript Developer', 'Moinul Portfolio', 'Moinul Islam Dev', 'Web Developer', 'React Developer', 'Vue.js Developer', 'Node.js Developer'],
+  authors: [{ name: 'Moinul Islam' }],
+  creator: 'Moinul Islam',
+  themeColor: '#0a192f',
+  metadataBase: new URL('https://moinulislam7.vercel.app/'),
+  openGraph: {
+    title: 'Moinul Islam - Software Engineer',
+    description: 'Explore the portfolio and blog of Moinul Islam, a skilled full stack developer.',
+    url: 'https://moinulislam7.vercel.app/',
+    siteName: 'Moinul Islam Portfolio',
+    images: [
+      {
+        url: 'https://moinulislam7.vercel.app/profile.png',
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Moinul Islam - Full Stack Developer',
+    description: 'Official portfolio and projects of Moinul Islam.',
+    site: '@yourTwitterHandle',
+    creator: '@yourTwitterHandle',
+    images: ['https://yourdomain.com/og-image.png'],
+  },
 };
+
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <Head>
+        <meta name="google-site-verification" content="KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs" />
+      </Head>
+      <StructuredData />
       <body className={inter.className}>
         <ToastContainer />
         <NavbarWrapper />
