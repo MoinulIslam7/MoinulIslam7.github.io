@@ -7,23 +7,27 @@ import Experience from "./components/homepage/experience";
 import HeroSection from "./components/homepage/hero-section";
 import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
+import axios from 'axios';
+
 
 async function getData() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+  try {
+    const res = await axios.get(`https://dev.to/api/articles?username=${personalData.devUsername}`);
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    const filtered = res.data
+      .filter((item) => item?.cover_image)
+      .sort(() => Math.random() - 0.5);
+
+    return filtered;
+  } catch (error) {
+    console.error("Failed to fetch blogs from dev.to API:", error.message);
+    return [];
   }
-
-  const data = await res.json();
-
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
-
-  return filtered;
-};
+}
 
 export default async function Home() {
   const blogs = await getData();
+  console.log(blogs, 'b')
 
   return (
     <>
