@@ -6,10 +6,10 @@ function ProjectCard({ project, onViewDetails }) {
     <div className="card flex flex-col justify-between h-full">
       <div>
         <div className="card__border"></div>
-        <div className="w-full h-[14rem]">
+        <div className="w-full h-[9rem]">
           <img className="w-full h-full object-cover rounded-lg" src={project.image.src} alt="" />
         </div>
-        <div className="card_title__container">
+        <div className="card_title__container mt-4">
           <span className="card_title">{project.name}</span>
           <p className="card_paragraph">{project.tools}</p>
         </div>
