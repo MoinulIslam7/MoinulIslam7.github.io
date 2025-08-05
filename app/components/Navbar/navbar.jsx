@@ -46,9 +46,10 @@ function Navbar() {
             { label: "ABOUT", href: "#about" },
             { label: "EXPERIENCE", href: "#experience" },
             { label: "SKILLS", href: "#skills" },
+            { label: "PROJECTS", href: "#projects" },
             { label: "EDUCATION", href: "#education" },
             { label: "BLOGS", href: "#blogs" },
-            { label: "PROJECTS", href: "#projects" },
+            { label: "CONTACT", href: "#contact" },
           ].map((item) => (
             <li key={item.label}>
               <a
