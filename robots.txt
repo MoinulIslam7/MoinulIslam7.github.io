@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://moinulislam7.vercel.app/
+
+# Sitemaps
+Sitemap: https://moinulislam7.vercel.app/sitemap.xml
