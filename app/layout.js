@@ -16,15 +16,15 @@ export const metadata = {
   authors: [{ name: 'Moinul Islam' }],
   creator: 'Moinul Islam',
   themeColor: '#0a192f',
-  metadataBase: new URL('https://moinulislam7.vercel.app/'),
+  metadataBase: new URL('https://moinulislam7.github.io/'),
   openGraph: {
     title: 'Moinul Islam - Software Engineer',
     description: 'Explore the portfolio and blog of Moinul Islam, a skilled full stack developer.',
-    url: 'https://moinulislam7.vercel.app/',
+    url: 'https://moinulislam7.github.io/',
     siteName: 'Moinul Islam Portfolio',
     images: [
       {
-        url: 'https://moinulislam7.vercel.app/profile.png',
+        url: 'https://moinulislam7.github.io/profile.png',
         width: 1200,
         height: 630,
       },
@@ -38,7 +38,7 @@ export const metadata = {
     description: 'Official portfolio and projects of Moinul Islam.',
     site: '@Moinul7',
     creator: '@Moinul7',
-    images: ['https://moinulislam7.vercel.app/profile.png'],
+    images: ['https://moinulislam7.github.io/profile.png'],
   },
 };
 
