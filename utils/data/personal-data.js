@@ -1,17 +1,24 @@
 export const personalData = {
   name: "Moinul Islam",
   profile: '/profile.png',
-  designation: "Software Developer",
-  description: "My name is Moinul Islam. I am a professional and enthusiastic programmer in my daily life. I am a quick learner with a self-learning attitude. I love to learn and explore new technologies and am passionate about problem-solving. I love almost all the stacks of web application development and love to make the web more open to the world. My core skill is based on JavaScript and I love to do most of the things using JavaScript. I am available for any kind of job opportunity that suits my skills and interests.",
-  email: 'moinul180180@gmail.com',
-  phone: '+8801626248996',
-  address: 'Mirpur 2, Dhaka, Bangladesh - 1216 ',
-  github: 'https://github.com/MoinulIslam7',
-  facebook: 'https://www.facebook.com/mnl1122/',
-  linkedIn: 'https://www.linkedin.com/in/moinulislam7/',
-  twitter: 'https://twitter.com/moinul7',
-  stackOverflow: 'https://stackoverflow.com/users/16840768/moinul', //need modify
-  leetcode: "https://leetcode.com/moinul7/", // need modify
-  devUsername: "moinulislam7",
-  resume: "https://drive.google.com/file/d/1NYNqrCWpI33T_VnBzyXxRMrBpN-e-N4Z/view?usp=sharing"
-}
+  designation: "Software Engineer",
+  description: "I'm Moinul Islam, a passionate software engineer with 3 years of experience in building web applications. I specialize in turning coffee into code and occasionally solving actual problems. My current stack includes React, Next.js, Node.js, and MongoDB, but I'm always learning new ways to break (and then fix) things. When I'm not coding, you'll find me debugging my life choices or explaining to non-tech friends that 'the cloud' is just someone else's computer.",
+  email: 'moinul@example.com',
+  phone: '+1234567890',
+  address: 'Dhaka, Bangladesh',
+  github: 'https://github.com/moinulislam7',
+  facebook: 'https://www.facebook.com/',
+  linkedIn: 'https://www.linkedin.com/',
+  twitter: 'https://twitter.com/',
+  stackOverflow: "https://stackoverflow.com/",
+  leetcode: "https://leetcode.com/",
+  devUsername: "moinul7",
+  resume: "https://drive.google.com/",
+  funFacts: [
+    "I can center a div with my eyes closed",
+    "My first website was a GeoCities page about dolphins",
+    "I once fixed a bug by turning it off and on again",
+    "I have a special folder for 'Works on my machine' errors",
+    "My code has more comments than actual code (just kidding... mostly)"
+  ]
+};

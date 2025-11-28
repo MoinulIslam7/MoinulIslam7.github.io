@@ -1,13 +1,13 @@
-// app/layout.js or app/layout.tsx
 import { Inter } from 'next/font/google';
 import './css/card.scss';
 import './css/globals.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
-import NavbarWrapper from './components/Navbar/NavbarWrapper';
 import StructuredData from './components/helper/StructuredData';
 import Head from 'next/head';
+import Navbar from './components/Navbar/navbar';
+import LoadingScreen from './components/helper/LoadingScreen';
 
 export const metadata = {
   title: 'Moinul Islam - Full Stack Software Developer',
@@ -42,7 +42,6 @@ export const metadata = {
   },
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
@@ -51,8 +50,20 @@ export default function RootLayout({ children }) {
       </Head>
       <StructuredData />
       <body>
-        <ToastContainer />
-        <NavbarWrapper />
+        <LoadingScreen />
+        <ToastContainer 
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+        />
+        <Navbar />
         <main className="pt-20 min-h-screen relative container z-10">
           {children}
         </main>

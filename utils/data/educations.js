@@ -1,20 +1,31 @@
 export const educations = [
   {
     id: 1,
-    title: "Bachelor of Science in computer science and Engineering",
-    duration: "2019 - 2023",
-    institution: "Bangladesh University of Business and Technology-BUBT",
+    title: "BSc in Computer Science",
+    institution: "University of Dhaka",
+    duration: "2015 - 2019",
+    gpa: "3.8",
+    type: "degree"
   },
   {
     id: 2,
-    title: "Higher Secondary Certificate",
-    duration: "2015 - 2017",
-    institution: "Kazi Mohammad Shafiqul Islam College and University",
+    title: "Advanced JavaScript Concepts",
+    institution: "Udemy",
+    duration: "2020",
+    type: "course"
   },
   {
     id: 3,
-    title: "Secondary School Certificate",
-    duration: "2009 - 2015",
-    institution: "Satbarga High School",
+    title: "React & Redux Certification",
+    institution: "Coursera",
+    duration: "2021",
+    type: "course"
+  },
+  {
+    id: 4,
+    title: "Node.js Masterclass",
+    institution: "Pluralsight",
+    duration: "2022",
+    type: "course"
   }
-]
+];

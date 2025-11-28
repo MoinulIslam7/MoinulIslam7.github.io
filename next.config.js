@@ -1,13 +1,18 @@
-// next.config.js
 const path = require('path');
 
-/** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'export',
+  assetPrefix: './',
+  basePath: '',
+  trailingSlash: true,
+
   sassOptions: {
-    includePaths: [path.join(__dirname, 'styles')],
+    includePaths: [path.join(__dirname, 'app/css')],
   },
+
   images: {
     domains: ['res.cloudinary.com', 'media.dev.to'],
+    unoptimized: true,
   },
 };
 

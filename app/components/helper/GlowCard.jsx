@@ -1,9 +1,17 @@
 "use client"
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-const GlowCard = ({ children , identifier}) => {
+const GlowCard = ({ children, identifier }) => {
+  const [hydrated, setHydrated] = useState(false);
+
   useEffect(() => {
+    setHydrated(true); // Ensures client-side only rendering of dynamic stuff
+  }, []);
+
+  useEffect(() => {
+    if (!hydrated) return;
+
     const CONTAINER = document.querySelector(`.glow-container-${identifier}`);
     const CARDS = document.querySelectorAll(`.glow-card-${identifier}`);
 
@@ -50,6 +58,7 @@ const GlowCard = ({ children , identifier}) => {
     document.body.addEventListener('pointermove', UPDATE);
 
     const RESTYLE = () => {
+      if (!CONTAINER) return;
       CONTAINER.style.setProperty('--gap', CONFIG.gap);
       CONTAINER.style.setProperty('--blur', CONFIG.blur);
       CONTAINER.style.setProperty('--spread', CONFIG.spread);
@@ -62,11 +71,21 @@ const GlowCard = ({ children , identifier}) => {
     RESTYLE();
     UPDATE();
 
-    // Cleanup event listener
     return () => {
       document.body.removeEventListener('pointermove', UPDATE);
     };
-  }, [identifier]);
+  }, [identifier, hydrated]);
+
+  if (!hydrated) {
+    // Render a static shell for SSR to avoid mismatch
+    return (
+      <div className={`glow-container-${identifier} glow-container`}>
+        <article className={`glow-card glow-card-${identifier} h-fit cursor-pointer border border-[#2a2e5a] bg-[#101123] text-gray-200 rounded-xl w-full`}>
+          {children}
+        </article>
+      </div>
+    );
+  }
 
   return (
     <div className={`glow-container-${identifier} glow-container`}>
