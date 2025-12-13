@@ -5,11 +5,10 @@
   "homepage": "https://moinulislam7.github.io",
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "postbuild": "next-sitemap",
-    "deploy": "next build && gh-pages -d out"
+    "deploy": "next build && next export && gh-pages -d out"
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.1",
