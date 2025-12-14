@@ -7,8 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
 import NavbarWrapper from './components/Navbar/NavbarWrapper';
 import StructuredData from './components/helper/StructuredData';
-import Head from 'next/head';
-
 export const metadata = {
   title: 'Moinul Islam - Full Stack Software Developer',
   description: 'Portfolio of Moinul Islam, a full stack developer with 3 years of experience. Skilled in JavaScript, Vue, React, Node.js, and modern web technologies.',
@@ -17,6 +15,23 @@ export const metadata = {
   creator: 'Moinul Islam',
   themeColor: '#0a192f',
   metadataBase: new URL('https://moinulislam7.github.io/'),
+  alternates: {
+    canonical: '/',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs',
+  },
   openGraph: {
     title: 'Moinul Islam - Software Engineer',
     description: 'Explore the portfolio and blog of Moinul Islam, a skilled full stack developer.',
@@ -46,9 +61,6 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <Head>
-        <meta name="google-site-verification" content="KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs" />
-      </Head>
       <StructuredData />
       <body>
         <ToastContainer />
