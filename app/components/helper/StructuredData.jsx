@@ -11,12 +11,16 @@ export default function StructuredData() {
         url: 'https://moinulislam7.github.io/',
         sameAs: [
           'https://github.com/MoinulIslam7',
-          'https://www.linkedin.com/in/MoinulIslam7/',
-          'https://dev.to/moinulislam7'
+          'https://www.linkedin.com/in/moinul-islam7/',
+          'https://dev.to/moinulislam7',
+          'https://x.com/MoinulI7',
+          'https://www.facebook.com/mnl1122/',
+          'https://leetcode.com/u/MoinulIslam7/',
+          'https://stackoverflow.com/users/22913262/moinul-islam'
         ],
         jobTitle: 'Software Engineer',
         image: 'https://moinulislam7.github.io/profile.png',
-        description: 'Moinul Islam is a full stack software developer with expertise in JavaScript, Vue, React, Node.js, and modern web technologies. With over 3 years of experience, Moinul has worked on various projects, contributing to both frontend and backend development.',
+        description: 'Moinul Islam is a dedicated Full Stack Software Developer specialized in building scalable web applications with JavaScript, React, Next.js, and Node.js. Passionate about problem-solving and modern web aesthetics.',
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Dhaka',
@@ -24,7 +28,7 @@ export default function StructuredData() {
         },
         worksFor: {
           '@type': 'Organization',
-          name: 'Freelancer'
+          name: 'Gigalogy'
         }
       })}
     </Script>

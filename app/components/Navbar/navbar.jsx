@@ -1,65 +1,103 @@
 'use client';
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+const navItems = [
+  { label: "🧭 Quest Log", href: "#about" },
+  { label: "⚔️ Battle Record", href: "#experience" },
+  { label: "🎯 Skill Tree", href: "#skills" },
+  { label: "🗺️ Artifacts", href: "#projects" },
+  { label: "📜 Lore", href: "#education" },
+  { label: "📖 The Blog", href: "#blogs" },
+  { label: "☕ Brew a Chat", href: "#contact" },
+];
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-  const toggleMenu = () => setIsOpen(!isOpen);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav className="bg-transparent">
-      <div className="flex items-center justify-between py-5 relative">
+    <nav
+      style={{
+        background: scrolled
+          ? 'rgba(13,7,0,0.92)'
+          : 'transparent',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(200,149,108,0.15)' : '1px solid transparent',
+        transition: 'all 0.4s ease',
+      }}
+    >
+      <div className="flex items-center justify-between py-4 relative">
         {/* Logo */}
-        <div className="flex flex-shrink-0 items-center">
-          <Link href="/" className="text-[#16f2b3] text-3xl font-bold">
-            Moinul Islam
-          </Link>
-        </div>
+        <Link
+          href="/"
+          className="group flex items-center gap-2 no-underline"
+          style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 800, fontSize: '1.2rem', color: 'var(--latte)' }}
+        >
+          <span
+            className="group-hover:animate-bounce inline-block"
+            style={{ fontSize: '1.4rem', lineHeight: 1, display: 'inline-block', transition: 'transform 0.3s' }}
+          >
+            ☕
+          </span>
+          <span style={{ color: 'var(--cream)' }}>Moinul</span>
+          <span style={{ color: 'var(--latte)' }}>.dev</span>
+        </Link>
 
-        {/* Toggle Button for Mobile */}
-        <div className="md:hidden z-50">
-          <button onClick={toggleMenu} className="focus:outline-none">
-            {isOpen ? (
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            ) : (
-              <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            )}
-          </button>
-        </div>
+        {/* Mobile toggle */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="md:hidden z-50 focus:outline-none"
+          style={{ color: 'var(--cream)' }}
+          aria-label="Toggle menu"
+        >
+          {isOpen ? (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          ) : (
+            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+            </svg>
+          )}
+        </button>
 
-        {/* Menu */}
+        {/* Desktop menu */}
         <ul
           className={`
-            absolute top-20 left-0 w-full bg-[#001428] shadow flex flex-col space-y-2 transition-all duration-300 ease-in-out z-50
-            ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible'}
-            md:static md:opacity-100 md:visible md:flex-row md:space-y-0 md:space-x-4 md:bg-transparent md:w-auto md:p-0 md:flex
+            absolute top-20 left-0 w-full flex flex-col gap-1 p-4 z-50 shadow-2xl
+            transition-all duration-300 ease-in-out
+            md:static md:flex-row md:w-auto md:gap-0 md:p-0 md:shadow-none md:bg-transparent
+            ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:opacity-100 md:visible'}
           `}
+          style={{
+            background: 'rgba(13,7,0,0.97)',
+            backdropFilter: 'blur(20px)',
+          }}
           id="navbar-default"
         >
-          {[
-            { label: "ABOUT", href: "#about" },
-            { label: "EXPERIENCE", href: "#experience" },
-            { label: "SKILLS", href: "#skills" },
-            { label: "PROJECTS", href: "#projects" },
-            { label: "EDUCATION", href: "#education" },
-            { label: "BLOGS", href: "#blogs" },
-            { label: "CONTACT", href: "#contact" },
-          ].map((item) => (
-            <li key={item.label}>
+          {navItems.map((item) => (
+            <li key={item.label} style={{ listStyle: 'none' }}>
               <a
                 href={item.href}
                 onClick={closeMenu}
-                className="block px-4 py-2 no-underline outline-none hover:no-underline"
+                className="block no-underline text-[#9ca3af] transition-all duration-200 hover:text-[#c8956c] whitespace-nowrap px-3 py-2"
+                style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontSize: '0.72rem',
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                }}
               >
-                <div className="dark:text-gray-300 text-sm text-gray-700 transition-colors duration-300 hover:text-gray-400 focus:text-white dark:hover:text-pink-600">
-                  {item.label}
-                </div>
+                {item.label}
               </a>
             </li>
           ))}

@@ -15,7 +15,7 @@ export const experiences = [
     id: 3,
     title: 'Junior Developer',
     company: "Core Devs Ltd.",
-    duration: "(18 August, 2023 - Present)"
+    duration: "(18 August, 2023 - 30 November, 2024)"
   },
   {
     id: 4,

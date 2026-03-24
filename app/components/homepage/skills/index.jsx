@@ -1,72 +1,158 @@
-"use client"
-
+'use client';
+// @flow strict
 import { skillsData } from "@/utils/data/skills";
 import { skillsImage } from "@/utils/skill-image";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
 const Marquee = dynamic(() => import('react-fast-marquee'), { ssr: false });
 
-function Skills() {
+const tiers = [
+  {
+    key: 'espresso',
+    label: '☕ Espresso — Languages & Fundamentals',
+    desc: 'The foundation. Strong, concentrated, non-negotiable.',
+    skills: ['Python', 'Javascript', 'Typescript', 'C++', 'C', 'HTML', 'CSS', 'DSA'],
+    color: 'var(--latte)',
+  },
+  {
+    key: 'latte',
+    label: '🥛 Latte — Frontend Sorcery',
+    desc: 'Smooth and crowd-pleasing. Makes everything look good.',
+    skills: ['React', 'Next JS', 'Vue', 'jQuery', 'Tailwind', 'Bootstrap', 'MaterialUI', 'Redux', 'Socket.io'],
+    color: 'var(--pink)',
+  },
+  {
+    key: 'cold',
+    label: '🧊 Cold Brew — Backend & Infrastructure',
+    desc: 'Slow-brewed power. Handles the heavy lifting overnight.',
+    skills: ['Node JS', 'Express', 'MongoDB', 'MySQL', 'PostgreSQL', 'Firebase', 'Docker', 'Nginx', 'Puppeteer', 'Fastify', 'REST APIs'],
+    color: 'var(--matcha)',
+  },
+  {
+    key: 'barista',
+    label: '🎨 Barista Pick — Tools & Deployment',
+    desc: 'The craftsmanship layer. Every barista has their secret tools.',
+    skills: ['Git', 'GitHub', 'Netlify', 'Vercel', 'Figma', 'Postman', 'Chrome Dev Tools'],
+    color: 'var(--violet)',
+  },
+];
+
+function SkillChip({ skill, accentColor }) {
+  const img = skillsImage(skill);
   return (
-    <div id="skills" className="relative z-50 border-t my-12 lg:my-24 border-[#25213b]">
-      <div className="w-[100px] h-[100px] bg-violet-100 rounded-full absolute top-6 left-[42%] translate-x-1/2 filter blur-3xl  opacity-20"></div>
-
-      <div className="flex justify-center -translate-y-[1px]">
-        <div className="w-3/4">
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent  w-full" />
-        </div>
-      </div>
-
-      <div className="flex justify-center my-5 lg:py-8">
-        <div className="flex  items-center">
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-          <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Skills
-          </span>
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-        </div>
-      </div>
-
-      <div className="w-full my-12">
-        <Marquee
-          gradient={false}
-          speed={80}
-          pauseOnHover={true}
-          pauseOnClick={true}
-          delay={0}
-          play={true}
-          direction="left"
-        >
-          {skillsData.map((skill, id) => (
-            <div className="w-36 min-w-fit h-fit flex flex-col items-center justify-center transition-all duration-500 m-3 sm:m-5 rounded-lg group relative hover:scale-[1.15] cursor-pointer"
-              key={id}>
-              <div className="h-full w-full rounded-lg border border-[#1f223c] bg-[#11152c] shadow-none shadow-gray-50 group-hover:border-violet-500 transition-all duration-500">
-                <div className="flex -translate-y-[1px] justify-center">
-                  <div className="w-3/4">
-                    <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-violet-500 to-transparent" />
-                  </div>
-                </div>
-                <div className="flex flex-col items-center justify-center gap-3 p-6">
-                  <div className="h-8 sm:h-10">
-                    <Image
-                      src={skillsImage(skill)?.src}
-                      alt={skill}
-                      width={40}
-                      height={40}
-                      className="h-full w-auto rounded-lg"
-                    />
-                  </div>
-                  <p className="text-white text-sm sm:text-lg">
-                    {skill}
-                  </p>
-                </div>
-              </div>
-            </div>
-          ))}
-        </Marquee>
-      </div>
+    <div
+      className="skill-chip"
+      style={{ '--chip-accent': accentColor }}
+      title={skill}
+    >
+      {img?.src ? (
+        <Image
+          src={img.src}
+          alt={skill}
+          width={20}
+          height={20}
+          className="rounded"
+          style={{ width: 20, height: 20, objectFit: 'contain' }}
+        />
+      ) : (
+        <span style={{ fontSize: '0.8rem' }}>💎</span>
+      )}
+      <span>{skill}</span>
+      <span style={{
+        fontSize: '0.55rem',
+        fontWeight: 700,
+        letterSpacing: '0.1em',
+        color: accentColor,
+        opacity: 0.7,
+      }}>✓</span>
     </div>
   );
-};
+}
+
+function Skills() {
+  return (
+    <section id="skills" style={{ padding: '5rem 0', position: 'relative' }}>
+      {/* Ambient glow */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', left: '50%', transform: 'translateX(-50%)',
+        width: '600px', height: '600px',
+        background: 'radial-gradient(circle, rgba(200,149,108,0.06) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      <div className="section-header">
+        <span className="section-tag">Chapter 03</span>
+        <h2 className="section-title font-heading">🎯 Skill Tree</h2>
+        <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+          What&apos;s in the grinder — served by categorical mastery
+        </p>
+        <div className="section-divider" />
+      </div>
+
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+        {tiers.map(tier => (
+          <div key={tier.key}>
+            <div className="skill-tier-title" style={{ color: tier.color }}>
+              {tier.label}
+              <span style={{ color: 'var(--text-dim)', fontWeight: 400, fontStyle: 'italic', textTransform: 'none', letterSpacing: 0, fontSize: '0.7rem' }}>
+                — {tier.desc}
+              </span>
+            </div>
+            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.55rem' }}>
+              {tier.skills.map(skill => (
+                <SkillChip key={skill} skill={skill} accentColor={tier.color} />
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      {/* Marquee remains as a nice extra footer for the section */}
+      <div style={{ marginTop: '3rem' }}>
+        <p style={{
+          fontSize: '0.65rem',
+          fontWeight: 600,
+          letterSpacing: '0.18em',
+          textTransform: 'uppercase',
+          color: 'var(--text-dim)',
+          textAlign: 'center',
+          marginBottom: '1rem',
+        }}>
+          + global pantry
+        </p>
+        <div style={{
+          border: '1px solid var(--border-subtle)',
+          borderRadius: '12px',
+          overflow: 'hidden',
+          padding: '0.5rem 0',
+          background: 'rgba(255,255,255,0.015)',
+        }}>
+          <Marquee gradient={false} speed={45} pauseOnHover direction="left">
+            {skillsData.map((skill, id) => (
+              <div
+                key={id}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  margin: '0 1.2rem',
+                  fontSize: '0.78rem',
+                  color: 'var(--text-muted)',
+                  fontWeight: 500,
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {skillsImage(skill)?.src && (
+                  <Image src={skillsImage(skill).src} alt={skill} width={16} height={16} style={{ opacity: 0.7 }} />
+                )}
+                {skill}
+              </div>
+            ))}
+          </Marquee>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 export default Skills;
