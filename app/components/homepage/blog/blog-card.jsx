@@ -1,61 +1,86 @@
+'use client';
 // @flow strict
 import { timeConverter } from '@/utils/time-converter';
-import Image from 'next/image';
 import Link from 'next/link';
 import { BsHeartFill } from 'react-icons/bs';
 import { FaCommentAlt } from 'react-icons/fa';
 
 function BlogCard({ blog }) {
-
   return (
-    <div className="border border-[#1d293a] hover:border-[#464c6a] transition-all duration-500 bg-[#1b203e] rounded-lg relative group"
+    <div
+      className="brew-card group"
+      style={{ overflow: 'hidden', display: 'flex', flexDirection: 'column' }}
     >
-      <div className="h-44 lg:h-52 w-auto cursor-pointer overflow-hidden rounded-t-lg">
-        <img
-          src={blog?.cover_image}
-          height={1080}
-          width={1920}
-          alt=""
-          className='h-full w-full group-hover:scale-110 transition-all duration-300'
-        />
+      {/* Image */}
+      <div style={{
+        height: '160px', flexShrink: 0, overflow: 'hidden',
+        position: 'relative',
+      }}>
+        {blog?.cover_image ? (
+          <img
+            src={blog.cover_image}
+            alt={blog.title}
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#1c0e05] to-[#2a1509] flex items-center justify-center text-4xl">
+            ☕
+          </div>
+        )}
+        {/* "Fresh Brew" overlay */}
+        <div style={{
+          position: 'absolute', top: '10px', left: '10px',
+          fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.1em',
+          background: 'rgba(200,149,108,0.15)',
+          border: '1px solid rgba(200,149,108,0.3)',
+          color: 'var(--latte)',
+          padding: '0.2rem 0.55rem', borderRadius: '4px',
+          textTransform: 'uppercase', backdropFilter: 'blur(8px)',
+        }}>
+          🍵 Fresh Brew
+        </div>
       </div>
-      <div className="p-2 sm:p-3 flex flex-col">
-        <div className="flex justify-between items-center text-[#16f2b3] text-sm">
-          <p>{timeConverter(blog.published_at)}</p>
-          <div className="flex items-center gap-3">
-            <p className="flex items-center gap-1">
-              <BsHeartFill />
-              <span>{blog.public_reactions_count}</span>
-            </p>
-            {blog.comments_count > 0 &&
-              <p className="flex items-center gap-1">
-                <FaCommentAlt />
-                <span>{blog.comments_count}</span>
-              </p>
-            }
+
+      <div style={{ padding: '1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+        {/* Date & stats */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>
+            {timeConverter(blog.published_at)}
+          </span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.68rem', color: 'var(--matcha)' }}>
+            <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+              <BsHeartFill /> {blog.public_reactions_count}
+            </span>
+            {blog.comments_count > 0 && (
+              <span style={{ display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
+                <FaCommentAlt /> {blog.comments_count}
+              </span>
+            )}
           </div>
         </div>
-        <Link target='_blank' href={blog.url}>
-          <p className='my-2 lg:my-3 cursor-pointer text-lg sm:text-xl font-medium hover:text-violet-500'>
+
+        <Link href={blog.url} target="_blank" className="no-underline">
+          <h3 className="font-heading font-bold text-[1rem] text-[#f5e6d3] leading-tight transition-colors duration-200 group-hover:text-[#c8956c]">
             {blog.title}
-          </p>
+          </h3>
         </Link>
-        <p className='mb-2 text-sm text-[#16f2b3]'>
-          {`${blog.reading_time_minutes} Min Read`}
-        </p>
-        <p className='text-sm lg:text-base text-[#d3d8e8] pb-3 lg:pb-6 line-clamp-3'>
+
+        <p className="text-[0.75rem] text-[#9ca3af] leading-relaxed line-clamp-2">
           {blog.description}
         </p>
-        {/* <div className="">
-          <Link target='_blank' href={blog.url}>
-            <button className='bg-violet-500 text-white px-3 py-1.5 rounded-full text-xs'>
-              Read More
-            </button>
+
+        {/* CTA */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+          <span style={{ fontSize: '0.68rem', color: 'var(--matcha)', fontWeight: 600 }}>
+            ⏱ {blog.reading_time_minutes} min read
+          </span>
+          <Link href={blog.url} target="_blank" className="no-underline text-[0.68rem] font-bold text-[#c8956c] flex items-center gap-1 transition-colors duration-200 group-hover:text-pink-500">
+            ☕ Read More →
           </Link>
-        </div> */}
+        </div>
       </div>
     </div>
   );
-};
+}
 
 export default BlogCard;

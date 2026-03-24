@@ -1,91 +1,171 @@
+'use client';
 // @flow strict
-
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef } from "react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare } from "react-icons/fa";
+import { FaFacebook, FaTwitterSquare, FaDev, FaStackOverflow } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { SiLeetcode } from "react-icons/si";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
-import { SiLeetcode } from "react-icons/si";
 
 function HeroSection() {
   return (
-    <section className="relative flex flex-col items-center justify-between py-4 lg:py-20 ">
-      <Image
-        src="/hero.svg"
-        alt="Hero"
-        width={1572}
-        height={795}
-        className="absolute -top-[98px] -z-10"
+    <section
+      id="hero"
+      className="relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24"
+      style={{ minHeight: 'calc(100vh - 80px)' }}
+    >
+      {/* Ambient blobs */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute', top: '-80px', left: '-100px',
+          width: '480px', height: '480px',
+          background: 'radial-gradient(circle, rgba(200,149,108,0.09) 0%, transparent 70%)',
+          pointerEvents: 'none', zIndex: 0,
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: 'absolute', bottom: '-60px', right: '-80px',
+          width: '360px', height: '360px',
+          background: 'radial-gradient(circle, rgba(168,85,247,0.07) 0%, transparent 70%)',
+          pointerEvents: 'none', zIndex: 0,
+        }}
       />
 
-      <div className="grid grid-cols-1 items-center justify-center w-[70%] text-center lg:grid-cols-1 lg:gap-12 gap-y-8">
-        <div className="order-2 lg:order-1 flex flex-col items-center justify-center p-2 pb-20 md:pb-10 lg:pt-10">
-          <h1 className="pt-16 md:pt-0 lg:text-3xl font-bold leading-10 text-white md:font-extrabold lg:text-[2.6rem] lg:leading-[3.5rem]">
-            Hi, I’m {' '}
-            <span className=" text-pink-500">{personalData.name}</span>
-            {`, — part engineer, part problem-solver, part philosopher when the code doesn’t compile`}
-            {/* <span className=" text-[#16f2b3]">{personalData.designation}.</span> */}
-            <span className=" text-[#16f2b3]">.</span>
-          </h1>
+      {/* LEFT — Text content */}
+      <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
-          <div className="my-12 flex items-center gap-5">
-            <Link
-              href={personalData.github}
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsGithub size={30} />
-            </Link>
-            <Link
-              href={personalData.linkedIn}
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <BsLinkedin size={30} />
-            </Link>
-            <Link
-              href={personalData.facebook}
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaFacebook size={30} />
-            </Link>
-            <Link
-              href={personalData.leetcode}
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <SiLeetcode size={30} />
-            </Link>
-            <Link
-              href={personalData.twitter}
-              target='_blank'
-              className="transition-all text-pink-500 hover:scale-125 duration-300"
-            >
-              <FaTwitterSquare size={30} />
-            </Link>
+        {/* Level badge */}
+        <div className="level-chip mb-5">
+          ⚔️ &nbsp;LVL 3 &nbsp;·&nbsp; SOFTWARE ENGINEER
+        </div>
+
+        {/* Name headline */}
+        <h1
+          className="font-heading"
+          style={{
+            fontSize: 'clamp(2rem, 5vw, 3.4rem)',
+            fontWeight: 800,
+            lineHeight: 1.18,
+            color: 'var(--cream)',
+            marginBottom: '0.5rem',
+          }}
+        >
+          Hi, I&rsquo;m{' '}
+          <span
+            style={{
+              background: 'linear-gradient(135deg, var(--latte), var(--pink))',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}
+          >
+            Moinul Islam
+          </span>
+          <span style={{ color: 'var(--matcha)' }}>.</span>
+        </h1>
+
+        {/* Witty subtitle */}
+        <p
+          style={{
+            fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
+            color: 'var(--text-muted)',
+            marginBottom: '1.5rem',
+            maxWidth: '480px',
+            lineHeight: 1.6,
+          }}
+        >
+          Fueled by ☕ coffee. Debugged by stubbornness.{' '}
+          <span style={{ color: 'var(--latte)' }}>Deployed on vibes.</span>
+        </p>
+
+        {/* XP Bar */}
+        <div className="xp-bar-container mb-7 w-full" style={{ maxWidth: '380px' }}>
+          <div className="xp-labels">
+            <span>⚡ XP — 3 Years Production</span>
+            <span style={{ color: 'var(--matcha)' }}>72%</span>
           </div>
+          <div className="xp-track">
+            <div className="xp-fill" />
+          </div>
+        </div>
 
-          <div className="flex items-center gap-3">
-            <Link href="#contact" className="bg-gradient-to-r to-pink-500 from-violet-600 p-[1px] rounded-full transition-all duration-300 hover:from-pink-500 hover:to-violet-600">
-              <button className="px-3 text-xs md:px-8 py-3 md:py-4 bg-[#0d1224] rounded-full border-none text-center md:text-sm font-medium uppercase tracking-wider text-[#ffff] no-underline transition-all duration-200 ease-out  md:font-semibold flex items-center gap-1 hover:gap-3">
-                <span>Contact me</span>
-                <RiContactsFill size={16} />
-              </button>
-            </Link>
-
-            <Link className="flex items-center gap-1 hover:gap-3 rounded-full bg-gradient-to-r from-pink-500 to-violet-600 px-3 md:px-8 py-3 md:py-4 text-center text-xs md:text-sm font-medium uppercase tracking-wider text-white no-underline transition-all duration-200 ease-out hover:text-white hover:no-underline md:font-semibold" role="button" target="_blank" href={personalData.resume}
+        {/* Social icons */}
+        <div className="flex flex-wrap items-center gap-5 mb-8">
+          {[
+            { href: personalData.github, Icon: BsGithub, label: 'GitHub' },
+            { href: personalData.linkedIn, Icon: BsLinkedin, label: 'LinkedIn' },
+            { href: personalData.twitter, Icon: FaXTwitter, label: 'Twitter' },
+            { href: personalData.facebook, Icon: FaFacebook, label: 'Facebook' },
+            { href: personalData.leetcode, Icon: SiLeetcode, label: 'LeetCode' },
+            { href: personalData.stackOverflow, Icon: FaStackOverflow, label: 'StackOveflow' },
+            { href: `https://dev.to/${personalData.devUsername}`, Icon: FaDev, label: 'Dev.to' },
+          ].map(({ href, Icon, label }) => (
+            <Link
+              key={label}
+              href={href}
+              target="_blank"
+              aria-label={label}
+              className="text-[#c8956c] transition-all duration-300 hover:text-pink-500 hover:scale-125"
             >
-              <span>Get Resume</span>
-              <MdDownload size={16} />
+              <Icon size={26} />
             </Link>
+          ))}
+        </div>
+
+        {/* CTAs */}
+        <div className="flex flex-wrap items-center gap-4">
+          <Link href="#contact" className="btn-primary">
+            <RiContactsFill size={16} />
+            <span>☕ Hire Me</span>
+          </Link>
+          <Link href={personalData.resume} target="_blank" className="btn-outline">
+            <MdDownload size={16} />
+            <span>📜 Get Resume</span>
+          </Link>
+        </div>
+      </div>
+
+      {/* RIGHT — Profile image */}
+      <div
+        className="flex-shrink-0 flex items-center justify-center z-10 animate-float"
+        style={{ width: 'clamp(200px, 30vw, 340px)', height: 'clamp(200px, 30vw, 340px)' }}
+      >
+        <div
+          className="animate-pulse-glow"
+          style={{
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            padding: '4px',
+            background: 'linear-gradient(135deg, var(--latte), var(--pink), var(--violet))',
+          }}
+        >
+          <div
+            style={{
+              width: '100%',
+              height: '100%',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              border: '4px solid var(--bg-deep)',
+            }}
+          >
+            <img
+              src={personalData.profile}
+              alt="Moinul Islam — Full Stack Software Developer"
+              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+            />
           </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default HeroSection;

@@ -1,5 +1,5 @@
-// app/layout.js or app/layout.tsx
-import { Inter } from 'next/font/google';
+// app/layout.js
+import { Space_Grotesk, DM_Sans } from 'next/font/google';
 import './css/card.scss';
 import './css/globals.scss';
 import { ToastContainer } from 'react-toastify';
@@ -7,6 +7,20 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
 import NavbarWrapper from './components/Navbar/NavbarWrapper';
 import StructuredData from './components/helper/StructuredData';
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-space-grotesk',
+  display: 'swap',
+});
+
+const dmSans = DM_Sans({
+  subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
+  variable: '--font-dm-sans',
+  display: 'swap',
+});
 export const metadata = {
   title: 'Moinul Islam - Full Stack Software Developer',
   description: 'Portfolio of Moinul Islam, a full stack developer with 3 years of experience. Skilled in JavaScript, Vue, React, Node.js, and modern web technologies.',
@@ -60,9 +74,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
       <StructuredData />
-      <body>
+      <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
         <NavbarWrapper />
         <main className="pt-20 min-h-screen relative container z-10">

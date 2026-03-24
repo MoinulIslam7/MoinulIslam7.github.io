@@ -1,84 +1,100 @@
 // @flow strict
-import Image from "next/image";
-
 import { educations } from "@/utils/data/educations";
-import { BsPersonWorkspace } from "react-icons/bs";
-import AnimationLottie from "../../helper/animation-lottie";
-import GlowCard from "../../helper/GlowCard";
-import lottieFile from '/public/lottie/study.json';
+
+const scrollIcons = ['🎓', '📚', '✏️'];
 
 function Education() {
   return (
-    <div id="education" className="relative z-10 border-t my-12 lg:my-24 border-[#25213b]">
-      <Image
-        src="/section.svg"
-        alt="Hero"
-        width={1572}
-        height={795}
-        className="absolute top-0 -z-10"
-      />
-      <div className="flex justify-center -translate-y-[1px]">
-        <div className="w-3/4">
-          <div className="h-[1px] bg-gradient-to-r from-transparent via-violet-500 to-transparent  w-full" />
-        </div>
+    <section id="education" style={{ padding: '5rem 0', position: 'relative' }}>
+      {/* Ambient */}
+      <div aria-hidden="true" style={{
+        position: 'absolute', right: '-40px', bottom: '10%',
+        width: '280px', height: '280px',
+        background: 'radial-gradient(circle, rgba(22,242,179,0.05) 0%, transparent 70%)',
+        pointerEvents: 'none',
+      }} />
+
+      <div className="section-header">
+        <span className="section-tag">Chapter 05</span>
+        <h2 className="section-title font-heading">📜 Lore Scrolls</h2>
+        <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+          The Academic Arc — formal training before going feral in the industry
+        </p>
+        <div className="section-divider" />
       </div>
 
-      <div className="flex justify-center my-5 lg:py-8">
-        <div className="flex  items-center">
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-          <span className="bg-[#1a1443] w-fit text-white p-2 px-5 text-xl rounded-md">
-            Educations
-          </span>
-          <span className="w-24 h-[2px] bg-[#1a1443]"></span>
-        </div>
-      </div>
+      <div style={{ maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+        {educations.map((edu, i) => (
+          <div
+            key={edu.id}
+            className="brew-card"
+            style={{
+              padding: '1.5rem 1.8rem',
+              display: 'flex',
+              alignItems: 'flex-start',
+              gap: '1.2rem',
+              position: 'relative',
+              overflow: 'hidden',
+            }}
+          >
+            {/* Decorative icon */}
+            <div style={{
+              width: '44px', height: '44px', flexShrink: 0,
+              background: 'rgba(200,149,108,0.1)',
+              border: '1px solid rgba(200,149,108,0.2)',
+              borderRadius: '10px',
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              fontSize: '1.3rem',
+            }}>
+              {scrollIcons[i % scrollIcons.length]}
+            </div>
 
-      <div className="py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-          <div>
-            <div className="flex flex-col gap-6">
-              {
-                educations.map(education => (
-                  <GlowCard key={education.id} identifier={`education-${education.id}`}>
-                    <div className="p-3 relative">
-                      <Image
-                        src="/blur-23.svg"
-                        alt="Hero"
-                        width={1080}
-                        height={200}
-                        className="absolute bottom-0 opacity-80"
-                      />
-                      <div className="flex justify-center">
-                        <p className="text-xs sm:text-sm text-[#16f2b3]">
-                          {education.duration}
-                        </p>
-                      </div>
-                      <div className="flex items-center gap-x-8 px-3 py-5">
-                        <div className="text-violet-500  transition-all duration-300 hover:scale-125">
-                          <BsPersonWorkspace size={36} />
-                        </div>
-                        <div>
-                          <p className="text-base sm:text-xl mb-2 font-medium  uppercase">
-                            {education.title}
-                          </p>
-                          <p className="text-sm sm:text-base">{education.institution}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </GlowCard>
-                ))
-              }
+            <div style={{ flex: 1 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '1rem', flexWrap: 'wrap', marginBottom: '0.4rem' }}>
+                <span style={{
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  fontWeight: 700, fontSize: '0.95rem',
+                  color: 'var(--cream)', lineHeight: 1.3,
+                }}>
+                  {edu.title}
+                </span>
+                <span style={{
+                  fontSize: '0.65rem', fontWeight: 700,
+                  fontFamily: "'Space Grotesk', sans-serif",
+                  color: 'var(--matcha)',
+                  background: 'rgba(22,242,179,0.08)',
+                  border: '1px solid rgba(22,242,179,0.2)',
+                  padding: '0.2rem 0.6rem',
+                  borderRadius: '4px',
+                  whiteSpace: 'nowrap',
+                  letterSpacing: '0.06em',
+                }}>
+                  v{edu.duration.replace(' - ', '–')}
+                </span>
+              </div>
+
+              <p style={{ color: 'var(--latte)', fontSize: '0.82rem', fontWeight: 500 }}>
+                {edu.institution}
+              </p>
+
+              {i === 0 && (
+                <p style={{ color: 'var(--text-dim)', fontSize: '0.72rem', fontStyle: 'italic', marginTop: '0.4rem' }}>
+                  ☕ This is where semesters were survived on bad cafeteria coffee and GitHub commits.
+                </p>
+              )}
             </div>
+
+            {/* Corner flair */}
+            <div aria-hidden style={{
+              position: 'absolute', bottom: 0, right: 0,
+              width: '80px', height: '80px',
+              background: 'radial-gradient(circle at bottom right, rgba(200,149,108,0.06), transparent)',
+            }} />
           </div>
-          <div className="flex justify-center items-start">
-            <div className="w-3/4 h-3/4">
-              <AnimationLottie animationPath={lottieFile} />
-            </div>
-          </div>
-        </div>
+        ))}
       </div>
-    </div>
+    </section>
   );
-};
+}
 
 export default Education;

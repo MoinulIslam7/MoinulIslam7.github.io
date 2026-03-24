@@ -8,10 +8,10 @@ export const personalData = {
   address: 'Mirpur 2, Dhaka, Bangladesh - 1216 ',
   github: 'https://github.com/MoinulIslam7',
   facebook: 'https://www.facebook.com/mnl1122/',
-  linkedIn: 'https://www.linkedin.com/in/moinulislam7/',
-  twitter: 'https://twitter.com/moinul7',
-  stackOverflow: 'https://stackoverflow.com/users/16840768/moinul', //need modify
-  leetcode: "https://leetcode.com/moinul7/", // need modify
+  linkedIn: 'https://www.linkedin.com/in/moinul-islam7/',
+  twitter: 'https://x.com/MoinulI7',
+  stackOverflow: 'https://stackoverflow.com/users/22913262/moinul-islam',
+  leetcode: "https://leetcode.com/u/MoinulIslam7/",
   devUsername: "moinulislam7",
   resume: "https://drive.google.com/file/d/1NYNqrCWpI33T_VnBzyXxRMrBpN-e-N4Z/view?usp=sharing"
 }
