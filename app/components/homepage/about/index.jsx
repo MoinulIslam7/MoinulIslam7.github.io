@@ -4,7 +4,7 @@ import { personalData } from "@/utils/data/personal-data";
 const stats = [
   { icon: '☕', label: 'Coffee Consumed', value: '4K+' },
   { icon: '🐛', label: 'Bugs Squashed', value: '∞' },
-  { icon: '📦', label: 'Projects Shipped', value: '10+' },
+  { icon: '📦', label: 'Projects Shipped', value: '30+' },
   { icon: '⚡', label: 'Years in the Game', value: '3+' },
 ];
 
