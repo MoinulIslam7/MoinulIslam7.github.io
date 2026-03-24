@@ -88,7 +88,7 @@ function AboutSection() {
                 { label: 'Realm',   value: 'Dhaka, Bangladesh' },
                 { label: 'Guild',   value: 'Gigalogy' },
                 { label: 'Status',  value: '✅ Open to Quests' },
-                { label: 'Spec',    value: 'JavaScript / Node / Vue / React' },
+                { label: 'Spec',    value: 'Python / JavaScript / Node / Vue / React' },
               ].map(row => (
                 <div key={row.label} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.82rem' }}>
                   <span style={{ color: 'var(--latte)', fontWeight: 600, minWidth: '80px' }}>{row.label}</span>
