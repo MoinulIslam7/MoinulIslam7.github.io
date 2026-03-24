@@ -31,7 +31,7 @@ function Blog({ blogs }) {
 
       <div className="flex justify-center mt-12">
         <Link
-          href="https://dev.to/moinulislam7"
+          href="https://dev.to/MoinulIslam7"
           target="_blank"
           className="btn-outline group flex items-center gap-2 no-underline"
         >

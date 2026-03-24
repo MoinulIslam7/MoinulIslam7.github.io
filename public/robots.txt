@@ -1,9 +1,5 @@
-# *
 User-agent: *
 Allow: /
-
-# Host
-Host: https://moinulislam7.github.io/
 
 # Sitemaps
 Sitemap: https://moinulislam7.github.io/sitemap.xml
