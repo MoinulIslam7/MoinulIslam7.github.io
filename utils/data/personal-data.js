@@ -7,11 +7,11 @@ export const personalData = {
   phone: '+8801626248996',
   address: 'Mirpur 2, Dhaka, Bangladesh - 1216 ',
   github: 'https://github.com/MoinulIslam7',
-  facebook: 'https://www.facebook.com/mnl1122/',
-  linkedIn: 'https://www.linkedin.com/in/moinul-islam7/',
-  twitter: 'https://x.com/MoinulI7',
-  stackOverflow: 'https://stackoverflow.com/users/22913262/moinul-islam',
+  facebook: 'https://www.facebook.com/MoinulIslamm7/',
+  linkedIn: 'https://www.linkedin.com/in/moinulislam7/',
+  twitter: 'https://x.com/MoinulIslam77',
+  stackOverflow: 'https://stackoverflow.com/users/22913262/moinulislam7',
   leetcode: "https://leetcode.com/u/MoinulIslam7/",
-  devUsername: "moinulislam7",
+  devUsername: "MoinulIslam7",
   resume: "https://drive.google.com/file/d/1NYNqrCWpI33T_VnBzyXxRMrBpN-e-N4Z/view?usp=sharing"
 }

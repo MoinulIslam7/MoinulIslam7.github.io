@@ -11,16 +11,16 @@ export default function StructuredData() {
         url: 'https://moinulislam7.github.io/',
         sameAs: [
           'https://github.com/MoinulIslam7',
-          'https://www.linkedin.com/in/moinul-islam7/',
-          'https://dev.to/moinulislam7',
-          'https://x.com/MoinulI7',
-          'https://www.facebook.com/mnl1122/',
+          'https://www.linkedin.com/in/moinulislam7/',
+          'https://dev.to/MoinulIslam7',
+          'https://x.com/MoinulIslam77',
+          'https://www.facebook.com/MoinulIslamm7/',
           'https://leetcode.com/u/MoinulIslam7/',
-          'https://stackoverflow.com/users/22913262/moinul-islam'
+          'https://stackoverflow.com/users/22913262/moinulislam7'
         ],
-        jobTitle: 'Software Engineer',
+        jobTitle: 'Full Stack Software Developer',
         image: 'https://moinulislam7.github.io/profile.png',
-        description: 'Moinul Islam is a dedicated Full Stack Software Developer specialized in building scalable web applications with JavaScript, React, Next.js, and Node.js. Passionate about problem-solving and modern web aesthetics.',
+        description: 'Moinul Islam is a professional Full Stack Software Developer specialized in building scalable web applications with Python, JavaScript, React, Next.js, and Node.js. Passionate about problem-solving and modern web aesthetics.',
         address: {
           '@type': 'PostalAddress',
           addressLocality: 'Dhaka',

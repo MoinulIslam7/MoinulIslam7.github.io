@@ -22,12 +22,17 @@ const dmSans = DM_Sans({
   display: 'swap',
 });
 export const metadata = {
-  title: 'Moinul Islam - Full Stack Software Developer',
-  description: 'Portfolio of Moinul Islam, a full stack developer with 3 years of experience. Skilled in JavaScript, Vue, React, Node.js, and modern web technologies.',
-  keywords: ['Moinul Islam', 'Software Engineer', 'Full Stack Developer', 'JavaScript Developer', 'Moinul Portfolio', 'Moinul Islam Dev', 'Web Developer', 'React Developer', 'Vue.js Developer', 'Node.js Developer'],
-  authors: [{ name: 'Moinul Islam' }],
+  title: 'Moinul Islam - Full Stack Software Developer | JavaScript & Python Expert',
+  description: 'Portfolio of Moinul Islam, a professional full stack software developer with 3+ years of experience. Specialist in React, Next.js, Vue, Node.js, Python, and scalable web architectures. Based in Dhaka, Bangladesh.',
+  keywords: [
+    'Moinul Islam', 'Software Engineer', 'Full Stack Developer', 'JavaScript Developer', 
+    'Python Developer', 'React Developer', 'Next.js Expert', 'Vue.js Developer', 
+    'Node.js Developer', 'Web Developer Dhaka', 'Portfolio', 'Software Architect', 
+    'MoinulIslam7', 'Frontend Engineer', 'Backend Developer'
+  ],
+  authors: [{ name: 'Moinul Islam', url: 'https://github.com/MoinulIslam7' }],
   creator: 'Moinul Islam',
-  themeColor: '#0a192f',
+  publisher: 'Moinul Islam',
   metadataBase: new URL('https://moinulislam7.github.io/'),
   alternates: {
     canonical: '/',
@@ -47,8 +52,8 @@ export const metadata = {
     google: 'KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs',
   },
   openGraph: {
-    title: 'Moinul Islam - Software Engineer',
-    description: 'Explore the portfolio and blog of Moinul Islam, a skilled full stack developer.',
+    title: 'Moinul Islam | Full Stack Software Developer',
+    description: 'Explore the artifacts, battle records, and technical insights of Moinul Islam. Building the web with precision and passion.',
     url: 'https://moinulislam7.github.io/',
     siteName: 'Moinul Islam Portfolio',
     images: [
@@ -56,6 +61,7 @@ export const metadata = {
         url: 'https://moinulislam7.github.io/profile.png',
         width: 1200,
         height: 630,
+        alt: 'Moinul Islam - Software Developer Portfolio',
       },
     ],
     locale: 'en_US',
@@ -63,10 +69,10 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Moinul Islam - Full Stack Developer',
-    description: 'Official portfolio and projects of Moinul Islam.',
-    site: '@Moinul7',
-    creator: '@Moinul7',
+    title: 'Moinul Islam | Software Developer',
+    description: 'Passionate Full Stack Developer specialized in modern web technologies. Check out my latest quests and artifacts.',
+    site: '@MoinulIslam77',
+    creator: '@MoinulIslam77',
     images: ['https://moinulislam7.github.io/profile.png'],
   },
 };
