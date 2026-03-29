@@ -9,7 +9,7 @@ import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
 async function getBlogs() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername}`)
+  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername.toLowerCase()}`)
 
   if (!res.ok) {
     throw new Error('Failed to fetch data')
@@ -24,9 +24,9 @@ async function getBlogs() {
 
 export default async function Home() {
   const blogs = await getBlogs();
-
+  
   return (
-    <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[1440px] w-full">
+    <main className="min-h-screen relative mx-auto px-8 lg:max-w-[1440px] w-full">
       {/* Introduction */}
       <HeroSection />
 

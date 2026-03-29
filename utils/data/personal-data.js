@@ -1,6 +1,6 @@
 export const personalData = {
   name: "Moinul Islam",
-  profile: '/profile.png',
+  profile: '/Moinul-Islam.png',
   designation: "Software Developer",
   description: "Hi, I'm Moinul Islam, a driven and self-taught Full Stack Software Engineer currently thriving at Gigalogy. I have 3 years of hands-on development experience, focusing on backend technologies using Python, Node.js, REST APIs, SQL, and NoSQL databases, while also building frontend applications with JavaScript, React, HTML, and CSS. I am passionate about solving complex problems, creating scalable and user-friendly web applications, and continuously learning modern technologies. I am open to software engineering opportunities, collaborations, and projects where I can contribute and grow.",
   email: 'moinul180180@gmail.com',

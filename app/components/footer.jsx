@@ -10,7 +10,7 @@ function Footer() {
       padding: '3rem 0 2rem',
       marginTop: '4rem',
     }}>
-      <div className="container mx-auto px-6">
+      <div className="mx-auto px-8">
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '1.5rem' }}>
           
           {/* Logo / Sign-off */}

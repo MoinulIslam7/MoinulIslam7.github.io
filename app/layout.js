@@ -58,7 +58,7 @@ export const metadata = {
     siteName: 'Moinul Islam Portfolio',
     images: [
       {
-        url: 'https://moinulislam7.github.io/profile.png',
+        url: 'https://moinulislam7.github.io/Moinul-Islam.png',
         width: 1200,
         height: 630,
         alt: 'Moinul Islam - Software Developer Portfolio',
@@ -73,7 +73,7 @@ export const metadata = {
     description: 'Passionate Full Stack Developer specialized in modern web technologies. Check out my latest quests and artifacts.',
     site: '@MoinulIslam77',
     creator: '@MoinulIslam77',
-    images: ['https://moinulislam7.github.io/profile.png'],
+    images: ['https://moinulislam7.github.io/Moinul-Islam.png'],
   },
 };
 
@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
         <NavbarWrapper />
-        <main className="pt-20 min-h-screen relative container z-10">
+        <main className="pt-20 min-h-screen relative z-10">
           {children}
         </main>
         <Footer />

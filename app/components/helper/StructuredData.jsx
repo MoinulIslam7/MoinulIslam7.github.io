@@ -19,7 +19,7 @@ export default function StructuredData() {
           'https://stackoverflow.com/users/22913262/moinulislam7'
         ],
         jobTitle: 'Full Stack Software Developer',
-        image: 'https://moinulislam7.github.io/profile.png',
+        image: 'https://moinulislam7.github.io/Moinul-Islam.png',
         description: 'Moinul Islam is a professional Full Stack Software Developer specialized in building scalable web applications with Python, JavaScript, React, Next.js, and Node.js. Passionate about problem-solving and modern web aesthetics.',
         address: {
           '@type': 'PostalAddress',
