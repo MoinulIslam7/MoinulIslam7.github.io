@@ -85,7 +85,7 @@ export default function RootLayout({ children }) {
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
         <NavbarWrapper />
-        <main className="pt-20 min-h-screen relative container z-10">
+        <main className="pt-20 min-h-screen relative z-10">
           {children}
         </main>
         <Footer />

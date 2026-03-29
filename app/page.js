@@ -23,11 +23,10 @@ async function getBlogs() {
 };
 
 export default async function Home() {
-  console.log('time to time')
   const blogs = await getBlogs();
-  console.log(blogs, 'blogs')
+  
   return (
-    <main className="min-h-screen relative mx-auto px-6 sm:px-12 lg:max-w-[1440px] w-full">
+    <main className="min-h-screen relative mx-auto px-8 lg:max-w-[1440px] w-full">
       {/* Introduction */}
       <HeroSection />
 
