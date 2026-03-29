@@ -58,7 +58,7 @@ export const metadata = {
     siteName: 'Moinul Islam Portfolio',
     images: [
       {
-        url: 'https://moinulislam7.github.io/profile.png',
+        url: 'https://moinulislam7.github.io/Moinul-Islam.png',
         width: 1200,
         height: 630,
         alt: 'Moinul Islam - Software Developer Portfolio',
@@ -73,7 +73,7 @@ export const metadata = {
     description: 'Passionate Full Stack Developer specialized in modern web technologies. Check out my latest quests and artifacts.',
     site: '@MoinulIslam77',
     creator: '@MoinulIslam77',
-    images: ['https://moinulislam7.github.io/profile.png'],
+    images: ['https://moinulislam7.github.io/Moinul-Islam.png'],
   },
 };
 
