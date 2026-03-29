@@ -51,6 +51,17 @@ export const metadata = {
   verification: {
     google: 'KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs',
   },
+  manifest: '/manifest.json',
+  icons: {
+    icon: [
+      { url: '/favicon.ico' },
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: [
+      { url: '/Moinul-Islam.png', sizes: '180x180', type: 'image/png' },
+    ],
+  },
   openGraph: {
     title: 'Moinul Islam | Full Stack Software Developer',
     description: 'Explore the artifacts, battle records, and technical insights of Moinul Islam. Building the web with precision and passion.',
