@@ -1,5 +1,29 @@
+# Robots.txt for Moinul Islam Portfolio
+# Generated with SEO best practices
+
 User-agent: *
 Allow: /
+Disallow: /.next/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /node_modules/
+
+# Allow specific crawlers to crawl faster
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
 
 # Sitemaps
 Sitemap: https://moinulislam7.github.io/sitemap.xml
+Sitemap: https://moinulislam7.github.io/sitemap-0.xml

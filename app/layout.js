@@ -21,31 +21,58 @@ const dmSans = DM_Sans({
   variable: '--font-dm-sans',
   display: 'swap',
 });
+
 export const metadata = {
-  title: 'Moinul Islam - Full Stack Software Developer | JavaScript & Python Expert',
-  description: 'Portfolio of Moinul Islam, a professional full stack software developer with 3+ years of experience. Specialist in React, Next.js, Vue, Node.js, Python, and scalable web architectures. Based in Dhaka, Bangladesh.',
+  title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience | Dhaka',
+  description: 'Moinul Islam - Professional Full Stack Software Developer with 3+ years in Python, JavaScript, React, Next.js, Node.js, and scalable web architectures. Specializing in modern web development, REST APIs, and cloud solutions. Based in Dhaka, Bangladesh.',
   keywords: [
-    'Moinul Islam', 'Software Engineer', 'Full Stack Developer', 'JavaScript Developer', 
-    'Python Developer', 'React Developer', 'Next.js Expert', 'Vue.js Developer', 
-    'Node.js Developer', 'Web Developer Dhaka', 'Portfolio', 'Software Architect', 
-    'MoinulIslam7', 'Frontend Engineer', 'Backend Developer'
+    'Moinul Islam', 
+    'Full Stack Developer',
+    'Full Stack Software Developer', 
+    'JavaScript Developer', 
+    'Python Developer', 
+    'React Developer', 
+    'Next.js Developer',
+    'Next.js Expert',
+    'Vue.js Developer', 
+    'Node.js Developer', 
+    'Web Developer Dhaka',
+    'Software Engineer Dhaka',
+    'Software Architect', 
+    'MoinulIslam7', 
+    'Frontend Engineer', 
+    'Backend Developer',
+    'Web Application Developer',
+    'REST API Developer',
+    'Database Developer',
+    'Software Development Dhaka',
+    'Portfolio',
+    'Freelance Developer',
+    'Web Development',
+    'Application Development'
   ],
   authors: [{ name: 'Moinul Islam', url: 'https://github.com/MoinulIslam7' }],
   creator: 'Moinul Islam',
   publisher: 'Moinul Islam',
   metadataBase: new URL('https://moinulislam7.github.io/'),
   alternates: {
-    canonical: '/',
+    canonical: 'https://moinulislam7.github.io/',
   },
   robots: {
     index: true,
     follow: true,
+    nocache: false,
     googleBot: {
       index: true,
       follow: true,
+      noimageindex: false,
       'max-video-preview': -1,
       'max-image-preview': 'large',
       'max-snippet': -1,
+    },
+    bingbot: {
+      index: true,
+      follow: true,
     },
   },
   verification: {
@@ -63,8 +90,8 @@ export const metadata = {
     ],
   },
   openGraph: {
-    title: 'Moinul Islam | Full Stack Software Developer',
-    description: 'Explore the artifacts, battle records, and technical insights of Moinul Islam. Building the web with precision and passion.',
+    title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience',
+    description: 'Professional Full Stack Developer specializing in React, Next.js, Node.js, and Python. Building scalable web applications with modern technologies.',
     url: 'https://moinulislam7.github.io/',
     siteName: 'Moinul Islam Portfolio',
     images: [
@@ -72,7 +99,8 @@ export const metadata = {
         url: 'https://moinulislam7.github.io/Moinul-Islam.png',
         width: 1200,
         height: 630,
-        alt: 'Moinul Islam - Software Developer Portfolio',
+        alt: 'Moinul Islam - Full Stack Software Developer Portfolio',
+        type: 'image/png',
       },
     ],
     locale: 'en_US',
@@ -80,18 +108,25 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Moinul Islam | Software Developer',
-    description: 'Passionate Full Stack Developer specialized in modern web technologies. Check out my latest quests and artifacts.',
+    title: 'Moinul Islam - Full Stack Developer',
+    description: 'Professional Full Stack Developer with 3+ years of experience in modern web technologies. Python | JavaScript | React | Node.js | Next.js',
     site: '@MoinulIslam77',
     creator: '@MoinulIslam77',
     images: ['https://moinulislam7.github.io/Moinul-Islam.png'],
   },
 };
 
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#0d0700" />
+        <meta name="color-scheme" content="dark" />
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
       <StructuredData />
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
