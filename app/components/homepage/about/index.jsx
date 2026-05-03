@@ -18,7 +18,7 @@ const achievements = [
 
 function AboutSection() {
   return (
-    <section id="about" style={{ padding: '5rem 0 4rem', position: 'relative' }}>
+    <section id="about" className="animate-slide-in-bottom" style={{ padding: '5rem 0 4rem', position: 'relative' }}>
       {/* Ambient glow */}
       <div aria-hidden="true" style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
@@ -28,10 +28,10 @@ function AboutSection() {
       }} />
 
       {/* Section header */}
-      <div className="section-header">
-        <span className="section-tag">Chapter 01</span>
-        <h2 className="section-title font-heading">📖 Origin Story</h2>
-        <div className="section-divider" />
+      <div className="section-header animate-fade-up">
+        <span className="section-tag animate-pop-in">Chapter 01</span>
+        <h2 className="section-title font-heading text-shimmer">📖 Origin Story</h2>
+        <div className="section-divider animate-scale-in stagger-2" />
       </div>
 
       <div
@@ -40,7 +40,7 @@ function AboutSection() {
       >
         {/* Left — Bio quest card */}
         <div
-          className="brew-card"
+          className="brew-card card-hover-lift animate-slide-in-left hover-glow transition-all duration-300"
           style={{
             padding: '2rem',
             borderLeft: '3px solid var(--latte)',
@@ -55,22 +55,26 @@ function AboutSection() {
             background: 'radial-gradient(circle at top right, rgba(200,149,108,0.12), transparent)',
           }} />
 
-          <div className="quest-badge" style={{ marginBottom: '1.2rem' }}>
+          <div className="quest-badge animate-pop-in" style={{ marginBottom: '1.2rem' }}>
             🎯 Quest: Know the Developer
           </div>
 
-          <p style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '1.1rem', color: 'var(--cream)', marginBottom: '1rem' }}>
+          <p className="text-animate-glow" style={{ fontFamily: "'Space Grotesk', sans-serif", fontWeight: 700, fontSize: '1.1rem', color: 'var(--cream)', marginBottom: '1rem' }}>
             Who am I?
           </p>
 
-          <p style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.92rem' }}>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-muted)', lineHeight: 1.8, fontSize: '0.92rem' }}>
             {personalData.description}
           </p>
 
           {/* Achievement chips */}
           <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '1.5rem' }}>
-            {achievements.map(a => (
-              <span key={a.label} className="brew-badge">
+            {achievements.map((a, idx) => (
+              <span 
+                key={a.label} 
+                className="brew-badge animate-scale-in hover-scale"
+                style={{ animationDelay: `${idx * 0.06}s` }}
+              >
                 {a.icon} {a.label}
               </span>
             ))}
@@ -80,8 +84,8 @@ function AboutSection() {
         {/* Right — Stat panel */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem' }}>
           {/* Character card */}
-          <div className="brew-card" style={{ padding: '1.5rem' }}>
-            <p className="section-tag" style={{ marginBottom: '1rem' }}>📋 Character Sheet</p>
+          <div className="brew-card animate-slide-in-right card-hover-lift hover-glow transition-all duration-300" style={{ padding: '1.5rem' }}>
+            <p className="section-tag animate-pop-in" style={{ marginBottom: '1rem' }}>📋 Character Sheet</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
               {[
                 { label: 'Class',   value: 'Full Stack Developer' },
@@ -89,8 +93,8 @@ function AboutSection() {
                 { label: 'Guild',   value: 'Gigalogy' },
                 { label: 'Status',  value: '✅ Open to Quests' },
                 { label: 'Spec',    value: 'Python / JavaScript / Node / Vue / React' },
-              ].map(row => (
-                <div key={row.label} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.82rem' }}>
+              ].map((row, idx) => (
+                <div key={row.label} className="animate-slide-in-right hover-scale transition-all duration-300" style={{ display: 'flex', gap: '0.5rem', fontSize: '0.82rem', animationDelay: `${idx * 0.05}s` }}>
                   <span style={{ color: 'var(--latte)', fontWeight: 600, minWidth: '80px' }}>{row.label}</span>
                   <span style={{ color: 'var(--text-muted)' }}>→</span>
                   <span style={{ color: 'var(--cream)' }}>{row.value}</span>
@@ -101,13 +105,17 @@ function AboutSection() {
 
           {/* Stat grid */}
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.7rem' }}>
-            {stats.map(s => (
+            {stats.map((s, idx) => (
               <div
                 key={s.label}
-                className="brew-card"
-                style={{ padding: '1rem', textAlign: 'center' }}
+                className="brew-card animate-scale-bounce card-hover-lift hover-glow"
+                style={{ 
+                  padding: '1rem', 
+                  textAlign: 'center',
+                  animationDelay: `${idx * 0.08}s`,
+                }}
               >
-                <div style={{ fontSize: '1.5rem', marginBottom: '0.3rem' }}>{s.icon}</div>
+                <div className="animate-bounce-gentle text-animate-glow" style={{ fontSize: '1.5rem', marginBottom: '0.3rem', animationDelay: `${idx * 0.08}s` }}>{s.icon}</div>
                 <div style={{
                   fontFamily: "'Space Grotesk', sans-serif",
                   fontWeight: 800, fontSize: '1.3rem',

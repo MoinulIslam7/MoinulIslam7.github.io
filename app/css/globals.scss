@@ -530,6 +530,279 @@
   to { transform: rotate(360deg); }
 }
 
+/* ========== ENHANCED ENTRANCE ANIMATIONS ========== */
+@keyframes slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-top {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-bottom {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes scale-in-bounce {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 8px rgba(22, 242, 179, 0.2),
+                0 0 16px rgba(200, 149, 108, 0.15);
+  }
+  50% {
+    box-shadow: 0 0 16px rgba(22, 242, 179, 0.4),
+                0 0 32px rgba(200, 149, 108, 0.3),
+                0 0 48px rgba(244, 114, 182, 0.15);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+@keyframes color-shift {
+  0%, 100% {
+    background: linear-gradient(135deg, var(--latte), var(--pink));
+  }
+  50% {
+    background: linear-gradient(135deg, var(--pink), var(--violet));
+  }
+}
+
+@keyframes text-glow {
+  0%, 100% {
+    text-shadow: 0 0 8px rgba(22, 242, 179, 0.3),
+                 0 0 16px rgba(244, 114, 182, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 16px rgba(22, 242, 179, 0.6),
+                 0 0 32px rgba(244, 114, 182, 0.3),
+                 0 0 48px rgba(168, 85, 247, 0.15);
+  }
+}
+
+@keyframes bounce-gentle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+
+@keyframes pop-in {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(-180deg);
+  }
+  70% {
+    transform: scale(1.1) rotate(5deg);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+  }
+}
+
+@keyframes wiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-1deg);
+  }
+  75% {
+    transform: rotate(1deg);
+  }
+}
+
+@keyframes flip-in {
+  from {
+    opacity: 0;
+    transform: rotateY(-90deg);
+  }
+  to {
+    opacity: 1;
+    transform: rotateY(0deg);
+  }
+}
+
+/* ---- Animation utility classes ---- */
+
+/* ========== UTILITY ANIMATION CLASSES ========== */
+.animate-slide-in-left   { animation: slide-in-left 0.5s ease-out forwards; }
+.animate-slide-in-right  { animation: slide-in-right 0.5s ease-out forwards; }
+.animate-slide-in-top    { animation: slide-in-top 0.5s ease-out forwards; }
+.animate-slide-in-bottom { animation: slide-in-bottom 0.5s ease-out forwards; }
+.animate-scale-in        { animation: scale-in 0.4s ease-out forwards; }
+.animate-scale-bounce    { animation: scale-in-bounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-glow-pulse      { animation: glow-pulse 2.5s ease-in-out infinite; }
+.animate-shimmer         { animation: shimmer 2s linear infinite; background-size: 1000px 100%; }
+.animate-color-shift     { animation: color-shift 4s ease-in-out infinite; }
+.animate-text-glow       { animation: text-glow 2.5s ease-in-out infinite; }
+.animate-bounce-gentle   { animation: bounce-gentle 2s ease-in-out infinite; }
+.animate-pop-in          { animation: pop-in 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards; }
+.animate-wiggle          { animation: wiggle 0.5s ease-in-out; }
+.animate-flip-in         { animation: flip-in 0.5s ease-out forwards; perspective: 1000px; }
+
+/* Stagger delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+.stagger-6 { animation-delay: 0.3s; }
+.stagger-7 { animation-delay: 0.35s; }
+.stagger-8 { animation-delay: 0.4s; }
+
+/* Smooth hover transitions */
+.hover-scale {
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.hover-scale:hover {
+  transform: scale(1.05);
+}
+
+.hover-lift {
+  transition: all 0.3s ease-out;
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+}
+
+.hover-glow {
+  transition: all 0.3s ease-out;
+}
+.hover-glow:hover {
+  box-shadow: 0 0 16px rgba(22, 242, 179, 0.3),
+              0 0 32px rgba(244, 114, 182, 0.2);
+}
+
+/* Button animations */
+.btn-pulse {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.btn-hover-glow {
+  transition: all 0.3s ease-out;
+}
+.btn-hover-glow:hover {
+  text-shadow: 0 0 8px rgba(22, 242, 179, 0.5);
+  box-shadow: 0 0 16px rgba(22, 242, 179, 0.3),
+              0 0 32px rgba(244, 114, 182, 0.2);
+  transform: translateY(-2px);
+}
+
+/* Section entrance animation */
+.section-entrance {
+  animation: slide-in-top 0.6s ease-out forwards;
+}
+
+/* Card animations */
+.card-entrance {
+  animation: scale-in 0.5s ease-out forwards;
+}
+
+.card-hover-lift {
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.card-hover-lift:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 32px rgba(22, 242, 179, 0.2),
+              0 0 32px rgba(244, 114, 182, 0.15);
+}
+
+/* Text animations */
+.text-animate-glow {
+  animation: text-glow 2.5s ease-in-out infinite;
+  color: var(--cream);
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, var(--latte), var(--pink), var(--latte));
+  background-size: 200% 100%;
+  animation: shimmer 3s ease-in-out infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Batch animation with delays */
+.animate-stagger > * {
+  animation: inherit;
+}
+.animate-stagger > :nth-child(1) { animation-delay: 0.05s; }
+.animate-stagger > :nth-child(2) { animation-delay: 0.1s; }
+.animate-stagger > :nth-child(3) { animation-delay: 0.15s; }
+.animate-stagger > :nth-child(4) { animation-delay: 0.2s; }
+.animate-stagger > :nth-child(5) { animation-delay: 0.25s; }
+.animate-stagger > :nth-child(6) { animation-delay: 0.3s; }
+.animate-stagger > :nth-child(7) { animation-delay: 0.35s; }
+.animate-stagger > :nth-child(8) { animation-delay: 0.4s; }
 /* ---- Animation utility classes ---- */
 /* ============================================================
    RESPONSIVE OVERRIDES

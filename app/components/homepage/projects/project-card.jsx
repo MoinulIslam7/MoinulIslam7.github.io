@@ -1,22 +1,29 @@
 // @flow strict
 import * as React from 'react';
 
-function ProjectCard({ project, onViewDetails }) {
+function ProjectCard({ project, onViewDetails, delay = 0 }) {
   return (
-    <div className="card flex flex-col justify-between h-full">
+    <div 
+      className="card flex flex-col justify-between h-full card-hover-lift animate-scale-in"
+      style={{ animationDelay: `${delay}s` }}
+    >
       <div>
         <div className="card__border"></div>
-        <div className="w-full h-[9rem]">
-          <img className="w-full h-full object-cover rounded-lg" src={project.image.src} alt="" />
+        <div className="w-full h-[9rem] overflow-hidden rounded-lg hover:scale-105 transition-transform duration-300">
+          <img 
+            className="w-full h-full object-cover rounded-lg" 
+            src={project.image.src} 
+            alt={project.name}
+          />
         </div>
         <div className="card_title__container mt-4">
-          <span className="card_title">{project.name}</span>
+          <span className="card_title text-animate-glow">{project.name}</span>
           <p className="card_paragraph">{project.tools}</p>
         </div>
         <hr className="line" />
         <ul className="card__list">
           {project.shortDescripton.map((tool, index) => (
-            <li key={index} className="card__list_item">
+            <li key={index} className="card__list_item animate-slide-in-left" style={{ animationDelay: `${index * 0.05}s` }}>
               <span className="check">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="check_svg">
                   <path
@@ -31,7 +38,12 @@ function ProjectCard({ project, onViewDetails }) {
           ))}
         </ul>
       </div>
-      <button className="button mt-4" onClick={() => onViewDetails(project)}>Click for Blow!</button>
+      <button 
+        className="button mt-4 btn-hover-glow transition-all duration-300 hover:scale-105" 
+        onClick={() => onViewDetails(project)}
+      >
+        Click for Blow!
+      </button>
     </div>
   );
 }
