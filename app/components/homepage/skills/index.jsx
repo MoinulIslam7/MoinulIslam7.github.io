@@ -37,12 +37,15 @@ const tiers = [
   },
 ];
 
-function SkillChip({ skill, accentColor }) {
+function SkillChip({ skill, accentColor, delay = 0 }) {
   const img = skillsImage(skill);
   return (
     <div
-      className="skill-chip"
-      style={{ '--chip-accent': accentColor }}
+      className="skill-chip animate-scale-in hover-scale"
+      style={{ 
+        '--chip-accent': accentColor,
+        animationDelay: `${delay}s`,
+      }}
       title={skill}
     >
       {img?.src ? (
@@ -71,7 +74,7 @@ function SkillChip({ skill, accentColor }) {
 
 function Skills() {
   return (
-    <section id="skills" style={{ padding: '5rem 0', position: 'relative' }}>
+    <section id="skills" className="animate-slide-in-top" style={{ padding: '5rem 0', position: 'relative' }}>
       {/* Ambient glow */}
       <div aria-hidden="true" style={{
         position: 'absolute', left: '50%', transform: 'translateX(-50%)',
@@ -80,27 +83,32 @@ function Skills() {
         pointerEvents: 'none',
       }} />
 
-      <div className="section-header">
-        <span className="section-tag">Chapter 03</span>
-        <h2 className="section-title font-heading">🎯 Skill Tree</h2>
-        <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+      <div className="section-header animate-fade-up">
+        <span className="section-tag animate-pop-in">Chapter 03</span>
+        <h2 className="section-title font-heading text-shimmer">🎯 Skill Tree</h2>
+        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
           What&apos;s in the grinder — served by categorical mastery
         </p>
-        <div className="section-divider" />
+        <div className="section-divider animate-scale-in stagger-2" />
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
-        {tiers.map(tier => (
-          <div key={tier.key}>
-            <div className="skill-tier-title" style={{ color: tier.color }}>
+        {tiers.map((tier, tierIdx) => (
+          <div key={tier.key} className="animate-slide-in-left" style={{ animationDelay: `${tierIdx * 0.1}s` }}>
+            <div className="skill-tier-title hover-glow transition-all duration-300" style={{ color: tier.color }}>
               {tier.label}
               <span style={{ color: 'var(--text-dim)', fontWeight: 400, fontStyle: 'italic', textTransform: 'none', letterSpacing: 0, fontSize: '0.7rem' }}>
                 — {tier.desc}
               </span>
             </div>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.55rem' }}>
-              {tier.skills.map(skill => (
-                <SkillChip key={skill} skill={skill} accentColor={tier.color} />
+              {tier.skills.map((skill, skillIdx) => (
+                <SkillChip 
+                  key={skill} 
+                  skill={skill} 
+                  accentColor={tier.color}
+                  delay={tierIdx * 0.08 + skillIdx * 0.04}
+                />
               ))}
             </div>
           </div>
@@ -109,7 +117,7 @@ function Skills() {
 
       {/* Marquee remains as a nice extra footer for the section */}
       <div style={{ marginTop: '3rem' }}>
-        <p style={{
+        <p className="animate-slide-in-bottom stagger-1" style={{
           fontSize: '0.65rem',
           fontWeight: 600,
           letterSpacing: '0.18em',
@@ -120,7 +128,7 @@ function Skills() {
         }}>
           + global pantry
         </p>
-        <div style={{
+        <div className="hover-glow transition-all duration-300" style={{
           border: '1px solid var(--border-subtle)',
           borderRadius: '12px',
           overflow: 'hidden',
@@ -131,6 +139,7 @@ function Skills() {
             {skillsData.map((skill, id) => (
               <div
                 key={id}
+                className="hover-scale"
                 style={{
                   display: 'flex',
                   alignItems: 'center',
@@ -140,6 +149,7 @@ function Skills() {
                   color: 'var(--text-muted)',
                   fontWeight: 500,
                   whiteSpace: 'nowrap',
+                  cursor: 'pointer',
                 }}
               >
                 {skillsImage(skill)?.src && (

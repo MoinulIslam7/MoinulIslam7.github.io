@@ -12,7 +12,12 @@ const ProjectsGrid = () => {
     <>
       <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-6">
         {projectsData.map((project, index) => (
-          <ProjectCard key={index} project={project} onViewDetails={setSelectedProject} />
+          <ProjectCard 
+            key={index} 
+            project={project} 
+            onViewDetails={setSelectedProject}
+            delay={index * 0.1}
+          />
         ))}
       </div>
 
