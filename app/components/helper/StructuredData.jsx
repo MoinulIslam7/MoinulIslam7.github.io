@@ -27,7 +27,7 @@ export default function StructuredData() {
       addressRegion: 'Dhaka',
       postalCode: '1216',
       addressCountry: 'BD',
-      streetAddress: 'Mirpur 2'
+      streetAddress: 'Mirpur 12'
     },
     worksFor: {
       '@type': 'Organization',
