@@ -3,7 +3,7 @@
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare, FaDev, FaStackOverflow } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -11,13 +11,96 @@ import { SiLeetcode } from "react-icons/si";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 
+const orbitBands = [
+  { size: '440px', radius: '176px', speed: '30s', delay: '-8s', reverse: false, color: 'rgba(200,149,108,0.18)' },
+  { size: '340px', radius: '136px', speed: '24s', delay: '-4s', reverse: true, color: 'rgba(244,114,182,0.20)' },
+  { size: '260px', radius: '102px', speed: '18s', delay: '-11s', reverse: false, color: 'rgba(168,85,247,0.22)' },
+  { size: '180px', radius: '72px', speed: '14s', delay: '-6s', reverse: true, color: 'rgba(22,242,179,0.20)' },
+];
+
+const focusFragments = [
+  { angle: '-40deg', distance: '150px', size: '10px', delay: '0s' },
+  { angle: '-10deg', distance: '182px', size: '8px', delay: '0.08s' },
+  { angle: '18deg', distance: '168px', size: '12px', delay: '0.12s' },
+  { angle: '56deg', distance: '144px', size: '9px', delay: '0.18s' },
+  { angle: '120deg', distance: '176px', size: '11px', delay: '0.1s' },
+  { angle: '162deg', distance: '138px', size: '7px', delay: '0.16s' },
+  { angle: '208deg', distance: '158px', size: '10px', delay: '0.22s' },
+  { angle: '270deg', distance: '192px', size: '8px', delay: '0.14s' },
+];
+
 function HeroSection() {
+  const heroRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    const node = heroRef.current;
+
+    if (!node) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsFocused(true);
+        }
+      },
+      { threshold: 0.45 }
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="hero"
+      ref={heroRef}
       className="relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left"
-      style={{ minHeight: 'calc(100vh - 80px)' }}
+      style={{ minHeight: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
+      {/* Animated background constellation */}
+      <div aria-hidden="true" className={`hero-background-animation${isFocused ? ' hero-background-animation--active' : ''}`}>
+        <div className="hero-background-core" />
+        <div className="hero-background-mesh" />
+        {isFocused && (
+          <>
+            <div className="hero-focus-sweep" />
+            <div className="hero-focus-ring" />
+            <div className="hero-focus-ring hero-focus-ring--inner" />
+            {focusFragments.map((fragment, idx) => (
+              <span
+                key={`fragment-${idx}`}
+                className="hero-focus-fragment"
+                style={{
+                  '--fragment-angle': fragment.angle,
+                  '--fragment-distance': fragment.distance,
+                  '--fragment-size': fragment.size,
+                  '--fragment-delay': fragment.delay,
+                }}
+              />
+            ))}
+          </>
+        )}
+        {orbitBands.map((orbit, idx) => (
+          <div
+            key={`orbit-${idx}`}
+            className={`hero-background-orbit${orbit.reverse ? ' hero-background-orbit--reverse' : ''}`}
+            style={{
+              '--orbit-size': orbit.size,
+              '--orbit-duration': orbit.speed,
+              '--orbit-delay': orbit.delay,
+              '--orbit-color': orbit.color,
+              '--node-radius': orbit.radius,
+            }}
+          >
+            <span className="hero-background-orbit-node" />
+          </div>
+        ))}
+      </div>
+
       {/* Ambient blobs */}
       <div
         aria-hidden="true"
