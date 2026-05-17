@@ -58,7 +58,7 @@ function HeroSection() {
     <section
       id="hero"
       ref={heroRef}
-      className="relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left"
+      className="hero-section-shell relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left"
       style={{ minHeight: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
       {/* Animated background constellation */}
@@ -87,7 +87,7 @@ function HeroSection() {
         {orbitBands.map((orbit, idx) => (
           <div
             key={`orbit-${idx}`}
-            className={`hero-background-orbit${orbit.reverse ? ' hero-background-orbit--reverse' : ''}`}
+            className={`hero-background-orbit hero-background-orbit--${idx}${orbit.reverse ? ' hero-background-orbit--reverse' : ''}`}
             style={{
               '--orbit-size': orbit.size,
               '--orbit-duration': orbit.speed,
@@ -122,7 +122,7 @@ function HeroSection() {
       />
 
       {/* LEFT — Text content */}
-      <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
+      <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
         {/* Level badge */}
         <div className="level-chip mb-5 animate-pop-in" itemProp="jobTitle">
@@ -184,7 +184,7 @@ function HeroSection() {
         </div>
 
         {/* Social icons with rel attributes for SEO */}
-        <div className="flex flex-wrap items-center gap-5 mb-8 animate-slide-in-top stagger-4" aria-label="Social media links">
+        <div className="hero-socials flex flex-wrap items-center gap-5 mb-8 animate-slide-in-top stagger-4" aria-label="Social media links">
           {[
             { href: personalData.github, Icon: BsGithub, label: 'GitHub', rel: 'me noopener noreferrer' },
             { href: personalData.linkedIn, Icon: BsLinkedin, label: 'LinkedIn', rel: 'me noopener noreferrer' },
@@ -210,7 +210,7 @@ function HeroSection() {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 animate-slide-in-top stagger-5">
+        <div className="hero-cta-group flex flex-wrap items-center gap-4 animate-slide-in-top stagger-5">
           <Link href="#contact" className="btn-primary btn-hover-glow" title="Contact Moinul Islam">
             <RiContactsFill size={16} />
             <span>☕ Hire Me</span>
@@ -224,8 +224,8 @@ function HeroSection() {
 
       {/* RIGHT — Profile image */}
       <div
-        className="flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
-        style={{ width: 'clamp(200px, 30vw, 340px)', height: 'clamp(200px, 30vw, 340px)' }}
+        className="hero-profile-shell flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
+        style={{ width: 'clamp(180px, 30vw, 340px)', height: 'clamp(180px, 30vw, 340px)' }}
       >
         <div
           className="animate-pulse-glow"
