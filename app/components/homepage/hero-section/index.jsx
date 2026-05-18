@@ -3,7 +3,7 @@
 import { personalData } from "@/utils/data/personal-data";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare, FaDev, FaStackOverflow } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
@@ -11,13 +11,96 @@ import { SiLeetcode } from "react-icons/si";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 
+const orbitBands = [
+  { size: '440px', radius: '176px', speed: '30s', delay: '-8s', reverse: false, color: 'rgba(200,149,108,0.18)' },
+  { size: '340px', radius: '136px', speed: '24s', delay: '-4s', reverse: true, color: 'rgba(244,114,182,0.20)' },
+  { size: '260px', radius: '102px', speed: '18s', delay: '-11s', reverse: false, color: 'rgba(168,85,247,0.22)' },
+  { size: '180px', radius: '72px', speed: '14s', delay: '-6s', reverse: true, color: 'rgba(22,242,179,0.20)' },
+];
+
+const focusFragments = [
+  { angle: '-40deg', distance: '150px', size: '10px', delay: '0s' },
+  { angle: '-10deg', distance: '182px', size: '8px', delay: '0.08s' },
+  { angle: '18deg', distance: '168px', size: '12px', delay: '0.12s' },
+  { angle: '56deg', distance: '144px', size: '9px', delay: '0.18s' },
+  { angle: '120deg', distance: '176px', size: '11px', delay: '0.1s' },
+  { angle: '162deg', distance: '138px', size: '7px', delay: '0.16s' },
+  { angle: '208deg', distance: '158px', size: '10px', delay: '0.22s' },
+  { angle: '270deg', distance: '192px', size: '8px', delay: '0.14s' },
+];
+
 function HeroSection() {
+  const heroRef = useRef(null);
+  const [isFocused, setIsFocused] = useState(false);
+
+  useEffect(() => {
+    const node = heroRef.current;
+
+    if (!node) {
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsFocused(true);
+        }
+      },
+      { threshold: 0.45 }
+    );
+
+    observer.observe(node);
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section
       id="hero"
-      className="relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left"
-      style={{ minHeight: 'calc(100vh - 80px)' }}
+      ref={heroRef}
+      className="hero-section-shell relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left"
+      style={{ minHeight: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
+      {/* Animated background constellation */}
+      <div aria-hidden="true" className={`hero-background-animation${isFocused ? ' hero-background-animation--active' : ''}`}>
+        <div className="hero-background-core" />
+        <div className="hero-background-mesh" />
+        {isFocused && (
+          <>
+            <div className="hero-focus-sweep" />
+            <div className="hero-focus-ring" />
+            <div className="hero-focus-ring hero-focus-ring--inner" />
+            {focusFragments.map((fragment, idx) => (
+              <span
+                key={`fragment-${idx}`}
+                className="hero-focus-fragment"
+                style={{
+                  '--fragment-angle': fragment.angle,
+                  '--fragment-distance': fragment.distance,
+                  '--fragment-size': fragment.size,
+                  '--fragment-delay': fragment.delay,
+                }}
+              />
+            ))}
+          </>
+        )}
+        {orbitBands.map((orbit, idx) => (
+          <div
+            key={`orbit-${idx}`}
+            className={`hero-background-orbit hero-background-orbit--${idx}${orbit.reverse ? ' hero-background-orbit--reverse' : ''}`}
+            style={{
+              '--orbit-size': orbit.size,
+              '--orbit-duration': orbit.speed,
+              '--orbit-delay': orbit.delay,
+              '--orbit-color': orbit.color,
+              '--node-radius': orbit.radius,
+            }}
+          >
+            <span className="hero-background-orbit-node" />
+          </div>
+        ))}
+      </div>
+
       {/* Ambient blobs */}
       <div
         aria-hidden="true"
@@ -39,7 +122,7 @@ function HeroSection() {
       />
 
       {/* LEFT — Text content */}
-      <div className="flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
+      <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
         {/* Level badge */}
         <div className="level-chip mb-5 animate-pop-in" itemProp="jobTitle">
@@ -101,7 +184,7 @@ function HeroSection() {
         </div>
 
         {/* Social icons with rel attributes for SEO */}
-        <div className="flex flex-wrap items-center gap-5 mb-8 animate-slide-in-top stagger-4" aria-label="Social media links">
+        <div className="hero-socials flex flex-wrap items-center gap-5 mb-8 animate-slide-in-top stagger-4" aria-label="Social media links">
           {[
             { href: personalData.github, Icon: BsGithub, label: 'GitHub', rel: 'me noopener noreferrer' },
             { href: personalData.linkedIn, Icon: BsLinkedin, label: 'LinkedIn', rel: 'me noopener noreferrer' },
@@ -127,7 +210,7 @@ function HeroSection() {
         </div>
 
         {/* CTAs */}
-        <div className="flex flex-wrap items-center gap-4 animate-slide-in-top stagger-5">
+        <div className="hero-cta-group flex flex-wrap items-center gap-4 animate-slide-in-top stagger-5">
           <Link href="#contact" className="btn-primary btn-hover-glow" title="Contact Moinul Islam">
             <RiContactsFill size={16} />
             <span>☕ Hire Me</span>
@@ -141,8 +224,8 @@ function HeroSection() {
 
       {/* RIGHT — Profile image */}
       <div
-        className="flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
-        style={{ width: 'clamp(200px, 30vw, 340px)', height: 'clamp(200px, 30vw, 340px)' }}
+        className="hero-profile-shell flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
+        style={{ width: 'clamp(180px, 30vw, 340px)', height: 'clamp(180px, 30vw, 340px)' }}
       >
         <div
           className="animate-pulse-glow"

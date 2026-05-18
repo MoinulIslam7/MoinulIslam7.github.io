@@ -4,7 +4,7 @@ import { useState } from "react";
 import { BsGithub } from "react-icons/bs";
 import { MdOpenInNew, MdClose } from "react-icons/md";
 
-const questTiers = ['☕ Side Quest', '⚔️ Main Quest', '🔥 Legendary', '🌟 Epic'];
+const questTiers = ['☕ Main Quest', '⚔️ Main Quest', '🔥 Legendary', '🌟 Epic'];
 const tierColors = [
   { bg: 'rgba(22,242,179,0.08)', border: 'rgba(22,242,179,0.25)', text: 'var(--matcha)' },
   { bg: 'rgba(200,149,108,0.1)',  border: 'rgba(200,149,108,0.3)',  text: 'var(--latte)' },
