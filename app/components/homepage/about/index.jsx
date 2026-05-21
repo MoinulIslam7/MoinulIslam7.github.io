@@ -18,7 +18,7 @@ const achievements = [
 
 function AboutSection() {
   return (
-    <section id="about" className="animate-slide-in-bottom" style={{ padding: '5rem 0 4rem', position: 'relative' }}>
+    <section id="about" className="section-aurora section-aurora--about animate-slide-in-bottom" style={{ padding: '5rem 0 4rem', position: 'relative' }}>
       {/* Ambient glow */}
       <div aria-hidden="true" style={{
         position: 'absolute', top: 0, left: '50%', transform: 'translateX(-50%)',
@@ -32,6 +32,12 @@ function AboutSection() {
         <span className="section-tag animate-pop-in">Chapter 01</span>
         <h2 className="section-title font-heading text-shimmer">📖 Origin Story</h2>
         <div className="section-divider animate-scale-in stagger-2" />
+      </div>
+
+      <div className="availability-strip animate-slide-in-top stagger-1">
+        <span className="signal-dot" aria-hidden="true" />
+        <span className="availability-text">Available for new quests</span>
+        <span className="expertise-pill">Full-stack delivery · React / Next / Node</span>
       </div>
 
       <div

@@ -150,6 +150,113 @@
 }
 
 /* ============================================================
+   SECTION AURORA + EXPERTISE STRIPS
+   ============================================================ */
+.section-aurora {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-aurora::before,
+.section-aurora::after {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-aurora::before {
+  inset: -20% -10% auto -10%;
+  height: 70%;
+  background: radial-gradient(circle at 30% 30%, rgba(200,149,108,0.16) 0%, transparent 60%);
+  animation: nebula-shift 14s ease-in-out infinite;
+  opacity: 0.65;
+}
+
+.section-aurora::after {
+  inset: 0;
+  background-image:
+    radial-gradient(circle at center, rgba(255,255,255,0.25) 0 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(22,242,179,0.18) 0 1px, transparent 1px);
+  background-size: 140px 140px, 240px 240px;
+  background-position: 0 0, 12px 18px;
+  animation: star-drift 28s linear infinite;
+  opacity: 0.28;
+}
+
+.section-aurora > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-aurora--about::before {
+  background: radial-gradient(circle at 25% 25%, rgba(200,149,108,0.2) 0%, rgba(244,114,182,0.08) 38%, transparent 70%);
+}
+
+.section-aurora--skills::before {
+  background: radial-gradient(circle at 70% 20%, rgba(22,242,179,0.18) 0%, rgba(168,85,247,0.1) 45%, transparent 72%);
+}
+
+.section-aurora--projects::before {
+  background: radial-gradient(circle at 55% 25%, rgba(244,114,182,0.18) 0%, rgba(200,149,108,0.08) 45%, transparent 72%);
+}
+
+.availability-strip,
+.expertise-strip {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin: -1rem auto 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+.availability-strip {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.availability-text {
+  color: var(--cream);
+  font-weight: 600;
+}
+
+.signal-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background: var(--matcha);
+  box-shadow: 0 0 12px rgba(22, 242, 179, 0.65);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.expertise-strip {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+}
+
+.expertise-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.8rem;
+  border-radius: 9999px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .availability-strip,
+  .expertise-strip {
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================
    GAME / QUEST BADGES
    ============================================================ */
 .level-chip {
@@ -304,6 +411,75 @@
     height: 1px;
     background: linear-gradient(90deg, var(--border-subtle), transparent);
   }
+}
+
+/* Skill radar accent */
+.skill-radar {
+  position: absolute;
+  top: 2rem;
+  right: 6%;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  border: 1px solid rgba(22, 242, 179, 0.2);
+  box-shadow: 0 0 32px rgba(22, 242, 179, 0.08);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.skill-radar::before {
+  content: '';
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  border: 1px dashed rgba(255, 255, 255, 0.18);
+}
+
+.skill-radar::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 46%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(22, 242, 179, 0.6), transparent);
+  transform-origin: left center;
+  transform: translate(-50%, -50%) rotate(0deg);
+  animation: radar-rotate 7s linear infinite;
+}
+
+@media (max-width: 768px) {
+  .skill-radar {
+    display: none;
+  }
+}
+
+/* Project card scanline */
+.project-grid {
+  position: relative;
+  z-index: 1;
+}
+
+.project-card-shell {
+  position: relative;
+}
+
+.project-card-shell::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 22px;
+  background: linear-gradient(120deg, transparent 30%, rgba(244,114,182,0.16) 48%, rgba(22,242,179,0.18) 52%, transparent 70%);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  animation: scan-sweep 6s ease-in-out infinite;
+  animation-delay: var(--scan-delay, 0s);
+}
+
+.project-tier-badge {
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(244, 114, 182, 0.12);
 }
 
 /* ============================================================
@@ -719,6 +895,60 @@
   }
   50% {
     transform: translate3d(2%, 1.5%, 0) scale(1.04);
+  }
+}
+
+@keyframes nebula-shift {
+  0% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+    opacity: 0.55;
+  }
+  50% {
+    transform: translate3d(4%, 3%, 0) scale(1.08);
+    opacity: 0.75;
+  }
+  100% {
+    transform: translate3d(-6%, -4%, 0) scale(1);
+    opacity: 0.55;
+  }
+}
+
+@keyframes star-drift {
+  0% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.18;
+  }
+  50% {
+    transform: translate3d(3%, -2%, 0);
+    opacity: 0.32;
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+    opacity: 0.18;
+  }
+}
+
+@keyframes radar-rotate {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes scan-sweep {
+  0% {
+    opacity: 0;
+    transform: translateX(-40%);
+  }
+  20% {
+    opacity: 0.4;
+  }
+  60% {
+    opacity: 0.12;
+    transform: translateX(40%);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(40%);
   }
 }
 
