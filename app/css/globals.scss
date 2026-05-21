@@ -904,6 +904,12 @@
 .animate-fade-up      { animation: fade-up 0.6s ease-out forwards; }
 
 /* Hero background animation */
+.hero-section-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
 .hero-background-animation {
   position: absolute;
   inset: 0;
@@ -1056,6 +1062,10 @@
 }
 
 @media (max-width: 768px) {
+  .hero-section-bleed {
+    min-height: auto !important;
+  }
+
   .hero-section-shell {
     min-height: auto !important;
     padding-top: 2.5rem !important;
