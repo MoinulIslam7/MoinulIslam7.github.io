@@ -74,7 +74,7 @@ function SkillChip({ skill, accentColor, delay = 0 }) {
 
 function Skills() {
   return (
-    <section id="skills" className="animate-slide-in-top" style={{ padding: '5rem 0', position: 'relative' }}>
+    <section id="skills" className="section-aurora section-aurora--skills animate-slide-in-top" style={{ padding: '5rem 0', position: 'relative' }}>
       {/* Ambient glow */}
       <div aria-hidden="true" style={{
         position: 'absolute', left: '50%', transform: 'translateX(-50%)',
@@ -82,6 +82,7 @@ function Skills() {
         background: 'radial-gradient(circle, rgba(200,149,108,0.06) 0%, transparent 70%)',
         pointerEvents: 'none',
       }} />
+      <div className="skill-radar" aria-hidden="true" />
 
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 03</span>
@@ -90,6 +91,12 @@ function Skills() {
           What&apos;s in the grinder — served by categorical mastery
         </p>
         <div className="section-divider animate-scale-in stagger-2" />
+      </div>
+
+      <div className="expertise-strip animate-fade-up stagger-1">
+        <span className="expertise-pill">Full-stack delivery ready</span>
+        <span className="expertise-pill">React + Next.js depth</span>
+        <span className="expertise-pill">Backend & infra mastery</span>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>

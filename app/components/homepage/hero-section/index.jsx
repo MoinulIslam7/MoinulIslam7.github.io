@@ -58,7 +58,7 @@ function HeroSection() {
     <section
       id="hero"
       ref={heroRef}
-      className="hero-section-shell relative flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left"
+      className="hero-section-bleed relative"
       style={{ minHeight: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
       {/* Animated background constellation */}
@@ -121,8 +121,9 @@ function HeroSection() {
         }}
       />
 
-      {/* LEFT — Text content */}
-      <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
+      <div className="hero-section-shell mx-auto px-8 lg:max-w-[1440px] w-full flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left">
+        {/* LEFT — Text content */}
+        <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
         {/* Level badge */}
         <div className="level-chip mb-5 animate-pop-in" itemProp="jobTitle">
@@ -222,38 +223,39 @@ function HeroSection() {
         </div>
       </div>
 
-      {/* RIGHT — Profile image */}
-      <div
-        className="hero-profile-shell flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
-        style={{ width: 'clamp(180px, 30vw, 340px)', height: 'clamp(180px, 30vw, 340px)' }}
-      >
+        {/* RIGHT — Profile image */}
         <div
-          className="animate-pulse-glow"
-          style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: '50%',
-            padding: '4px',
-            background: 'linear-gradient(135deg, var(--latte), var(--pink), var(--violet))',
-          }}
+          className="hero-profile-shell flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
+          style={{ width: 'clamp(180px, 30vw, 340px)', height: 'clamp(180px, 30vw, 340px)' }}
         >
           <div
+            className="animate-pulse-glow"
             style={{
               width: '100%',
               height: '100%',
               borderRadius: '50%',
-              overflow: 'hidden',
-              border: '4px solid var(--bg-deep)',
+              padding: '4px',
+              background: 'linear-gradient(135deg, var(--latte), var(--pink), var(--violet))',
             }}
           >
-            <img
-              src={personalData.profile}
-              alt="Moinul Islam — Full Stack Software Developer based in Dhaka, Bangladesh"
-              itemProp="image"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-              loading="priority"
-              decoding="async"
-            />
+            <div
+              style={{
+                width: '100%',
+                height: '100%',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                border: '4px solid var(--bg-deep)',
+              }}
+            >
+              <img
+                src={personalData.profile}
+                alt="Moinul Islam — Full Stack Software Developer based in Dhaka, Bangladesh"
+                itemProp="image"
+                style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+                loading="priority"
+                decoding="async"
+              />
+            </div>
           </div>
         </div>
       </div>

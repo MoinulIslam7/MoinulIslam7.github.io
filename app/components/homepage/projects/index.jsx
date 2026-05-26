@@ -71,7 +71,8 @@ function ProjectCard({ project, index, onOpenGallery }) {
 
   return (
     <div
-      style={{ perspective: '1000px', cursor: 'pointer', height: '440px' }}
+      className="project-card-shell animate-fade-up"
+      style={{ perspective: '1000px', cursor: 'pointer', height: '440px', animationDelay: `${index * 0.08}s`, '--scan-delay': `${index * 0.6}s` }}
       onClick={() => setFlipped(!flipped)}
       title="Click to flip"
     >
@@ -90,7 +91,9 @@ function ProjectCard({ project, index, onOpenGallery }) {
             display: 'flex', flexDirection: 'column', overflow: 'hidden',
           }}
         >
-          <div style={{
+          <div
+            className="project-tier-badge animate-glow-pulse"
+            style={{
             position: 'absolute', top: '12px', right: '12px', zIndex: 2,
             background: tier.bg, border: `1px solid ${tier.border}`,
             color: tier.text, fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.08em',
@@ -184,15 +187,15 @@ function Projects() {
   const [galleryProject, setGalleryProject] = useState(null);
 
   return (
-    <section id="projects" style={{ padding: '5rem 0', position: 'relative' }}>
-      <div className="section-header">
-        <span className="section-tag">Chapter 04</span>
-        <h2 className="section-title font-heading">🗺️ Artifacts</h2>
-        <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>Click any quest card to reveal lore and view captures</p>
-        <div className="section-divider" />
+    <section id="projects" className="section-aurora section-aurora--projects" style={{ padding: '5rem 0', position: 'relative' }}>
+      <div className="section-header animate-fade-up">
+        <span className="section-tag animate-pop-in">Chapter 04</span>
+        <h2 className="section-title font-heading text-shimmer">🗺️ Artifacts</h2>
+        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>Click any quest card to reveal lore and view captures</p>
+        <div className="section-divider animate-scale-in stagger-2" />
       </div>
 
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+      <div className="project-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
         {projectsData.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} onOpenGallery={(name) => setGalleryProject(name)} />
         ))}
