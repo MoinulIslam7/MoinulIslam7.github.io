@@ -16,11 +16,12 @@ function Education() {
 
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 05</span>
-        <h2 className="section-title font-heading text-shimmer">📜 Lore Scrolls</h2>
-        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
-          The Academic Arc — formal training before going feral in the industry
-        </p>
-        <div className="section-divider animate-scale-in stagger-2" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading text-shimmer">📜 Lore Scrolls</h2>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+            The Academic Arc — formal training before going feral in the industry
+          </p>
+        </div>
       </div>
 
       <div style={{ maxWidth: '680px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>

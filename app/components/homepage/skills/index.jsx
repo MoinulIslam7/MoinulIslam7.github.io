@@ -86,11 +86,12 @@ function Skills() {
 
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 03</span>
-        <h2 className="section-title font-heading text-shimmer">🎯 Skill Tree</h2>
-        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
-          What&apos;s in the grinder — served by categorical mastery
-        </p>
-        <div className="section-divider animate-scale-in stagger-2" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading text-shimmer">🎯 Skill Tree</h2>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+            What&apos;s in the grinder — served by categorical mastery
+          </p>
+        </div>
       </div>
 
       <div className="expertise-strip animate-fade-up stagger-1">

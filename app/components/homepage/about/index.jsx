@@ -30,8 +30,9 @@ function AboutSection() {
       {/* Section header */}
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 01</span>
-        <h2 className="section-title font-heading text-shimmer">📖 Origin Story</h2>
-        <div className="section-divider animate-scale-in stagger-2" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading text-shimmer">📖 Origin Story</h2>
+        </div>
       </div>
 
       <div className="availability-strip animate-slide-in-top stagger-1">

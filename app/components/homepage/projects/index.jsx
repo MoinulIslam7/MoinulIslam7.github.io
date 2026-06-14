@@ -190,9 +190,10 @@ function Projects() {
     <section id="projects" className="section-aurora section-aurora--projects" style={{ padding: '5rem 0', position: 'relative' }}>
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 04</span>
-        <h2 className="section-title font-heading text-shimmer">🗺️ Artifacts</h2>
-        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>Click any quest card to reveal lore and view captures</p>
-        <div className="section-divider animate-scale-in stagger-2" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading text-shimmer">🗺️ Artifacts</h2>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>Click any quest card to reveal lore and view captures</p>
+        </div>
       </div>
 
       <div className="project-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>

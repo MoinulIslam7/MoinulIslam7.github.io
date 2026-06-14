@@ -17,11 +17,12 @@ function Experience() {
       {/* Section header */}
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 02</span>
-        <h2 className="section-title font-heading text-shimmer">⚔️ Battle Record</h2>
-        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
-          The Grind Log — every arc that shaped the developer
-        </p>
-        <div className="section-divider animate-scale-in stagger-2" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading text-shimmer">⚔️ Battle Record</h2>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+            The Grind Log — every arc that shaped the developer
+          </p>
+        </div>
       </div>
 
       <div style={{ maxWidth: '680px', margin: '0 auto' }}>

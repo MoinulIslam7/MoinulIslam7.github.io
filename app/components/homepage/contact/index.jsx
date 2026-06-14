@@ -23,11 +23,12 @@ function ContactSection() {
 
       <div className="section-header">
         <span className="section-tag">Chapter 07</span>
-        <h2 className="section-title font-heading">☕ Brew a Chat</h2>
-        <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
-          Drop me a line — whether it&apos;s a project quest or just coffee talk
-        </p>
-        <div className="section-divider" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading">☕ Brew a Chat</h2>
+          <p style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+            Drop me a line — whether it&apos;s a project quest or just coffee talk
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start mt-10">
