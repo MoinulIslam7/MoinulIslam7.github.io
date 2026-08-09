@@ -17,9 +17,14 @@ const projectQuips = [
   'Scraped the web so you don\'t have to. You\'re welcome.',
   'Revamped a whole site. They gave me coffee. Fair trade.',
   'Task management for teams that actually communicate.',
+  'Faraiz math, minus the family argument.',
+  'Bangladesh from orbit — and your plot, measured in বিঘা.',
+  'Five dropdowns between you and your khatian.',
 ];
 
-function GalleryModal({ images, onClose, projectName }) {
+const projectEmojis = ['🤖', '🕷️', '🌐', '📋', '🕌', '🛰️', '📜'];
+
+function GalleryModal({ image, onClose, projectName }) {
   return (
     <div
       style={{
@@ -45,13 +50,19 @@ function GalleryModal({ images, onClose, projectName }) {
             <MdClose size={24} />
           </button>
         </div>
-        <div style={{ padding: '1.5rem', overflowY: 'auto', display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
-          {[1, 2, 3].map(i => (
-            <div key={i} style={{ borderRadius: '8px', overflow: 'hidden', height: '200px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ padding: '1.5rem', overflowY: 'auto' }}>
+          {image?.src ? (
+            <img
+              src={image.src}
+              alt={`${projectName} screenshot`}
+              style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}
+            />
+          ) : (
+            <div style={{ borderRadius: '8px', height: '200px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'center' }}>
               <span className="text-4xl">📸</span>
-              <span style={{ position: 'absolute', bottom: '10px', fontSize: '0.6rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>Dummy Screenshot {i}</span>
+              <span style={{ fontSize: '0.6rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>No captures yet</span>
             </div>
-          ))}
+          )}
         </div>
         <div style={{ padding: '1rem', textAlign: 'center', borderTop: '1px solid var(--border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
           <p className="text-[0.65rem] text-[#9ca3af] uppercase tracking-widest">☕ More artifact captures brewing...</p>
@@ -106,10 +117,21 @@ function ProjectCard({ project, index, onOpenGallery }) {
             height: '180px', flexShrink: 0, overflow: 'hidden', background: '#000',
             position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center',
           }}>
-            <div className="w-full h-full bg-gradient-to-br from-[#1c0e05] to-[#2a1509] flex items-center justify-center text-5xl transition-transform duration-500 group-hover:scale-110">
-              {['🤖', '🕷️', '🌐', '📋'][index % 4]}
-            </div>
-            <span style={{ position: 'absolute', bottom: '8px', right: '10px', fontSize: '0.55rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>[ Image Placeholder ]</span>
+            {project.image?.src ? (
+              <img
+                src={project.image.src}
+                alt={project.name}
+                loading="lazy"
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+              />
+            ) : (
+              <>
+                <div className="w-full h-full bg-gradient-to-br from-[#1c0e05] to-[#2a1509] flex items-center justify-center text-5xl transition-transform duration-500 group-hover:scale-110">
+                  {projectEmojis[index % projectEmojis.length]}
+                </div>
+                <span style={{ position: 'absolute', bottom: '8px', right: '10px', fontSize: '0.55rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>[ Image Placeholder ]</span>
+              </>
+            )}
           </div>
 
           <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
@@ -169,7 +191,7 @@ function ProjectCard({ project, index, onOpenGallery }) {
               )}
             </div>
             <button
-              onClick={e => { e.stopPropagation(); onOpenGallery(project.name); }}
+              onClick={e => { e.stopPropagation(); onOpenGallery(project); }}
               className="btn-outline"
               style={{ fontSize: '0.65rem', padding: '0.5rem', width: '100%', justifyContent: 'center', borderColor: 'var(--gold)', color: 'var(--gold)', background: 'rgba(251,191,36,0.05)' }}
             >
@@ -198,13 +220,14 @@ function Projects() {
 
       <div className="project-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
         {projectsData.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} onOpenGallery={(name) => setGalleryProject(name)} />
+          <ProjectCard key={project.id} project={project} index={i} onOpenGallery={setGalleryProject} />
         ))}
       </div>
 
       {galleryProject && (
         <GalleryModal
-          projectName={galleryProject}
+          projectName={galleryProject.name}
+          image={galleryProject.image}
           onClose={() => setGalleryProject(null)}
         />
       )}

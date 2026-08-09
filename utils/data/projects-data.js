@@ -1,7 +1,8 @@
-import ayla from '/public/png/placeholder.png';
-import crefin from '/public/png/placeholder.png';
-import realEstate from '/public/png/placeholder.png';
-import travel from '/public/png/placeholder.png';
+// Projects without a real screenshot leave `image` null — the card falls back to
+// its emoji tile, which suits the dark theme better than the stock placeholder art.
+import uttoradhikar from '/public/image/uttoradhikar.jpg';
+import bhumibdMap from '/public/image/bhumibd-map.jpg';
+import bhumibdKhatian from '/public/image/bhumibd-khatian.jpg';
 
 export const projectsData = [
     {
@@ -13,7 +14,7 @@ export const projectsData = [
         role: 'Backend Developer',
         code: '',
         demo: '',
-        image: ayla,
+        image: null,
         url: 'https://github.com/MoinulIslam7/discord-bot-with-openai'
     },
     {
@@ -25,7 +26,7 @@ export const projectsData = [
         role: 'Backend Developer',
         code: '',
         demo: '',
-        image: crefin,
+        image: null,
         url: 'https://github.com/MoinulIslam7/Amazon-and-Indeed-Web-Scraping-with-Puppeteer'
     },
     {
@@ -37,7 +38,7 @@ export const projectsData = [
         code: '',
         role: 'Full Stack Developer',
         demo: '',
-        image: realEstate,
+        image: null,
     },
     {
         id: 4,
@@ -47,8 +48,44 @@ export const projectsData = [
         tools: "Express, MongoDB, OpenAI API, AWS SES, AWS S3, Node Mailer, Joi, Puppeteer, EC2, PM2, Nginx",
         code: '',
         demo: '',
-        image: ayla,
+        image: null,
         role: 'Full Stack Developer',
+    },
+    {
+        id: 5,
+        name: 'Uttoradhikar.Org',
+        shortDescripton: ['Islamic inheritance (Faraiz) calculator in Bengali', 'Pick from 25+ heir types — spouse, children, parents, grandparents, siblings, uncles and cousins', 'Splits land (শতাংশ), gold & silver (ভরি) and cash into per-heir Sharia shares', 'Rules guide, markdown blog and legal-advice chat widget, installable as a PWA'],
+        description: 'Uttoradhikar.Org is a Bengali-language Islamic inheritance calculator that turns a complex Faraiz calculation into a single form. Users tick the surviving relatives from a list of more than twenty-five heir categories — স্বামী/স্ত্রী, পুত্র/কন্যা, পিতা/মাতা, দাদা/দাদি/নানি, full and half siblings, nephews, uncles and cousins, including predeceased children — enter the estate as land in শতাংশ, gold and silver in ভরি and cash in টাকা, and get each heir\'s exact share back instantly.\n\nThe app is a React + Vite single-page application with a markdown-driven rules (বিধি) section and blog, full Bengali SEO metadata, and PWA support so it works offline. A floating chat widget offers আইনি পরামর্শ (legal guidance) alongside the calculator.',
+        tools: "React, Vite, JavaScript, Tailwind CSS, Markdown, PWA (Service Worker), SEO",
+        role: 'Full Stack Developer',
+        code: '',
+        demo: 'https://uttoradhikar.org/',
+        image: uttoradhikar,
+        url: ''
+    },
+    {
+        id: 6,
+        name: 'BhumiBD — Satellite Map & Land Assistant',
+        shortDescripton: ['High-resolution satellite map of Bangladesh, entirely in Bengali', 'Draw points, lines, polygons and rectangles to measure real land area and distance', 'Results in traditional units — শতাংশ, কাঠা, বিঘা — with PDF export', 'Nearby schools & hospitals layer plus a Bengali AI assistant for land questions'],
+        description: 'BhumiBD is a free Bengali land-information platform built around a high-resolution satellite map of Bangladesh. The measurement toolkit lets users drop points and draw lines, polygons or rectangles directly on the map to get true land area and distance, converted into the traditional units people actually use — শতাংশ, কাঠা and বিঘা — with undo/redo, a 3D view, switchable layers and one-click PDF export of the drawn plot.\n\nAround the map sit a nearby-places layer for schools and hospitals, and an AI assistant that answers land, inheritance and housing questions in Bengali with suggested prompts such as "খতিয়ান কী?" and "নামজারি কিভাবে করব?". Map data comes from OpenStreetMap and geoBoundaries with khatian/dag records from the Ministry of Land\'s DLRMS. The UI is bilingual (বাংলা/EN) with a flash-free dark/light theme resolved before first paint.',
+        tools: "React, Vite, Leaflet, OpenStreetMap, geoBoundaries, GeoJSON, AI Assistant, PDF Export, i18n (bn/en)",
+        role: 'Full Stack Developer',
+        code: '',
+        demo: 'https://bhumi.uttoradhikar.org/',
+        image: bhumibdMap,
+        url: ''
+    },
+    {
+        id: 7,
+        name: 'BhumiBD — Khatian & Dag Search',
+        shortDescripton: ['Search Bangladesh land records straight from the Ministry of Land DLRMS dataset', 'Five-step cascading picker: বিভাগ → জেলা → উপজেলা → জরিপ → মৌজা', 'Look up by khatian number, owner name or dag number across CS, SA, RS and BS surveys', 'Every step is stored in the URL, so any search result is a shareable link'],
+        description: 'The Khatian & Dag search module of BhumiBD makes Bangladesh land records searchable from the browser. A guided five-step cascading form narrows the query down through বিভাগ, জেলা, উপজেলা/সার্কেল, জরিপ and মৌজা (JL no.), after which users can search by khatian number, owner name or dag number and compare the same property across CS, SA, RS and BS survey periods.\n\nEvery selection is written into the URL, so a completed search can be copied and shared without the recipient repeating the steps. The results are clearly labelled as preliminary index data rather than certified legal documents, with an in-page notice pointing users to the government portal for certified porcha and stating that BhumiBD is not a government body.',
+        tools: "React, Vite, React Router, REST API, DLRMS Data, URL State, Server-side SEO Prerendering",
+        role: 'Full Stack Developer',
+        code: '',
+        demo: 'https://bhumi.uttoradhikar.org/khatian',
+        image: bhumibdKhatian,
+        url: ''
     }
 ];
 
