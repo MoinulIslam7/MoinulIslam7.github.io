@@ -12,7 +12,7 @@ function ProjectCard({ project, onViewDetails, delay = 0 }) {
         <div className="w-full h-[9rem] overflow-hidden rounded-lg hover:scale-105 transition-transform duration-300">
           <img 
             className="w-full h-full object-cover rounded-lg" 
-            src={project.image.src} 
+            src={project.image?.src}
             alt={project.name}
           />
         </div>

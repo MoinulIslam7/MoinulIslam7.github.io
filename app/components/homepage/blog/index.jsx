@@ -16,11 +16,12 @@ function Blog({ blogs }) {
 
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 06</span>
-        <h2 className="section-title font-heading text-shimmer">📖 The Blog</h2>
-        <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
-          Freshly brewed insights — served hot from the dev machine
-        </p>
-        <div className="section-divider animate-scale-in stagger-2" />
+        <div className="section-title-wrap">
+          <h2 className="section-title font-heading text-shimmer">📖 The Blog</h2>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>
+            Freshly brewed insights — served hot from the dev machine
+          </p>
+        </div>
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">

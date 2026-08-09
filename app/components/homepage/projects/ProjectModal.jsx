@@ -28,7 +28,7 @@ function ProjectModal({ project, onClose }) {
         <h2 className="text-3xl font-bold mb-3 text-purple-300">{project.name}</h2>
 
         <img
-          src={project.image.src}
+          src={project.image?.src}
           alt={project.name}
           className="w-full h-60 object-cover rounded-xl mb-4 border border-purple-600"
         />
