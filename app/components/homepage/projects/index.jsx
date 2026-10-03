@@ -1,256 +1,286 @@
 'use client';
 import { projectsData } from "@/utils/data/projects-data";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { BsGithub } from "react-icons/bs";
-import { MdOpenInNew, MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
+import { MdOpenInNew, MdClose, MdChevronLeft, MdChevronRight, MdCheckCircle, MdArrowForward } from "react-icons/md";
 
-const questTiers = ['☕ Main Quest', '⚔️ Main Quest', '🔥 Legendary', '🌟 Epic'];
-const tierColors = [
-  { bg: 'rgba(22,242,179,0.08)', border: 'rgba(22,242,179,0.25)', text: 'var(--matcha)' },
-  { bg: 'rgba(200,149,108,0.1)',  border: 'rgba(200,149,108,0.3)',  text: 'var(--latte)' },
-  { bg: 'rgba(251,191,36,0.1)',   border: 'rgba(251,191,36,0.3)',   text: 'var(--gold)' },
-  { bg: 'rgba(168,85,247,0.1)',   border: 'rgba(168,85,247,0.3)',   text: 'var(--violet)' },
+const accents = [
+  { bg: 'rgba(22,242,179,0.08)', border: 'rgba(22,242,179,0.3)',  text: 'var(--matcha)' },
+  { bg: 'rgba(200,149,108,0.1)', border: 'rgba(200,149,108,0.35)', text: 'var(--latte)' },
+  { bg: 'rgba(251,191,36,0.1)',  border: 'rgba(251,191,36,0.35)',  text: 'var(--gold)' },
+  { bg: 'rgba(168,85,247,0.1)',  border: 'rgba(168,85,247,0.35)',  text: 'var(--violet)' },
 ];
 
-const projectQuips = [
-  'Finding a বাসা in Dhaka, minus the to-let signs. Built solo.',
-  'Birthdays, weddings & AI-planned parties — shipped as a team.',
-  'Faraiz math, minus the family argument.',
-  'Built with love, caffeine, and an OpenAI API key.',
-  'Scraped the web so you don\'t have to. You\'re welcome.',
-  'Revamped a whole site. They gave me coffee. Fair trade.',
-  'Task management for teams that actually communicate.',
-  'Bangladesh from orbit — and your plot, measured in বিঘা.',
-  'Five dropdowns between you and your khatian.',
-];
+const toolList = (tools) => typeof tools === 'string'
+  ? tools.split(',').map(t => t.trim()).filter(Boolean)
+  : (tools || []);
 
-const projectEmojis = ['🏠', '🎉', '🕌', '🤖', '🕷️', '🌐', '📋', '🛰️', '📜'];
+const projectImages = (project) => project.gallery?.length ? project.gallery : (project.image ? [project.image] : []);
 
-function GalleryModal({ images, onClose, projectName }) {
+const labelStyle = { fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '0.5rem' };
+
+function Gallery({ images, projectName }) {
   const [active, setActive] = useState(0);
   const count = images.length;
-  const current = images[active];
   const go = (step) => setActive(i => (i + step + count) % count);
 
   useEffect(() => {
+    if (count < 2) return;
     const onKey = (e) => {
-      if (e.key === 'Escape') onClose();
-      else if (count > 1 && e.key === 'ArrowRight') go(1);
-      else if (count > 1 && e.key === 'ArrowLeft') go(-1);
+      if (e.key === 'ArrowRight') go(1);
+      else if (e.key === 'ArrowLeft') go(-1);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [count, onClose]);
+  }, [count]);
 
   const navBtn = {
     position: 'absolute', top: '50%', transform: 'translateY(-50%)',
-    width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
-    background: 'rgba(13,7,0,0.7)', border: '1px solid var(--border-accent)', color: '#f5e6d3', backdropFilter: 'blur(6px)',
+    width: '38px', height: '38px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    background: 'rgba(13,7,0,0.75)', border: '1px solid var(--border-accent)', color: '#f5e6d3', backdropFilter: 'blur(6px)',
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed', inset: 0, zIndex: 1000,
-        background: 'rgba(13,7,0,0.95)', backdropFilter: 'blur(12px)',
-        display: 'flex', alignItems: 'center', justifyContent: 'center',
-        padding: '2rem',
-      }}
-      onClick={onClose}
-    >
-      <div
-        className="brew-card"
-        style={{
-          width: '100%', maxWidth: '900px', maxHeight: '90vh',
-          display: 'flex', flexDirection: 'column', overflow: 'hidden',
-          background: 'var(--bg-deep)', border: '1px solid var(--border-accent)',
-        }}
-        onClick={e => e.stopPropagation()}
-      >
-        <div style={{ padding: '1.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-subtle)' }}>
-          <h3 className="font-heading text-xl text-[#f5e6d3]">📸 {projectName} Gallery</h3>
-          {count > 1 && <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', marginLeft: 'auto', marginRight: '1rem' }}>{active + 1} / {count}</span>}
-          <button onClick={onClose} className="text-[#9ca3af] hover:text-[#f5e6d3] transition-colors">
-            <MdClose size={24} />
-          </button>
-        </div>
-        <div style={{ padding: '1.5rem', overflowY: 'auto' }}>
-          {current?.src ? (
-            <>
-              <div style={{ position: 'relative' }}>
-                <img
-                  src={current.src}
-                  alt={`${projectName} screenshot ${active + 1}`}
-                  style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}
-                />
-                {count > 1 && (
-                  <>
-                    <button onClick={() => go(-1)} aria-label="Previous screenshot" style={{ ...navBtn, left: '10px' }}><MdChevronLeft size={26} /></button>
-                    <button onClick={() => go(1)} aria-label="Next screenshot" style={{ ...navBtn, right: '10px' }}><MdChevronRight size={26} /></button>
-                  </>
-                )}
-              </div>
-              {count > 1 && (
-                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.8rem', overflowX: 'auto', paddingBottom: '0.3rem' }}>
-                  {images.map((img, i) => (
-                    <button
-                      key={img.src}
-                      onClick={() => setActive(i)}
-                      aria-label={`Show screenshot ${i + 1}`}
-                      style={{
-                        flex: '0 0 auto', width: '96px', height: '60px', padding: 0, borderRadius: '6px', overflow: 'hidden',
-                        border: i === active ? '2px solid var(--gold)' : '1px solid rgba(255,255,255,0.1)',
-                        opacity: i === active ? 1 : 0.55, transition: 'opacity 0.2s',
-                      }}
-                    >
-                      <img src={img.src} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
-                    </button>
-                  ))}
-                </div>
-              )}
-            </>
-          ) : (
-            <div style={{ borderRadius: '8px', height: '200px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'center' }}>
-              <span className="text-4xl">📸</span>
-              <span style={{ fontSize: '0.6rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>No captures yet</span>
-            </div>
-          )}
-        </div>
-        <div style={{ padding: '1rem', textAlign: 'center', borderTop: '1px solid var(--border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
-          <p className="text-[0.65rem] text-[#9ca3af] uppercase tracking-widest">☕ More artifact captures brewing...</p>
-        </div>
+    <div>
+      <div style={{ position: 'relative', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', background: '#000' }}>
+        <img src={images[active].src} alt={`${projectName} screenshot ${active + 1} of ${count}`} style={{ width: '100%', display: 'block' }} />
+        {count > 1 && (
+          <>
+            <button onClick={() => go(-1)} aria-label="Previous screenshot" style={{ ...navBtn, left: '10px' }}><MdChevronLeft size={24} /></button>
+            <button onClick={() => go(1)} aria-label="Next screenshot" style={{ ...navBtn, right: '10px' }}><MdChevronRight size={24} /></button>
+            <span style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '0.65rem', fontWeight: 700, color: '#f5e6d3', background: 'rgba(13,7,0,0.75)', padding: '0.2rem 0.55rem', borderRadius: '9999px' }}>
+              {active + 1} / {count}
+            </span>
+          </>
+        )}
       </div>
+      {count > 1 && (
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.7rem', overflowX: 'auto', paddingBottom: '0.3rem' }}>
+          {images.map((img, i) => (
+            <button
+              key={img.src}
+              onClick={() => setActive(i)}
+              aria-label={`Show screenshot ${i + 1}`}
+              style={{
+                flex: '0 0 auto', width: '92px', height: '56px', padding: 0, borderRadius: '6px', overflow: 'hidden',
+                border: i === active ? '2px solid var(--gold)' : '1px solid rgba(255,255,255,0.1)',
+                opacity: i === active ? 1 : 0.5, transition: 'opacity 0.2s',
+              }}
+            >
+              <img src={img.src} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+            </button>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
 
-function ProjectCard({ project, index, onOpenGallery }) {
-  const [flipped, setFlipped] = useState(false);
-  const tier = tierColors[index % tierColors.length];
-  const tierLabel = questTiers[index % questTiers.length];
-  const tools = typeof project.tools === 'string'
-    ? project.tools.split(',').map(t => t.trim()).slice(0, 5)
-    : (project.tools || []).slice(0, 5);
+function InfoBlock({ icon, title, children, accent }) {
+  return (
+    <div style={{ background: 'rgba(255,255,255,0.025)', border: '1px solid var(--border-subtle)', borderRadius: '12px', padding: '1rem 1.1rem' }}>
+      <p style={{ ...labelStyle, color: accent.text }}>{icon} {title}</p>
+      <p style={{ fontSize: '0.88rem', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>{children}</p>
+    </div>
+  );
+}
+
+function ProjectDetails({ project, accent, onClose }) {
+  const closeRef = useRef(null);
+  const images = projectImages(project);
+  const tools = toolList(project.tools);
+  const [showStory, setShowStory] = useState(false);
+
+  useEffect(() => {
+    closeRef.current?.focus();
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    window.addEventListener('keydown', onKey);
+    return () => {
+      document.body.style.overflow = prevOverflow;
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [onClose]);
+
+  return createPortal(
+    <div
+      style={{
+        position: 'fixed', inset: 0, zIndex: 1000,
+        background: 'rgba(13,7,0,0.92)', backdropFilter: 'blur(12px)',
+        display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '1rem',
+      }}
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="project-details-title"
+        className="brew-card project-details"
+        style={{
+          width: '100%', maxWidth: '920px', maxHeight: '92vh',
+          display: 'flex', flexDirection: 'column', overflow: 'hidden',
+          background: 'var(--bg-deep)', border: `1px solid ${accent.border}`, transform: 'none',
+        }}
+        onClick={e => e.stopPropagation()}
+      >
+        {/* Header */}
+        <div style={{ padding: '1rem 1.25rem', display: 'flex', gap: '0.9rem', alignItems: 'center', borderBottom: '1px solid var(--border-subtle)' }}>
+          <span style={{ fontSize: '1.8rem', lineHeight: 1 }}>{project.emoji}</span>
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ ...labelStyle, color: accent.text, marginBottom: '0.15rem' }}>{project.category}</p>
+            <h3 id="project-details-title" className="font-heading text-lg md:text-xl font-bold text-[#f5e6d3]" style={{ lineHeight: 1.25 }}>{project.name}</h3>
+          </div>
+          <button ref={closeRef} onClick={onClose} aria-label="Close project details" className="text-[#9ca3af] hover:text-[#f5e6d3] transition-colors" style={{ flexShrink: 0 }}>
+            <MdClose size={26} />
+          </button>
+        </div>
+
+        {/* Body */}
+        <div style={{ padding: '1.25rem', overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '1.4rem' }}>
+          <p style={{ fontSize: '1.05rem', lineHeight: 1.6, color: 'var(--text-primary)', margin: 0 }}>{project.summary}</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '0.8rem' }}>
+            {project.problem && <InfoBlock icon="💡" title="Why it exists" accent={accent}>{project.problem}</InfoBlock>}
+            {project.audience && <InfoBlock icon="👥" title="Who it's for" accent={accent}>{project.audience}</InfoBlock>}
+            {project.contribution && <InfoBlock icon="🛠️" title="My part" accent={accent}>{project.contribution}</InfoBlock>}
+          </div>
+
+          {images.length > 0 && (
+            <div>
+              <p style={labelStyle}>Screenshots</p>
+              <Gallery images={images} projectName={project.name} />
+            </div>
+          )}
+
+          {project.shortDescripton?.length > 0 && (
+            <div>
+              <p style={labelStyle}>What it can do</p>
+              <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))', gap: '0.6rem 1.2rem' }}>
+                {project.shortDescripton.map((item, i) => (
+                  <li key={i} style={{ display: 'flex', gap: '0.55rem', fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: 1.5 }}>
+                    <MdCheckCircle size={17} style={{ color: accent.text, flexShrink: 0, marginTop: '0.12rem' }} /> {item}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {tools.length > 0 && (
+            <div>
+              <p style={labelStyle}>Built with</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                {tools.map(tool => (
+                  <span key={tool} style={{ fontSize: '0.7rem', fontWeight: 600, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-muted)', padding: '0.2rem 0.65rem', borderRadius: '9999px' }}>{tool}</span>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {project.description && (
+            <div>
+              <button
+                onClick={() => setShowStory(s => !s)}
+                aria-expanded={showStory}
+                style={{ ...labelStyle, marginBottom: 0, display: 'flex', alignItems: 'center', gap: '0.35rem', color: accent.text }}
+              >
+                {showStory ? '▾' : '▸'} The full technical story
+              </button>
+              {showStory && (
+                <p className="whitespace-pre-line" style={{ fontSize: '0.82rem', lineHeight: 1.7, color: 'var(--text-muted)', marginTop: '0.6rem' }}>{project.description}</p>
+              )}
+            </div>
+          )}
+        </div>
+
+        {/* Footer */}
+        {(project.demo || project.url || project.code) && (
+          <div style={{ padding: '0.9rem 1.25rem', display: 'flex', gap: '0.6rem', flexWrap: 'wrap', borderTop: '1px solid var(--border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
+            {project.demo && (
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '0.72rem', padding: '0.6rem 1.3rem' }}><MdOpenInNew size={15} /> Visit live site</a>
+            )}
+            {(project.url || project.code) && (
+              <a href={project.url || project.code} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '0.72rem', padding: '0.55rem 1.3rem' }}><BsGithub size={15} /> View code</a>
+            )}
+          </div>
+        )}
+      </div>
+    </div>,
+    document.body
+  );
+}
+
+function ProjectCard({ project, index, accent, onOpen }) {
+  const open = () => onOpen(project);
 
   return (
     <div
-      className="project-card-shell animate-fade-up"
-      style={{ perspective: '1000px', cursor: 'pointer', height: '440px', animationDelay: `${index * 0.08}s`, '--scan-delay': `${index * 0.6}s` }}
-      onClick={() => setFlipped(!flipped)}
-      title="Click to flip"
+      role="button"
+      tabIndex={0}
+      aria-label={`${project.name}: open details`}
+      onClick={open}
+      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } }}
+      className="project-card-shell brew-card group animate-fade-up"
+      style={{
+        cursor: 'pointer', display: 'flex', flexDirection: 'column', overflow: 'hidden',
+        animationDelay: `${index * 0.08}s`, '--scan-delay': `${index * 0.6}s`,
+      }}
     >
-      <div
-        style={{
-          position: 'relative', width: '100%', height: '100%',
-          transformStyle: 'preserve-3d', transition: 'transform 0.6s cubic-bezier(0.23, 1, 0.32, 1)',
-          transform: flipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
-        }}
-      >
-        {/* FRONT */}
-        <div
-          className="brew-card group"
+      <div style={{ height: '180px', flexShrink: 0, overflow: 'hidden', background: '#000', position: 'relative' }}>
+        {project.image?.src ? (
+          <img
+            src={project.image.src}
+            alt={project.name}
+            loading="lazy"
+            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#1c0e05] to-[#2a1509] flex items-center justify-center text-6xl transition-transform duration-500 group-hover:scale-110">
+            {project.emoji}
+          </div>
+        )}
+        <span
+          className="project-tier-badge"
           style={{
-            position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
-            display: 'flex', flexDirection: 'column', overflow: 'hidden',
+            position: 'absolute', top: '12px', left: '12px',
+            background: 'rgba(13,7,0,0.8)', border: `1px solid ${accent.border}`, color: accent.text,
+            fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.08em',
+            padding: '0.25rem 0.6rem', borderRadius: '9999px', backdropFilter: 'blur(8px)',
           }}
         >
-          <div
-            className="project-tier-badge animate-glow-pulse"
-            style={{
-            position: 'absolute', top: '12px', right: '12px', zIndex: 2,
-            background: tier.bg, border: `1px solid ${tier.border}`,
-            color: tier.text, fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.08em',
-            padding: '0.22rem 0.6rem', borderRadius: '4px', backdropFilter: 'blur(8px)',
-          }}>
-            {tierLabel}
-          </div>
+          {project.emoji} {project.category}
+        </span>
+        {projectImages(project).length > 1 && (
+          <span style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '0.6rem', fontWeight: 700, color: '#f5e6d3', background: 'rgba(13,7,0,0.8)', padding: '0.2rem 0.55rem', borderRadius: '9999px' }}>
+            📸 {projectImages(project).length} photos
+          </span>
+        )}
+      </div>
 
-          <div style={{
-            height: '180px', flexShrink: 0, overflow: 'hidden', background: '#000',
-            position: 'relative', display: 'flex', alignItems: 'center', justifyContent: 'center',
-          }}>
-            {project.image?.src ? (
-              <img
-                src={project.image.src}
-                alt={project.name}
-                loading="lazy"
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
-              />
-            ) : (
-              <>
-                <div className="w-full h-full bg-gradient-to-br from-[#1c0e05] to-[#2a1509] flex items-center justify-center text-5xl transition-transform duration-500 group-hover:scale-110">
-                  {projectEmojis[index % projectEmojis.length]}
-                </div>
-                <span style={{ position: 'absolute', bottom: '8px', right: '10px', fontSize: '0.55rem', color: 'var(--text-dim)', textTransform: 'uppercase' }}>[ Image Placeholder ]</span>
-              </>
-            )}
-          </div>
+      <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <h3 className="font-heading font-bold text-[#f5e6d3] text-lg leading-tight group-hover:text-[#c8956c] transition-colors">
+          {project.name}
+        </h3>
+        <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--text-muted)', margin: 0 }}>
+          {project.summary}
+        </p>
 
-          <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <h3 className="font-heading font-bold text-[#f5e6d3] text-lg leading-tight uppercase group-hover:text-[#c8956c] transition-colors">
-              {project.name}
-            </h3>
-            <p style={{ fontSize: '0.75rem', color: 'var(--text-dim)', fontStyle: 'italic' }}>
-              {projectQuips[index % projectQuips.length]}
-            </p>
-            <span className="brew-badge" style={{ alignSelf: 'flex-start', marginTop: 'auto' }}>🎭 {project.role || 'Developer'}</span>
-            <p style={{ fontSize: '0.6rem', color: 'var(--text-dim)', textAlign: 'center', marginTop: '0.4rem', letterSpacing: '0.08em', textTransform: 'uppercase' }}>🔄 Click to reveal details</p>
-          </div>
-        </div>
+        {project.highlights?.length > 0 && (
+          <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+            {project.highlights.map(h => (
+              <li key={h} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.68rem', fontWeight: 600, color: 'var(--text-primary)', background: accent.bg, border: `1px solid ${accent.border}`, padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>
+                <MdCheckCircle size={12} style={{ color: accent.text }} /> {h}
+              </li>
+            ))}
+          </ul>
+        )}
 
-        {/* BACK */}
-        <div
-          className="brew-card"
-          style={{
-            position: 'absolute', inset: 0, backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden',
-            transform: 'rotateY(180deg)', display: 'flex', flexDirection: 'column', padding: '1.5rem', gap: '0.8rem',
-            borderColor: tier.border, boxShadow: `0 0 40px ${tier.bg}`,
-          }}
-        >
-          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span className="quest-badge">🏅 QUEST COMPLETE</span>
-            <span style={{ fontSize: '0.6rem', color: tier.text, fontWeight: 700 }}>{tierLabel}</span>
-          </div>
-
-          <h3 className="font-heading font-bold text-[#f5e6d3] text-lg">{project.name}</h3>
-
-          {project.shortDescripton && (
-            <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.4rem' }}>
-              {project.shortDescripton.slice(0, 3).map((desc, i) => (
-                <li key={i} style={{ display: 'flex', gap: '0.5rem', fontSize: '0.75rem', color: 'var(--text-muted)', lineHeight: 1.4 }}>
-                  <span style={{ color: tier.text, flexShrink: 0 }}>›</span> {desc}
-                </li>
-              ))}
-            </ul>
-          )}
-
-          <div>
-            <p style={{ fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.12em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '0.4rem' }}>Tech Stack</p>
-            <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.35rem' }}>
-              {tools.map(tool => (
-                <span key={tool} style={{ fontSize: '0.62rem', fontWeight: 600, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-muted)', padding: '0.15rem 0.55rem', borderRadius: '4px' }}>{tool}</span>
-              ))}
-            </div>
-          </div>
-
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: 'auto' }}>
-            <div style={{ display: 'flex', gap: '0.5rem' }}>
-              {project.url && (
-                <a href={project.url} target="_blank" onClick={e => e.stopPropagation()} className="btn-outline" style={{ fontSize: '0.65rem', padding: '0.5rem', flex: 1, justifyContent: 'center' }}><BsGithub size={14} /> Code</a>
-              )}
-              {project.demo && (
-                <a href={project.demo} target="_blank" onClick={e => e.stopPropagation()} className="btn-primary" style={{ fontSize: '0.65rem', padding: '0.5rem', flex: 1, justifyContent: 'center' }}><MdOpenInNew size={14} /> Live</a>
-              )}
-            </div>
-            <button
-              onClick={e => { e.stopPropagation(); onOpenGallery(project); }}
-              className="btn-outline"
-              style={{ fontSize: '0.65rem', padding: '0.5rem', width: '100%', justifyContent: 'center', borderColor: 'var(--gold)', color: 'var(--gold)', background: 'rgba(251,191,36,0.05)' }}
-            >
-              📸 View Gallery
-            </button>
-          </div>
-          <p style={{ fontSize: '0.6rem', color: 'var(--text-dim)', textAlign: 'center', letterSpacing: '0.08em', textTransform: 'uppercase' }}>🔄 Click to flip back</p>
+        <div style={{ marginTop: 'auto', paddingTop: '0.6rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
+          <span className="brew-badge">🎭 {project.role || 'Developer'}</span>
+          <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.72rem', fontWeight: 700, color: accent.text }}>
+            See details <MdArrowForward size={14} className="transition-transform group-hover:translate-x-1" />
+          </span>
         </div>
       </div>
     </div>
@@ -258,7 +288,8 @@ function ProjectCard({ project, index, onOpenGallery }) {
 }
 
 function Projects() {
-  const [galleryProject, setGalleryProject] = useState(null);
+  const [selected, setSelected] = useState(null);
+  const close = useCallback(() => setSelected(null), []);
 
   return (
     <section id="projects" className="section-aurora section-aurora--projects" style={{ padding: '5rem 0', position: 'relative' }}>
@@ -266,21 +297,21 @@ function Projects() {
         <span className="section-tag animate-pop-in">Chapter 04</span>
         <div className="section-title-wrap">
           <h2 className="section-title font-heading text-shimmer">🗺️ Artifacts</h2>
-          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>Click any quest card to reveal lore and view captures</p>
+          <p className="animate-slide-in-top stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.82rem', marginTop: '0.3rem' }}>Things I&apos;ve built. Tap any project to see what it does, who it helps, and screenshots.</p>
         </div>
       </div>
 
-      <div className="project-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+      <div className="project-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
         {projectsData.map((project, i) => (
-          <ProjectCard key={project.id} project={project} index={i} onOpenGallery={setGalleryProject} />
+          <ProjectCard key={project.id} project={project} index={i} accent={accents[i % accents.length]} onOpen={setSelected} />
         ))}
       </div>
 
-      {galleryProject && (
-        <GalleryModal
-          projectName={galleryProject.name}
-          images={galleryProject.gallery?.length ? galleryProject.gallery : [galleryProject.image]}
-          onClose={() => setGalleryProject(null)}
+      {selected && (
+        <ProjectDetails
+          project={selected}
+          accent={accents[projectsData.indexOf(selected) % accents.length]}
+          onClose={close}
         />
       )}
     </section>

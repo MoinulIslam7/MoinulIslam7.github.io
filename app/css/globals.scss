@@ -513,6 +513,13 @@
   box-shadow: 0 0 18px rgba(244, 114, 182, 0.12);
 }
 
+/* Project cards and the details dialog lay out their own inner spacing,
+   so they opt out of the mobile .brew-card padding override. */
+.brew-card.project-card-shell,
+.brew-card.project-details {
+  padding: 0 !important;
+}
+
 /* ============================================================
    PROJECT CARDS
    ============================================================ */
