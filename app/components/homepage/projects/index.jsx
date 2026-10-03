@@ -1,8 +1,8 @@
 'use client';
 import { projectsData } from "@/utils/data/projects-data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { BsGithub } from "react-icons/bs";
-import { MdOpenInNew, MdClose } from "react-icons/md";
+import { MdOpenInNew, MdClose, MdChevronLeft, MdChevronRight } from "react-icons/md";
 
 const questTiers = ['☕ Main Quest', '⚔️ Main Quest', '🔥 Legendary', '🌟 Epic'];
 const tierColors = [
@@ -20,11 +20,34 @@ const projectQuips = [
   'Faraiz math, minus the family argument.',
   'Bangladesh from orbit — and your plot, measured in বিঘা.',
   'Five dropdowns between you and your khatian.',
+  'Birthdays, weddings & AI-planned parties — shipped as a team.',
+  'Finding a বাসা in Dhaka, minus the to-let signs. Built solo.',
 ];
 
-const projectEmojis = ['🤖', '🕷️', '🌐', '📋', '🕌', '🛰️', '📜'];
+const projectEmojis = ['🤖', '🕷️', '🌐', '📋', '🕌', '🛰️', '📜', '🎉', '🏠'];
 
-function GalleryModal({ image, onClose, projectName }) {
+function GalleryModal({ images, onClose, projectName }) {
+  const [active, setActive] = useState(0);
+  const count = images.length;
+  const current = images[active];
+  const go = (step) => setActive(i => (i + step + count) % count);
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'Escape') onClose();
+      else if (count > 1 && e.key === 'ArrowRight') go(1);
+      else if (count > 1 && e.key === 'ArrowLeft') go(-1);
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [count, onClose]);
+
+  const navBtn = {
+    position: 'absolute', top: '50%', transform: 'translateY(-50%)',
+    width: '40px', height: '40px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center',
+    background: 'rgba(13,7,0,0.7)', border: '1px solid var(--border-accent)', color: '#f5e6d3', backdropFilter: 'blur(6px)',
+  };
+
   return (
     <div
       style={{
@@ -46,17 +69,46 @@ function GalleryModal({ image, onClose, projectName }) {
       >
         <div style={{ padding: '1.2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid var(--border-subtle)' }}>
           <h3 className="font-heading text-xl text-[#f5e6d3]">📸 {projectName} Gallery</h3>
+          {count > 1 && <span style={{ fontSize: '0.7rem', color: 'var(--text-dim)', marginLeft: 'auto', marginRight: '1rem' }}>{active + 1} / {count}</span>}
           <button onClick={onClose} className="text-[#9ca3af] hover:text-[#f5e6d3] transition-colors">
             <MdClose size={24} />
           </button>
         </div>
         <div style={{ padding: '1.5rem', overflowY: 'auto' }}>
-          {image?.src ? (
-            <img
-              src={image.src}
-              alt={`${projectName} screenshot`}
-              style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}
-            />
+          {current?.src ? (
+            <>
+              <div style={{ position: 'relative' }}>
+                <img
+                  src={current.src}
+                  alt={`${projectName} screenshot ${active + 1}`}
+                  style={{ width: '100%', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.08)' }}
+                />
+                {count > 1 && (
+                  <>
+                    <button onClick={() => go(-1)} aria-label="Previous screenshot" style={{ ...navBtn, left: '10px' }}><MdChevronLeft size={26} /></button>
+                    <button onClick={() => go(1)} aria-label="Next screenshot" style={{ ...navBtn, right: '10px' }}><MdChevronRight size={26} /></button>
+                  </>
+                )}
+              </div>
+              {count > 1 && (
+                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.8rem', overflowX: 'auto', paddingBottom: '0.3rem' }}>
+                  {images.map((img, i) => (
+                    <button
+                      key={img.src}
+                      onClick={() => setActive(i)}
+                      aria-label={`Show screenshot ${i + 1}`}
+                      style={{
+                        flex: '0 0 auto', width: '96px', height: '60px', padding: 0, borderRadius: '6px', overflow: 'hidden',
+                        border: i === active ? '2px solid var(--gold)' : '1px solid rgba(255,255,255,0.1)',
+                        opacity: i === active ? 1 : 0.55, transition: 'opacity 0.2s',
+                      }}
+                    >
+                      <img src={img.src} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+                    </button>
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <div style={{ borderRadius: '8px', height: '200px', background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.05)', display: 'flex', flexDirection: 'column', gap: '0.5rem', alignItems: 'center', justifyContent: 'center' }}>
               <span className="text-4xl">📸</span>
@@ -227,7 +279,7 @@ function Projects() {
       {galleryProject && (
         <GalleryModal
           projectName={galleryProject.name}
-          image={galleryProject.image}
+          images={galleryProject.gallery?.length ? galleryProject.gallery : [galleryProject.image]}
           onClose={() => setGalleryProject(null)}
         />
       )}

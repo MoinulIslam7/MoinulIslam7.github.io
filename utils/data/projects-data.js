@@ -3,6 +3,18 @@
 import uttoradhikar from '/public/image/uttoradhikar.jpg';
 import bhumibdMap from '/public/image/bhumibd-map.jpg';
 import bhumibdKhatian from '/public/image/bhumibd-khatian.jpg';
+import poshHome from '/public/image/posh-home.jpg';
+import poshMarketplace from '/public/image/posh-marketplace.jpg';
+import poshVenues from '/public/image/posh-venues.jpg';
+import poshPlanner from '/public/image/posh-planner.jpg';
+import poshInspirations from '/public/image/posh-inspirations.jpg';
+import poshCorporate from '/public/image/posh-corporate.jpg';
+import ghorbdHome from '/public/image/ghorbd-home.jpg';
+import ghorbdListings from '/public/image/ghorbd-listings.jpg';
+import ghorbdMap from '/public/image/ghorbd-map.jpg';
+import ghorbdListing from '/public/image/ghorbd-listing.jpg';
+import ghorbdLand from '/public/image/ghorbd-land.jpg';
+import ghorbdPricing from '/public/image/ghorbd-pricing.jpg';
 
 export const projectsData = [
     {
@@ -85,6 +97,32 @@ export const projectsData = [
         code: '',
         demo: 'https://bhumi.uttoradhikar.org/khatian',
         image: bhumibdKhatian,
+        url: ''
+    },
+    {
+        id: 8,
+        name: 'Posh Celebration',
+        shortDescripton: ['Bangladesh\'s first AI-powered celebration marketplace for birthdays, weddings and corporate events', 'Built as part of the team — contributed across both the backend and the frontend', 'Marketplace of decor, venues, people & services and food, with deals, cart and vendor onboarding', 'AI tools: Posh Buddy drafts an event plan from a brief, Posh Planner builds it from templates with EMI payments'],
+        description: 'Posh Celebration is an event-planning marketplace based in Dhaka where customers plan birthdays, weddings and corporate events, browse packages and book vendors in one place. The marketplace is organised into Decor & Equipment, Venues, Posh Selection, People & Service and Food & Beverage, with sub-categories such as restaurants, party halls and villas, plus curated "Deals of the week", "Most Selling" and vendor-offer collections and a Real Events inspiration gallery.\n\nTwo AI-powered tools sit on top of the marketplace: Posh Buddy, which turns a short brief about the event into a complete plan, and Posh Planner, which starts from a template, lets users add the services and products they like, and supports smart installments & EMI. A partner programme lets vendors list their services and reach clients across Bangladesh.\n\nI worked on Posh Celebration as part of the team, contributing to both the backend and the frontend.',
+        tools: "Laravel, React, Inertia.js, Vite, Tailwind CSS, REST API, AI Integration",
+        role: 'Full Stack Developer (Team)',
+        code: '',
+        demo: 'https://poshcelebration.com/',
+        image: poshHome,
+        gallery: [poshHome, poshMarketplace, poshVenues, poshPlanner, poshInspirations, poshCorporate],
+        url: ''
+    },
+    {
+        id: 9,
+        name: 'GhorBD — Rent & Property Listings',
+        shortDescripton: ['Bengali-first platform for renting and selling flats, houses, rooms, hotels and land across Bangladesh', 'Designed and built entirely by me — frontend, backend and deployment', 'Search by area, type, bedrooms and budget, with a list view and an interactive map view', 'Free listings for owners, plus Pro/Business plans with invoices, rent reminders and building QR codes'],
+        description: 'GhorBD (ঘর বিডি) is a property platform for Bangladesh where tenants find বাসা, ফ্ল্যাট, রুম and hotels to rent and buyers find flats, houses and land for sale, contacting owners directly. The home page search filters by area, property type, bedrooms and a maximum-budget slider, with quick links to popular Dhaka neighbourhoods such as Uttara, Dhanmondi, Bashundhara, Mirpur and Gulshan, and browsing by division.\n\nListings can be explored as cards or on an OpenStreetMap-based map showing each property\'s rent as a pin, alongside filters for type, area, rent range and verified-only. A separate land section covers plot size in কাঠা/বিঘা, road width and dag/khatian details. Posting a listing is free; Pro and Business plans add unlimited listings, verification priority, invoices and PDF receipts, automatic rent reminders, building QR codes, multi-building management and income/expense reports. The site also includes a blog, guides and land-related calculators, with SEO-friendly Bengali URLs and a dark mode.\n\nGhorBD was designed and built entirely by me.',
+        tools: "Next.js, React, OpenStreetMap, Leaflet, Tailwind CSS, REST API, SEO, i18n (bn/en)",
+        role: 'Full Stack Developer (Solo)',
+        code: '',
+        demo: 'https://ghorbd.com/',
+        image: ghorbdHome,
+        gallery: [ghorbdHome, ghorbdListings, ghorbdMap, ghorbdListing, ghorbdLand, ghorbdPricing],
         url: ''
     }
 ];
