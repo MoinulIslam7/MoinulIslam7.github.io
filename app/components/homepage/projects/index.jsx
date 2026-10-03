@@ -6,10 +6,10 @@ import { BsGithub } from "react-icons/bs";
 import { MdOpenInNew, MdClose, MdChevronLeft, MdChevronRight, MdCheckCircle, MdArrowForward } from "react-icons/md";
 
 const accents = [
-  { bg: 'rgba(22,242,179,0.08)', border: 'rgba(22,242,179,0.3)',  text: 'var(--matcha)' },
-  { bg: 'rgba(200,149,108,0.1)', border: 'rgba(200,149,108,0.35)', text: 'var(--latte)' },
-  { bg: 'rgba(251,191,36,0.1)',  border: 'rgba(251,191,36,0.35)',  text: 'var(--gold)' },
-  { bg: 'rgba(168,85,247,0.1)',  border: 'rgba(168,85,247,0.35)',  text: 'var(--violet)' },
+  { bg: 'rgba(22,242,179,0.08)', border: 'rgba(22,242,179,0.3)',  text: 'var(--matcha)', rgb: '22,242,179' },
+  { bg: 'rgba(200,149,108,0.1)', border: 'rgba(200,149,108,0.35)', text: 'var(--latte)',  rgb: '200,149,108' },
+  { bg: 'rgba(251,191,36,0.1)',  border: 'rgba(251,191,36,0.35)',  text: 'var(--gold)',   rgb: '251,191,36' },
+  { bg: 'rgba(168,85,247,0.1)',  border: 'rgba(168,85,247,0.35)',  text: 'var(--violet)', rgb: '168,85,247' },
 ];
 
 const toolList = (tools) => typeof tools === 'string'
@@ -28,8 +28,8 @@ function Gallery({ images, projectName }) {
   useEffect(() => {
     if (count < 2) return;
     const onKey = (e) => {
-      if (e.key === 'ArrowRight') go(1);
-      else if (e.key === 'ArrowLeft') go(-1);
+      if (e.key === 'ArrowRight') setActive(i => (i + 1) % count);
+      else if (e.key === 'ArrowLeft') setActive(i => (i - 1 + count) % count);
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
@@ -44,14 +44,11 @@ function Gallery({ images, projectName }) {
   return (
     <div>
       <div style={{ position: 'relative', borderRadius: '10px', overflow: 'hidden', border: '1px solid rgba(255,255,255,0.08)', background: '#000' }}>
-        <img src={images[active].src} alt={`${projectName} screenshot ${active + 1} of ${count}`} style={{ width: '100%', display: 'block' }} />
+        <img src={images[active].src} alt={`${projectName} screenshot`} style={{ width: '100%', display: 'block' }} />
         {count > 1 && (
           <>
             <button onClick={() => go(-1)} aria-label="Previous screenshot" style={{ ...navBtn, left: '10px' }}><MdChevronLeft size={24} /></button>
             <button onClick={() => go(1)} aria-label="Next screenshot" style={{ ...navBtn, right: '10px' }}><MdChevronRight size={24} /></button>
-            <span style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '0.65rem', fontWeight: 700, color: '#f5e6d3', background: 'rgba(13,7,0,0.75)', padding: '0.2rem 0.55rem', borderRadius: '9999px' }}>
-              {active + 1} / {count}
-            </span>
           </>
         )}
       </div>
@@ -215,75 +212,30 @@ function ProjectCard({ project, index, accent, onOpen }) {
   const open = () => onOpen(project);
 
   return (
-    <div
+    <article
       role="button"
       tabIndex={0}
       aria-label={`${project.name}: open details`}
       onClick={open}
       onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } }}
-      className="project-card-shell brew-card group animate-fade-up"
-      style={{
-        cursor: 'pointer', display: 'flex', flexDirection: 'column', overflow: 'hidden',
-        animationDelay: `${index * 0.08}s`, '--scan-delay': `${index * 0.6}s`,
-      }}
+      className="artifact-card animate-fade-up"
+      style={{ '--accent': accent.rgb, animationDelay: `${index * 0.08}s` }}
     >
-      <div style={{ height: '180px', flexShrink: 0, overflow: 'hidden', background: '#000', position: 'relative' }}>
+      <div className="artifact-media">
         {project.image?.src ? (
-          <img
-            src={project.image.src}
-            alt={project.name}
-            loading="lazy"
-            className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-110"
-          />
+          <img src={project.image.src} alt={`${project.name} screenshot`} loading="lazy" />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#1c0e05] to-[#2a1509] flex items-center justify-center text-6xl transition-transform duration-500 group-hover:scale-110">
-            {project.emoji}
-          </div>
-        )}
-        <span
-          className="project-tier-badge"
-          style={{
-            position: 'absolute', top: '12px', left: '12px',
-            background: 'rgba(13,7,0,0.8)', border: `1px solid ${accent.border}`, color: accent.text,
-            fontSize: '0.6rem', fontWeight: 700, letterSpacing: '0.08em',
-            padding: '0.25rem 0.6rem', borderRadius: '9999px', backdropFilter: 'blur(8px)',
-          }}
-        >
-          {project.emoji} {project.category}
-        </span>
-        {projectImages(project).length > 1 && (
-          <span style={{ position: 'absolute', bottom: '10px', right: '10px', fontSize: '0.6rem', fontWeight: 700, color: '#f5e6d3', background: 'rgba(13,7,0,0.8)', padding: '0.2rem 0.55rem', borderRadius: '9999px' }}>
-            📸 {projectImages(project).length} photos
-          </span>
+          <div className="artifact-placeholder" aria-hidden="true">{project.emoji}</div>
         )}
       </div>
 
-      <div style={{ padding: '1.2rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
-        <h3 className="font-heading font-bold text-[#f5e6d3] text-lg leading-tight group-hover:text-[#c8956c] transition-colors">
-          {project.name}
-        </h3>
-        <p style={{ fontSize: '0.85rem', lineHeight: 1.6, color: 'var(--text-muted)', margin: 0 }}>
-          {project.summary}
-        </p>
-
-        {project.highlights?.length > 0 && (
-          <ul style={{ margin: 0, padding: 0, listStyle: 'none', display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
-            {project.highlights.map(h => (
-              <li key={h} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.68rem', fontWeight: 600, color: 'var(--text-primary)', background: accent.bg, border: `1px solid ${accent.border}`, padding: '0.2rem 0.6rem', borderRadius: '9999px' }}>
-                <MdCheckCircle size={12} style={{ color: accent.text }} /> {h}
-              </li>
-            ))}
-          </ul>
-        )}
-
-        <div style={{ marginTop: 'auto', paddingTop: '0.6rem', borderTop: '1px solid var(--border-subtle)', display: 'flex', alignItems: 'center', gap: '0.5rem', flexWrap: 'wrap' }}>
-          <span className="brew-badge">🎭 {project.role || 'Developer'}</span>
-          <span style={{ marginLeft: 'auto', display: 'inline-flex', alignItems: 'center', gap: '0.25rem', fontSize: '0.72rem', fontWeight: 700, color: accent.text }}>
-            See details <MdArrowForward size={14} className="transition-transform group-hover:translate-x-1" />
-          </span>
-        </div>
+      <div className="artifact-body">
+        <span className="artifact-category">{project.category}</span>
+        <h3 className="artifact-title">{project.name}</h3>
+        <p className="artifact-summary">{project.summary}</p>
+        <span className="artifact-link">View project <MdArrowForward size={15} /></span>
       </div>
-    </div>
+    </article>
   );
 }
 
@@ -301,7 +253,7 @@ function Projects() {
         </div>
       </div>
 
-      <div className="project-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(min(300px, 100%), 1fr))', gap: '1.5rem', marginTop: '2rem' }}>
+      <div className="artifact-grid">
         {projectsData.map((project, i) => (
           <ProjectCard key={project.id} project={project} index={i} accent={accents[i % accents.length]} onOpen={setSelected} />
         ))}
