@@ -18,6 +18,44 @@ import ghorbdPricing from '/public/image/ghorbd-pricing.jpg';
 
 export const projectsData = [
     {
+        id: 9,
+        name: 'GhorBD — Rent & Property Listings',
+        shortDescripton: ['Bengali-first platform for renting and selling flats, houses, rooms, hotels and land across Bangladesh', 'Designed and built entirely by me — frontend, backend and deployment', 'Search by area, type, bedrooms and budget, with a list view and an interactive map view', 'Free listings for owners, plus Pro/Business plans with invoices, rent reminders and building QR codes'],
+        description: 'GhorBD (ঘর বিডি) is a property platform for Bangladesh where tenants find বাসা, ফ্ল্যাট, রুম and hotels to rent and buyers find flats, houses and land for sale, contacting owners directly. The home page search filters by area, property type, bedrooms and a maximum-budget slider, with quick links to popular Dhaka neighbourhoods such as Uttara, Dhanmondi, Bashundhara, Mirpur and Gulshan, and browsing by division.\n\nListings can be explored as cards or on an OpenStreetMap-based map showing each property\'s rent as a pin, alongside filters for type, area, rent range and verified-only. A separate land section covers plot size in কাঠা/বিঘা, road width and dag/khatian details. Posting a listing is free; Pro and Business plans add unlimited listings, verification priority, invoices and PDF receipts, automatic rent reminders, building QR codes, multi-building management and income/expense reports. The site also includes a blog, guides and land-related calculators, with SEO-friendly Bengali URLs and a dark mode.\n\nGhorBD was designed and built entirely by me.',
+        tools: "Next.js, React, OpenStreetMap, Leaflet, Tailwind CSS, REST API, SEO, i18n (bn/en)",
+        role: 'Full Stack Developer (Solo)',
+        code: '',
+        demo: 'https://ghorbd.com/',
+        image: ghorbdHome,
+        gallery: [ghorbdHome, ghorbdListings, ghorbdMap, ghorbdListing, ghorbdLand, ghorbdPricing],
+        url: ''
+    },
+    {
+        id: 8,
+        name: 'Posh Celebration',
+        shortDescripton: ['Bangladesh\'s first AI-powered celebration marketplace for birthdays, weddings and corporate events', 'Built as part of the team — contributed across both the backend and the frontend', 'Marketplace of decor, venues, people & services and food, with deals, cart and vendor onboarding', 'AI tools: Posh Buddy drafts an event plan from a brief, Posh Planner builds it from templates with EMI payments'],
+        description: 'Posh Celebration is an event-planning marketplace based in Dhaka where customers plan birthdays, weddings and corporate events, browse packages and book vendors in one place. The marketplace is organised into Decor & Equipment, Venues, Posh Selection, People & Service and Food & Beverage, with sub-categories such as restaurants, party halls and villas, plus curated "Deals of the week", "Most Selling" and vendor-offer collections and a Real Events inspiration gallery.\n\nTwo AI-powered tools sit on top of the marketplace: Posh Buddy, which turns a short brief about the event into a complete plan, and Posh Planner, which starts from a template, lets users add the services and products they like, and supports smart installments & EMI. A partner programme lets vendors list their services and reach clients across Bangladesh.\n\nI worked on Posh Celebration as part of the team, contributing to both the backend and the frontend.',
+        tools: "Laravel, React, Inertia.js, Vite, Tailwind CSS, REST API, AI Integration",
+        role: 'Full Stack Developer (Team)',
+        code: '',
+        demo: 'https://poshcelebration.com/',
+        image: poshHome,
+        gallery: [poshHome, poshMarketplace, poshVenues, poshPlanner, poshInspirations, poshCorporate],
+        url: ''
+    },
+    {
+        id: 5,
+        name: 'Uttoradhikar.Org',
+        shortDescripton: ['Islamic inheritance (Faraiz) calculator in Bengali', 'Pick from 25+ heir types — spouse, children, parents, grandparents, siblings, uncles and cousins', 'Splits land (শতাংশ), gold & silver (ভরি) and cash into per-heir Sharia shares', 'Rules guide, markdown blog and legal-advice chat widget, installable as a PWA'],
+        description: 'Uttoradhikar.Org is a Bengali-language Islamic inheritance calculator that turns a complex Faraiz calculation into a single form. Users tick the surviving relatives from a list of more than twenty-five heir categories — স্বামী/স্ত্রী, পুত্র/কন্যা, পিতা/মাতা, দাদা/দাদি/নানি, full and half siblings, nephews, uncles and cousins, including predeceased children — enter the estate as land in শতাংশ, gold and silver in ভরি and cash in টাকা, and get each heir\'s exact share back instantly.\n\nThe app is a React + Vite single-page application with a markdown-driven rules (বিধি) section and blog, full Bengali SEO metadata, and PWA support so it works offline. A floating chat widget offers আইনি পরামর্শ (legal guidance) alongside the calculator.',
+        tools: "React, Vite, JavaScript, Tailwind CSS, Markdown, PWA (Service Worker), SEO",
+        role: 'Full Stack Developer',
+        code: '',
+        demo: 'https://uttoradhikar.org/',
+        image: uttoradhikar,
+        url: ''
+    },
+    {
         id: 1,
         name: 'Discord Bot',
         shortDescripton: ['OpenAI (Chatgpt 3.5) integration.', 'Slash Commands', 'Stable Diffusion for Image Generation', 'Enabled seamless interaction within Discord servers'],
@@ -64,18 +102,6 @@ export const projectsData = [
         role: 'Full Stack Developer',
     },
     {
-        id: 5,
-        name: 'Uttoradhikar.Org',
-        shortDescripton: ['Islamic inheritance (Faraiz) calculator in Bengali', 'Pick from 25+ heir types — spouse, children, parents, grandparents, siblings, uncles and cousins', 'Splits land (শতাংশ), gold & silver (ভরি) and cash into per-heir Sharia shares', 'Rules guide, markdown blog and legal-advice chat widget, installable as a PWA'],
-        description: 'Uttoradhikar.Org is a Bengali-language Islamic inheritance calculator that turns a complex Faraiz calculation into a single form. Users tick the surviving relatives from a list of more than twenty-five heir categories — স্বামী/স্ত্রী, পুত্র/কন্যা, পিতা/মাতা, দাদা/দাদি/নানি, full and half siblings, nephews, uncles and cousins, including predeceased children — enter the estate as land in শতাংশ, gold and silver in ভরি and cash in টাকা, and get each heir\'s exact share back instantly.\n\nThe app is a React + Vite single-page application with a markdown-driven rules (বিধি) section and blog, full Bengali SEO metadata, and PWA support so it works offline. A floating chat widget offers আইনি পরামর্শ (legal guidance) alongside the calculator.',
-        tools: "React, Vite, JavaScript, Tailwind CSS, Markdown, PWA (Service Worker), SEO",
-        role: 'Full Stack Developer',
-        code: '',
-        demo: 'https://uttoradhikar.org/',
-        image: uttoradhikar,
-        url: ''
-    },
-    {
         id: 6,
         name: 'BhumiBD — Satellite Map & Land Assistant',
         shortDescripton: ['High-resolution satellite map of Bangladesh, entirely in Bengali', 'Draw points, lines, polygons and rectangles to measure real land area and distance', 'Results in traditional units — শতাংশ, কাঠা, বিঘা — with PDF export', 'Nearby schools & hospitals layer plus a Bengali AI assistant for land questions'],
@@ -97,32 +123,6 @@ export const projectsData = [
         code: '',
         demo: 'https://bhumi.uttoradhikar.org/khatian',
         image: bhumibdKhatian,
-        url: ''
-    },
-    {
-        id: 8,
-        name: 'Posh Celebration',
-        shortDescripton: ['Bangladesh\'s first AI-powered celebration marketplace for birthdays, weddings and corporate events', 'Built as part of the team — contributed across both the backend and the frontend', 'Marketplace of decor, venues, people & services and food, with deals, cart and vendor onboarding', 'AI tools: Posh Buddy drafts an event plan from a brief, Posh Planner builds it from templates with EMI payments'],
-        description: 'Posh Celebration is an event-planning marketplace based in Dhaka where customers plan birthdays, weddings and corporate events, browse packages and book vendors in one place. The marketplace is organised into Decor & Equipment, Venues, Posh Selection, People & Service and Food & Beverage, with sub-categories such as restaurants, party halls and villas, plus curated "Deals of the week", "Most Selling" and vendor-offer collections and a Real Events inspiration gallery.\n\nTwo AI-powered tools sit on top of the marketplace: Posh Buddy, which turns a short brief about the event into a complete plan, and Posh Planner, which starts from a template, lets users add the services and products they like, and supports smart installments & EMI. A partner programme lets vendors list their services and reach clients across Bangladesh.\n\nI worked on Posh Celebration as part of the team, contributing to both the backend and the frontend.',
-        tools: "Laravel, React, Inertia.js, Vite, Tailwind CSS, REST API, AI Integration",
-        role: 'Full Stack Developer (Team)',
-        code: '',
-        demo: 'https://poshcelebration.com/',
-        image: poshHome,
-        gallery: [poshHome, poshMarketplace, poshVenues, poshPlanner, poshInspirations, poshCorporate],
-        url: ''
-    },
-    {
-        id: 9,
-        name: 'GhorBD — Rent & Property Listings',
-        shortDescripton: ['Bengali-first platform for renting and selling flats, houses, rooms, hotels and land across Bangladesh', 'Designed and built entirely by me — frontend, backend and deployment', 'Search by area, type, bedrooms and budget, with a list view and an interactive map view', 'Free listings for owners, plus Pro/Business plans with invoices, rent reminders and building QR codes'],
-        description: 'GhorBD (ঘর বিডি) is a property platform for Bangladesh where tenants find বাসা, ফ্ল্যাট, রুম and hotels to rent and buyers find flats, houses and land for sale, contacting owners directly. The home page search filters by area, property type, bedrooms and a maximum-budget slider, with quick links to popular Dhaka neighbourhoods such as Uttara, Dhanmondi, Bashundhara, Mirpur and Gulshan, and browsing by division.\n\nListings can be explored as cards or on an OpenStreetMap-based map showing each property\'s rent as a pin, alongside filters for type, area, rent range and verified-only. A separate land section covers plot size in কাঠা/বিঘা, road width and dag/khatian details. Posting a listing is free; Pro and Business plans add unlimited listings, verification priority, invoices and PDF receipts, automatic rent reminders, building QR codes, multi-building management and income/expense reports. The site also includes a blog, guides and land-related calculators, with SEO-friendly Bengali URLs and a dark mode.\n\nGhorBD was designed and built entirely by me.',
-        tools: "Next.js, React, OpenStreetMap, Leaflet, Tailwind CSS, REST API, SEO, i18n (bn/en)",
-        role: 'Full Stack Developer (Solo)',
-        code: '',
-        demo: 'https://ghorbd.com/',
-        image: ghorbdHome,
-        gallery: [ghorbdHome, ghorbdListings, ghorbdMap, ghorbdListing, ghorbdLand, ghorbdPricing],
         url: ''
     }
 ];

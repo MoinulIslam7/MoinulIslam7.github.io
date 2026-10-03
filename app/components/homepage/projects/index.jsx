@@ -13,18 +13,18 @@ const tierColors = [
 ];
 
 const projectQuips = [
+  'Finding a বাসা in Dhaka, minus the to-let signs. Built solo.',
+  'Birthdays, weddings & AI-planned parties — shipped as a team.',
+  'Faraiz math, minus the family argument.',
   'Built with love, caffeine, and an OpenAI API key.',
   'Scraped the web so you don\'t have to. You\'re welcome.',
   'Revamped a whole site. They gave me coffee. Fair trade.',
   'Task management for teams that actually communicate.',
-  'Faraiz math, minus the family argument.',
   'Bangladesh from orbit — and your plot, measured in বিঘা.',
   'Five dropdowns between you and your khatian.',
-  'Birthdays, weddings & AI-planned parties — shipped as a team.',
-  'Finding a বাসা in Dhaka, minus the to-let signs. Built solo.',
 ];
 
-const projectEmojis = ['🤖', '🕷️', '🌐', '📋', '🕌', '🛰️', '📜', '🎉', '🏠'];
+const projectEmojis = ['🏠', '🎉', '🕌', '🤖', '🕷️', '🌐', '📋', '🛰️', '📜'];
 
 function GalleryModal({ images, onClose, projectName }) {
   const [active, setActive] = useState(0);
