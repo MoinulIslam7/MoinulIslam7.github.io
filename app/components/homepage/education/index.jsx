@@ -5,14 +5,7 @@ const scrollIcons = ['🎓', '📚', '✏️'];
 
 function Education() {
   return (
-    <section id="education" className="animate-slide-in-bottom" style={{ padding: '5rem 0', position: 'relative' }}>
-      {/* Ambient */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', right: '-40px', bottom: '10%',
-        width: '280px', height: '280px',
-        background: 'radial-gradient(circle, rgba(22,242,179,0.05) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+    <section id="education" className="section-aurora section-aurora--education animate-slide-in-bottom" style={{ padding: '5rem 0', position: 'relative' }}>
 
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 05</span>

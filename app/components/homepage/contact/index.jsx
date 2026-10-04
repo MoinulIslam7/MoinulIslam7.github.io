@@ -12,14 +12,7 @@ import ContactForm from './contact-form';
 
 function ContactSection() {
   return (
-    <section id="contact" style={{ padding: '6rem 0 4rem', position: 'relative' }}>
-      {/* Ambient glow */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', bottom: '0', left: '50%', transform: 'translateX(-50%)',
-        width: '100%', height: '400px',
-        background: 'radial-gradient(circle at center, rgba(168,85,247,0.04) 0%, transparent 70%)',
-        pointerEvents: 'none', zIndex: 0,
-      }} />
+    <section id="contact" className="section-aurora section-aurora--contact" style={{ padding: '6rem 0 4rem', position: 'relative' }}>
 
       <div className="section-header">
         <span className="section-tag">Chapter 07</span>

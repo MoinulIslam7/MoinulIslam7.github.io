@@ -5,14 +5,7 @@ const arcLabels = ['Arc I', 'Arc II', 'Arc III', 'Arc IV', 'Arc V'];
 
 function Experience() {
   return (
-    <section id="experience" className="animate-slide-in-bottom" style={{ padding: '5rem 0', position: 'relative' }}>
-      {/* Ambient */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', right: '-60px', top: '10%',
-        width: '300px', height: '300px',
-        background: 'radial-gradient(circle, rgba(168,85,247,0.06) 0%, transparent 70%)',
-        pointerEvents: 'none',
-      }} />
+    <section id="experience" className="section-aurora section-aurora--experience animate-slide-in-bottom" style={{ padding: '5rem 0', position: 'relative' }}>
 
       {/* Section header */}
       <div className="section-header animate-fade-up">

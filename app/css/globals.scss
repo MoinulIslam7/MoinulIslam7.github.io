@@ -55,13 +55,14 @@
     position: relative;
   }
 
-  /* Noise grain overlay */
+  /* Noise grain overlay — sits above all content (it ignores the pointer) so the
+     texture is identical across the hero and every section, with no seams. */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
     pointer-events: none;
-    z-index: 0;
+    z-index: 60;
     opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 200px 200px;
@@ -185,34 +186,6 @@
    ============================================================ */
 .section-aurora {
   position: relative;
-  overflow: hidden;
-}
-
-.section-aurora::before,
-.section-aurora::after {
-  content: '';
-  position: absolute;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.section-aurora::before {
-  inset: -20% -10% auto -10%;
-  height: 70%;
-  background: radial-gradient(circle at 30% 30%, rgba(200,149,108,0.16) 0%, transparent 60%);
-  animation: nebula-shift 14s ease-in-out infinite;
-  opacity: 0.65;
-}
-
-.section-aurora::after {
-  inset: 0;
-  background-image:
-    radial-gradient(circle at center, rgba(255,255,255,0.25) 0 1px, transparent 1px),
-    radial-gradient(circle at center, rgba(22,242,179,0.18) 0 1px, transparent 1px);
-  background-size: 140px 140px, 240px 240px;
-  background-position: 0 0, 12px 18px;
-  animation: star-drift 28s linear infinite;
-  opacity: 0.28;
 }
 
 .section-aurora > * {
@@ -220,16 +193,106 @@
   z-index: 1;
 }
 
-.section-aurora--about::before {
-  background: radial-gradient(circle at 25% 25%, rgba(200,149,108,0.2) 0%, rgba(244,114,182,0.08) 38%, transparent 70%);
+/* ============================================================
+   PAGE MESH — animated gradient behind the whole page
+   ============================================================ */
+.page-mesh {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+
+  /* Vignette keeps the edges deep so content stays the focus */
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 85% 75% at 50% 45%, transparent 40%, rgba(13, 7, 0, 0.75) 100%);
+  }
 }
 
-.section-aurora--skills::before {
-  background: radial-gradient(circle at 70% 20%, rgba(22,242,179,0.18) 0%, rgba(168,85,247,0.1) 45%, transparent 72%);
+.page-mesh__blob {
+  position: absolute;
+  border-radius: 50%;
+  will-change: transform;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+
+  &--latte {
+    width: 62vmax; height: 62vmax;
+    top: -22vmax; left: -16vmax;
+    background: radial-gradient(circle, rgba(200, 149, 108, 0.30) 0%, rgba(200, 149, 108, 0) 65%);
+    animation-name: mesh-a;
+    animation-duration: 26s;
+  }
+
+  &--pink {
+    width: 56vmax; height: 56vmax;
+    top: 6vmax; right: -20vmax;
+    background: radial-gradient(circle, rgba(244, 114, 182, 0.22) 0%, rgba(244, 114, 182, 0) 65%);
+    animation-name: mesh-b;
+    animation-duration: 32s;
+  }
+
+  &--violet {
+    width: 64vmax; height: 64vmax;
+    bottom: -30vmax; left: 12vmax;
+    background: radial-gradient(circle, rgba(168, 85, 247, 0.22) 0%, rgba(168, 85, 247, 0) 65%);
+    animation-name: mesh-c;
+    animation-duration: 38s;
+  }
+
+  &--matcha {
+    width: 44vmax; height: 44vmax;
+    top: 30vmax; left: -18vmax;
+    background: radial-gradient(circle, rgba(22, 242, 179, 0.12) 0%, rgba(22, 242, 179, 0) 65%);
+    animation-name: mesh-d;
+    animation-duration: 30s;
+  }
+
+  &--gold {
+    width: 38vmax; height: 38vmax;
+    bottom: -6vmax; right: -6vmax;
+    background: radial-gradient(circle, rgba(251, 191, 36, 0.12) 0%, rgba(251, 191, 36, 0) 65%);
+    animation-name: mesh-e;
+    animation-duration: 24s;
+  }
 }
 
-.section-aurora--projects::before {
-  background: radial-gradient(circle at 55% 25%, rgba(244,114,182,0.18) 0%, rgba(200,149,108,0.08) 45%, transparent 72%);
+@keyframes mesh-a {
+  0%   { transform: translate3d(0, 0, 0) scale(1, 1); }
+  50%  { transform: translate3d(14vw, 10vh, 0) scale(1.15, 0.9); }
+  100% { transform: translate3d(28vw, -4vh, 0) scale(0.95, 1.1); }
+}
+
+@keyframes mesh-b {
+  0%   { transform: translate3d(0, 0, 0) scale(1, 1); }
+  50%  { transform: translate3d(-18vw, 16vh, 0) scale(0.9, 1.15); }
+  100% { transform: translate3d(-8vw, 34vh, 0) scale(1.12, 0.95); }
+}
+
+@keyframes mesh-c {
+  0%   { transform: translate3d(0, 0, 0) scale(1, 1); }
+  50%  { transform: translate3d(20vw, -18vh, 0) scale(1.1, 0.92); }
+  100% { transform: translate3d(-10vw, -30vh, 0) scale(0.92, 1.12); }
+}
+
+@keyframes mesh-d {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(22vw, -12vh, 0) scale(1.2); }
+  100% { transform: translate3d(40vw, 14vh, 0) scale(0.9); }
+}
+
+@keyframes mesh-e {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(-24vw, -14vh, 0) scale(1.25, 0.9); }
+  100% { transform: translate3d(-12vw, -40vh, 0) scale(0.9, 1.15); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .page-mesh__blob { animation: none; }
 }
 
 .availability-strip,

@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
 import NavbarWrapper from './components/Navbar/NavbarWrapper';
 import StructuredData from './components/helper/StructuredData';
+import MeshBackground from './components/helper/MeshBackground';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -130,6 +131,7 @@ export default function RootLayout({ children }) {
       <StructuredData />
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
+        <MeshBackground />
         <NavbarWrapper />
         <main className="pt-20 min-h-screen relative z-10">
           {children}
