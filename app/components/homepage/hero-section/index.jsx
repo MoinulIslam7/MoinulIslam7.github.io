@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare, FaDev, FaStackOverflow } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { SiLeetcode, SiReact, SiNextdotjs, SiNodedotjs, SiPython } from "react-icons/si";
+import { SiLeetcode, SiReact, SiNextdotjs, SiNodedotjs, SiPython, SiMongodb, SiPostgresql, SiMysql } from "react-icons/si";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 
@@ -31,13 +31,16 @@ const focusFragments = [
 
 const typedWords = ['web apps', 'scalable APIs', 'AI-powered tools', 'Bangla-first products'];
 
-// Icons that circle the profile photo; angle is the starting position in degrees.
+// Icons that circle the profile photo, spaced evenly around the ring.
 const orbitIcons = [
-  { Icon: SiReact, label: 'React', color: '#61dafb', angle: -30 },
-  { Icon: SiNextdotjs, label: 'Next.js', color: '#f5e6d3', angle: 60 },
-  { Icon: SiNodedotjs, label: 'Node.js', color: '#5fa04e', angle: 150 },
-  { Icon: SiPython, label: 'Python', color: '#ffd43b', angle: 240 },
-];
+  { Icon: SiReact, label: 'React', color: '#61dafb' },
+  { Icon: SiMongodb, label: 'MongoDB', color: '#47a248' },
+  { Icon: SiNextdotjs, label: 'Next.js', color: '#f5e6d3' },
+  { Icon: SiPostgresql, label: 'PostgreSQL', color: '#4f8fd6' },
+  { Icon: SiNodedotjs, label: 'Node.js', color: '#5fa04e' },
+  { Icon: SiMysql, label: 'MySQL', color: '#e48e00' },
+  { Icon: SiPython, label: 'Python', color: '#ffd43b' },
+].map((icon, i, all) => ({ ...icon, angle: -90 + (360 / all.length) * i }));
 
 function TypedWord() {
   const [text, setText] = useState('');
