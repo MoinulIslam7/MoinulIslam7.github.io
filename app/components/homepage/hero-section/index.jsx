@@ -58,7 +58,7 @@ function HeroSection() {
     <section
       id="hero"
       ref={heroRef}
-      className="hero-section-bleed relative"
+      className="hero-section-bleed relative flex items-center"
       style={{ minHeight: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
       {/* Animated background constellation */}
@@ -121,7 +121,7 @@ function HeroSection() {
         }}
       />
 
-      <div className="hero-section-shell mx-auto px-8 lg:max-w-[1440px] w-full flex flex-col lg:flex-row items-center justify-between gap-10 py-12 lg:py-24 animate-slide-in-left">
+      <div className="hero-section-shell mx-auto px-8 lg:max-w-[1240px] w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 py-12 lg:py-16 animate-slide-in-left">
         {/* LEFT — Text content */}
         <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
@@ -226,7 +226,7 @@ function HeroSection() {
         {/* RIGHT — Profile image */}
         <div
           className="hero-profile-shell flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
-          style={{ width: 'clamp(180px, 30vw, 340px)', height: 'clamp(180px, 30vw, 340px)' }}
+          style={{ width: 'clamp(220px, 34vw, 440px)', height: 'clamp(220px, 34vw, 440px)' }}
         >
           <div
             className="animate-pulse-glow"
