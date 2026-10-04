@@ -7,7 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
 import { FaFacebook, FaTwitterSquare, FaDev, FaStackOverflow } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
-import { SiLeetcode } from "react-icons/si";
+import { SiLeetcode, SiReact, SiNextdotjs, SiNodedotjs, SiPython } from "react-icons/si";
 import { MdDownload } from "react-icons/md";
 import { RiContactsFill } from "react-icons/ri";
 
@@ -28,6 +28,47 @@ const focusFragments = [
   { angle: '208deg', distance: '158px', size: '10px', delay: '0.22s' },
   { angle: '270deg', distance: '192px', size: '8px', delay: '0.14s' },
 ];
+
+const typedWords = ['web apps', 'scalable APIs', 'AI-powered tools', 'Bangla-first products'];
+
+// Icons that circle the profile photo; angle is the starting position in degrees.
+const orbitIcons = [
+  { Icon: SiReact, label: 'React', color: '#61dafb', angle: -30 },
+  { Icon: SiNextdotjs, label: 'Next.js', color: '#f5e6d3', angle: 60 },
+  { Icon: SiNodedotjs, label: 'Node.js', color: '#5fa04e', angle: 150 },
+  { Icon: SiPython, label: 'Python', color: '#ffd43b', angle: 240 },
+];
+
+function TypedWord() {
+  const [text, setText] = useState('');
+  const [wordIndex, setWordIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    const word = typedWords[wordIndex];
+    let delay = deleting ? 45 : 95;
+    if (!deleting && text === word) delay = 1600;
+    else if (deleting && text === '') delay = 350;
+
+    const timer = setTimeout(() => {
+      if (!deleting && text === word) setDeleting(true);
+      else if (deleting && text === '') {
+        setDeleting(false);
+        setWordIndex(i => (i + 1) % typedWords.length);
+      } else {
+        setText(word.slice(0, text.length + (deleting ? -1 : 1)));
+      }
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [text, deleting, wordIndex]);
+
+  return (
+    <span className="hero-typed">
+      {text}<span className="hero-caret" aria-hidden="true" />
+    </span>
+  );
+}
 
 function HeroSection() {
   const heroRef = useRef(null);
@@ -54,10 +95,17 @@ function HeroSection() {
     return () => observer.disconnect();
   }, []);
 
+  const handlePointerMove = (e) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    e.currentTarget.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
+    e.currentTarget.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
+  };
+
   return (
     <section
       id="hero"
       ref={heroRef}
+      onMouseMove={handlePointerMove}
       className="hero-section-bleed relative flex items-center"
       style={{ minHeight: 'calc(100vh - 80px)', overflow: 'hidden' }}
     >
@@ -100,6 +148,8 @@ function HeroSection() {
           </div>
         ))}
       </div>
+
+      <div aria-hidden="true" className="hero-spotlight" />
 
       {/* Ambient blobs */}
       <div
@@ -157,6 +207,10 @@ function HeroSection() {
           </span>
           <span style={{ color: 'var(--matcha)' }}>.</span>
         </h1>
+
+        <p className="hero-typed-line animate-slide-in-top stagger-1" aria-label={`I build ${typedWords.join(', ')}`}>
+          <span aria-hidden="true">&gt; I build <TypedWord /></span>
+        </p>
 
         {/* Subtitle - SEO Keywords */}
         <p
@@ -225,28 +279,28 @@ function HeroSection() {
 
         {/* RIGHT — Profile image */}
         <div
-          className="hero-profile-shell flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
+          className="hero-profile-shell relative flex-shrink-0 flex items-center justify-center z-10 animate-float animate-slide-in-right"
           style={{ width: 'clamp(220px, 34vw, 440px)', height: 'clamp(220px, 34vw, 440px)' }}
         >
-          <div
-            className="animate-pulse-glow"
-            style={{
-              width: '100%',
-              height: '100%',
-              borderRadius: '50%',
-              padding: '4px',
-              background: 'linear-gradient(135deg, var(--latte), var(--pink), var(--violet))',
-            }}
-          >
-            <div
-              style={{
-                width: '100%',
-                height: '100%',
-                borderRadius: '50%',
-                overflow: 'hidden',
-                border: '4px solid var(--bg-deep)',
-              }}
-            >
+          <div aria-hidden="true" className="hero-orbit">
+            {orbitIcons.map(({ Icon, label, color, angle }) => (
+              <span
+                key={label}
+                className="hero-orbit-icon"
+                title={label}
+                style={{
+                  left: `${50 + 50 * Math.cos((angle * Math.PI) / 180)}%`,
+                  top: `${50 + 50 * Math.sin((angle * Math.PI) / 180)}%`,
+                  color,
+                }}
+              >
+                <Icon />
+              </span>
+            ))}
+          </div>
+
+          <div className="hero-photo-ring animate-pulse-glow">
+            <div className="hero-photo">
               <img
                 src={personalData.profile}
                 alt="Moinul Islam — Full Stack Software Developer based in Dhaka, Bangladesh"
@@ -259,6 +313,11 @@ function HeroSection() {
           </div>
         </div>
       </div>
+
+      <a href="#about" className="hero-scroll-hint" aria-label="Scroll to the about section">
+        <span className="hero-scroll-mouse"><span className="hero-scroll-dot" /></span>
+        <span>Scroll</span>
+      </a>
     </section>
   );
 }
