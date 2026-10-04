@@ -1,16 +1,8 @@
 'use client';
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { navItems } from "@/utils/data/nav-links";
 
-const navItems = [
-  { label: "🧭 Quest Log", href: "#about" },
-  { label: "⚔️ Battle Record", href: "#experience" },
-  { label: "🎯 Skill Tree", href: "#skills" },
-  { label: "🗺️ Artifacts", href: "#projects" },
-  { label: "📜 Lore", href: "#education" },
-  { label: "📖 The Blog", href: "#blogs" },
-  { label: "☕ Brew a Chat", href: "#contact" },
-];
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
