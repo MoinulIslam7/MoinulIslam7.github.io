@@ -127,8 +127,8 @@ export default function RootLayout({ children }) {
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <StructuredData />
       </head>
-      <StructuredData />
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
         <MeshBackground />
