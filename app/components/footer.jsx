@@ -41,7 +41,7 @@ function Footer() {
         </div>
 
         <p className="footer-bottom">
-          © {new Date().getFullYear()} Moinul Islam <span aria-hidden="true">·</span> Built with Next.js &amp; ☕
+          © {new Date().getFullYear()} Moinul Islam
         </p>
       </div>
     </footer>
