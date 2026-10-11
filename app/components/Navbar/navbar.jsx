@@ -1,32 +1,16 @@
 'use client';
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { navItems } from "@/utils/data/nav-links";
 
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   const closeMenu = () => setIsOpen(false);
 
   return (
-    <nav
-      style={{
-        background: scrolled
-          ? 'rgba(13,7,0,0.92)'
-          : 'transparent',
-        backdropFilter: scrolled ? 'blur(16px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(200,149,108,0.15)' : '1px solid transparent',
-        transition: 'all 0.4s ease',
-      }}
-    >
+    <nav>
       <div className="flex items-center justify-between py-4 relative px-8">
         {/* Logo */}
         <Link
@@ -65,15 +49,12 @@ function Navbar() {
         {/* Desktop menu */}
         <ul
           className={`
-            absolute top-20 left-0 w-full flex flex-col gap-1 p-4 z-50 shadow-2xl
+            absolute top-full left-0 w-full flex flex-col gap-1 p-4 z-50 shadow-2xl
+            bg-[#0d0700] border-b border-[rgba(200,149,108,0.15)] rounded-b-xl
             transition-all duration-300 ease-in-out
-            md:static md:flex-row md:w-auto md:gap-0 md:p-0 md:shadow-none md:bg-transparent
+            md:static md:flex-row md:w-auto md:gap-0 md:p-0 md:shadow-none md:bg-transparent md:border-0 md:rounded-none
             ${isOpen ? 'opacity-100 visible' : 'opacity-0 invisible md:opacity-100 md:visible'}
           `}
-          style={{
-            background: 'rgba(13,7,0,0.97)',
-            backdropFilter: 'blur(20px)',
-          }}
           id="navbar-default"
         >
           {navItems.map((item) => (
