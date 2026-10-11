@@ -24,8 +24,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience | Dhaka',
-  description: 'Moinul Islam - Professional Full Stack Software Developer with 3+ years in Python, JavaScript, React, Next.js, Node.js, and scalable web architectures. Specializing in modern web development, REST APIs, and cloud solutions. Based in Dhaka, Bangladesh.',
+  title: 'Moinul Islam - Full Stack Developer in Dhaka',
+  description: 'Moinul Islam is a full stack developer in Dhaka with 3+ years building scalable web apps with React, Next.js, Node.js and Python. See projects and contact.',
   keywords: [
     'Moinul Islam', 
     'Full Stack Developer',
@@ -121,7 +121,6 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#0d0700" />
         <meta name="color-scheme" content="dark" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

@@ -249,7 +249,7 @@ function HeroSection() {
             { href: personalData.twitter, Icon: FaXTwitter, label: 'Twitter', rel: 'me noopener noreferrer' },
             { href: personalData.facebook, Icon: FaFacebook, label: 'Facebook', rel: 'me noopener noreferrer' },
             { href: personalData.leetcode, Icon: SiLeetcode, label: 'LeetCode', rel: 'noopener noreferrer' },
-            { href: personalData.stackOverflow, Icon: FaStackOverflow, label: 'StackOveflow', rel: 'noopener noreferrer' },
+            { href: personalData.stackOverflow, Icon: FaStackOverflow, label: 'Stack Overflow', rel: 'noopener noreferrer' },
             { href: `https://dev.to/${personalData.devUsername}`, Icon: FaDev, label: 'Dev.to', rel: 'noopener noreferrer' },
           ].map(({ href, Icon, label, rel }, idx) => (
             <Link
@@ -262,7 +262,7 @@ function HeroSection() {
               style={{ animationDelay: `${0.05 + idx * 0.05}s` }}
               title={`${label} Profile`}
             >
-              <Icon size={26} />
+              <Icon size={26} title={label} />
             </Link>
           ))}
         </div>
@@ -297,7 +297,7 @@ function HeroSection() {
                   color,
                 }}
               >
-                <Icon />
+                <Icon title={label} />
               </span>
             ))}
           </div>

@@ -30,7 +30,7 @@ function Footer() {
           <div className="footer-socials">
             {socials.map(({ href, label, Icon }) => (
               <a key={label} href={href} target="_blank" rel="me noopener noreferrer" aria-label={label} title={label}>
-                <Icon size={15} />
+                <Icon size={15} title={label} />
               </a>
             ))}
           </div>
