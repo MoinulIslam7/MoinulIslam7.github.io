@@ -1,15 +1,13 @@
 'use client';
 // @flow strict
 import { personalData } from "@/utils/data/personal-data";
-import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { BsGithub, BsLinkedin } from "react-icons/bs";
-import { FaFacebook, FaTwitterSquare, FaDev, FaStackOverflow } from "react-icons/fa";
+import { FaFacebook, FaDev, FaStackOverflow } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { SiLeetcode, SiReact, SiNextdotjs, SiNodedotjs, SiPython, SiMongodb, SiPostgresql, SiMysql } from "react-icons/si";
-import { MdDownload } from "react-icons/md";
-import { RiContactsFill } from "react-icons/ri";
+import { MdArrowForward, MdDownload } from "react-icons/md";
 
 const orbitBands = [
   { size: '440px', radius: '176px', speed: '30s', delay: '-8s', reverse: false, color: 'rgba(200,149,108,0.18)' },
@@ -29,7 +27,21 @@ const focusFragments = [
   { angle: '270deg', distance: '192px', size: '8px', delay: '0.14s' },
 ];
 
-const typedWords = ['web apps', 'scalable APIs', 'AI-powered tools', 'Bangla-first products'];
+// First production role (Core Devs internship) — drives the experience badge.
+const CAREER_START = new Date(2023, 1, 17);
+const yearsOfExperience = Math.floor((Date.now() - CAREER_START) / (365.25 * 24 * 60 * 60 * 1000));
+const careerYears = Array.from(
+  { length: new Date().getFullYear() - CAREER_START.getFullYear() + 1 },
+  (_, i) => CAREER_START.getFullYear() + i
+);
+
+const typedWords = [
+  'scalable REST APIs',
+  'microservices',
+  'cloud-native backends',
+  'AI-powered systems',
+  'Next.js frontends',
+];
 
 // Icons that circle the profile photo, spaced evenly around the ring.
 const orbitIcons = [
@@ -189,72 +201,71 @@ function HeroSection() {
         {/* LEFT — Text content */}
         <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
-        {/* Level badge */}
-        <div className="level-chip mb-5 animate-pop-in" itemProp="jobTitle">
-          ⚔️ &nbsp;LVL 3 &nbsp;·&nbsp; SOFTWARE ENGINEER
-        </div>
+        {/* Status line */}
+        <p className="hero-status animate-pop-in">
+          <span className="hero-status__dot" aria-hidden="true" />
+          <span>Available for work</span>
+          <span className="hero-status__role">
+            <span className="hero-status__sep" aria-hidden="true">/</span>
+            <span itemProp="jobTitle">Software Engineer</span>
+          </span>
+          <span className="hero-status__sep" aria-hidden="true">/</span>
+          <span>Remote<span className="hero-status__loc"> &middot; Dhaka, BD</span></span>
+        </p>
 
         {/* Main H1 - SEO Critical */}
-        <h1
-          className="font-heading"
-          itemProp="name"
-          style={{
-            fontSize: 'clamp(2rem, 5vw, 3.4rem)',
-            fontWeight: 800,
-            lineHeight: 1.18,
-            color: 'var(--cream)',
-            marginBottom: '0.5rem',
-          }}
-        >
-          Hi, I&rsquo;m{' '}
-          <span
-            className="text-shimmer"
-            style={{
-              background: 'linear-gradient(90deg, var(--latte), var(--pink), var(--latte))',
-              backgroundSize: '200% 100%',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-            }}
-          >
-            Moinul Islam
+        <h1 className="hero-title font-heading" itemProp="name">
+          <span className="hero-title__hello">Hi, I&rsquo;m</span>{' '}
+          <span className="hero-title__name">
+            Moinul Islam<span className="hero-title__dot">.</span>
+            <svg className="hero-title__swash" viewBox="0 0 300 14" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="hero-swash" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%" stopColor="#c8956c" />
+                  <stop offset="60%" stopColor="#f472b6" />
+                  <stop offset="100%" stopColor="#16f2b3" />
+                </linearGradient>
+              </defs>
+              <path d="M3 10 C 70 2, 160 2, 297 7" />
+            </svg>
           </span>
-          <span style={{ color: 'var(--matcha)' }}>.</span>
         </h1>
 
         <span className="sr-only">I build {typedWords.join(', ')}</span>
-        <p className="hero-typed-line" aria-hidden="true">
-          &gt; I build <TypedWord />
-        </p>
-
-        {/* Subtitle - SEO Keywords */}
-        <p
-          className="animate-slide-in-top stagger-2"
-          itemProp="description"
-          style={{
-            fontSize: 'clamp(0.95rem, 1.8vw, 1.15rem)',
-            color: 'var(--text-muted)',
-            marginBottom: '1.5rem',
-            maxWidth: '480px',
-            lineHeight: 1.6,
-          }}
-        >
-          Full Stack Developer specializing in React, Next.js, and Node.js. Building scalable web applications with modern technologies.
-        </p>
-
-        {/* XP Bar */}
-        <div className="xp-bar-container mb-7 w-full animate-slide-in-top stagger-3" style={{ maxWidth: '380px' }}>
-          <div className="xp-labels">
-            <span>⚡ XP — 3 Years Production Experience</span>
-            <span style={{ color: 'var(--matcha)' }}>72%</span>
-          </div>
-          <div className="xp-track">
-            <div className="xp-fill" />
-          </div>
+        <div className="hero-terminal" aria-hidden="true">
+          <span className="hero-terminal__dots"><i /><i /><i /></span>
+          <code>
+            <span className="hero-terminal__prompt"><span className="hero-terminal__path">~/moinul </span>$</span> build <TypedWord />
+          </code>
         </div>
 
-        {/* Social icons with rel attributes for SEO */}
-        <div className="hero-socials flex flex-wrap items-center gap-5 mb-8 animate-slide-in-top stagger-4" aria-label="Social media links">
+        {/* Subtitle - SEO Keywords */}
+        <p className="hero-lede animate-slide-in-top stagger-2" itemProp="description">
+          I&rsquo;m a full stack engineer who ships fast and breaks nothing. I build reliable APIs, microservices and
+          AI features with <strong>Python</strong> and <strong>Node.js</strong>, then turn them into clean, polished
+          products with <strong>React</strong> and <strong>Next.js</strong>.
+        </p>
+
+        {/* Experience badge */}
+        <div className="hero-exp animate-slide-in-top stagger-3">
+          <div className="hero-exp__head">
+            <span className="hero-exp__num">{yearsOfExperience}<span aria-hidden="true">+</span></span>
+            <span className="hero-exp__copy">
+              <strong>Years of experience</strong>
+              <span>Shipping production software since {CAREER_START.getFullYear()}</span>
+            </span>
+          </div>
+          <ol className="hero-exp__timeline" aria-hidden="true">
+            {careerYears.map((year, i) => (
+              <li key={year} className={i === careerYears.length - 1 ? 'is-now' : undefined}>
+                {i === careerYears.length - 1 ? 'Now' : year}
+              </li>
+            ))}
+          </ol>
+        </div>
+
+        {/* Social dock with rel attributes for SEO */}
+        <nav className="hero-dock animate-slide-in-top stagger-4" aria-label="Social media links">
           {[
             { href: personalData.github, Icon: BsGithub, label: 'GitHub', rel: 'me noopener noreferrer' },
             { href: personalData.linkedIn, Icon: BsLinkedin, label: 'LinkedIn', rel: 'me noopener noreferrer' },
@@ -263,31 +274,30 @@ function HeroSection() {
             { href: personalData.leetcode, Icon: SiLeetcode, label: 'LeetCode', rel: 'noopener noreferrer' },
             { href: personalData.stackOverflow, Icon: FaStackOverflow, label: 'Stack Overflow', rel: 'noopener noreferrer' },
             { href: `https://dev.to/${personalData.devUsername}`, Icon: FaDev, label: 'Dev.to', rel: 'noopener noreferrer' },
-          ].map(({ href, Icon, label, rel }, idx) => (
+          ].map(({ href, Icon, label, rel }) => (
             <Link
               key={label}
               href={href}
               target="_blank"
               rel={rel}
               aria-label={`Visit ${label} profile`}
-              className="text-[#c8956c] transition-all duration-300 hover:text-pink-500 hover:scale-125 hover-glow"
-              style={{ animationDelay: `${0.05 + idx * 0.05}s` }}
-              title={`${label} Profile`}
+              className="hero-dock__link"
+              data-label={label}
             >
-              <Icon size={26} title={label} />
+              <Icon size={18} title={label} />
             </Link>
           ))}
-        </div>
+        </nav>
 
         {/* CTAs */}
-        <div className="hero-cta-group flex flex-wrap items-center gap-4 animate-slide-in-top stagger-5">
-          <Link href="#contact" className="btn-primary btn-hover-glow" title="Contact Moinul Islam">
-            <RiContactsFill size={16} />
-            <span>☕ Hire Me</span>
+        <div className="hero-cta-group flex flex-wrap items-center gap-3 animate-slide-in-top stagger-5">
+          <Link href="#contact" className="hero-btn hero-btn--primary" title="Contact Moinul Islam">
+            <span>Let&rsquo;s brew something</span>
+            <MdArrowForward size={18} aria-hidden="true" />
           </Link>
-          <Link href={personalData.resume} target="_blank" rel="noopener noreferrer" className="btn-outline btn-hover-glow" title="Download Moinul Islam's Resume">
-            <MdDownload size={16} />
-            <span>📜 Get Resume</span>
+          <Link href={personalData.resume} target="_blank" rel="noopener noreferrer" className="hero-btn hero-btn--ghost" title="Download Moinul Islam's Resume">
+            <MdDownload size={18} aria-hidden="true" />
+            <span>Resume</span>
           </Link>
         </div>
       </div>
