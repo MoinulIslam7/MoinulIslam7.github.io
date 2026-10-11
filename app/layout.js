@@ -24,8 +24,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: 'Moinul Islam - Full Stack Developer in Dhaka',
-  description: 'Moinul Islam is a full stack developer in Dhaka with 3+ years building scalable web apps with React, Next.js, Node.js and Python. See projects and contact.',
+  title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
+  description: 'Moinul Islam, full stack developer in Dhaka. 3+ years building fast, scalable web apps with React, Next.js, Node.js and Python.',
   keywords: [
     'Moinul Islam', 
     'Full Stack Developer',
@@ -58,6 +58,10 @@ export const metadata = {
   metadataBase: new URL('https://moinulislam7.github.io/'),
   alternates: {
     canonical: 'https://moinulislam7.github.io/',
+    languages: {
+      'en': 'https://moinulislam7.github.io/',
+      'x-default': 'https://moinulislam7.github.io/',
+    },
   },
   robots: {
     index: true,
@@ -98,10 +102,10 @@ export const metadata = {
     images: [
       {
         url: 'https://moinulislam7.github.io/Moinul-Islam.png',
-        width: 1200,
-        height: 630,
+        width: 562,
+        height: 721,
         alt: 'Moinul Islam - Full Stack Software Developer Portfolio',
-        type: 'image/png',
+        type: 'image/jpeg',
       },
     ],
     locale: 'en_US',
@@ -121,6 +125,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
       <head>
+        <link rel="preload" as="image" href="/Moinul-Islam.webp" type="image/webp" fetchPriority="high" />
         <meta name="theme-color" content="#0d0700" />
         <meta name="color-scheme" content="dark" />
         <link rel="dns-prefetch" href="https://fonts.googleapis.com" />

@@ -128,7 +128,7 @@ function AboutSection() {
                   fontWeight: 800, fontSize: '1.3rem',
                   color: 'var(--latte)',
                 }}>{s.value}</div>
-                <div style={{ fontSize: '0.65rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{s.label}</div>
+                <div style={{ fontSize: '0.75rem', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.08em', marginTop: '0.2rem' }}>{s.label}</div>
               </div>
             ))}
           </div>

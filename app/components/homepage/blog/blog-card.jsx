@@ -23,8 +23,12 @@ function BlogCard({ blog, delay = 0 }) {
       }}>
         {blog?.cover_image ? (
           <img
-            src={blog.cover_image}
+            src={blog.cover_image.replace('width=1000,height=420', 'width=480,height=202')}
             alt={blog.title}
+            width={480}
+            height={202}
+            loading="lazy"
+            decoding="async"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
           />
         ) : (
@@ -35,7 +39,7 @@ function BlogCard({ blog, delay = 0 }) {
         {/* "Fresh Brew" overlay */}
         <div className="animate-pop-in" style={{
           position: 'absolute', top: '10px', left: '10px',
-          fontSize: '0.58rem', fontWeight: 700, letterSpacing: '0.1em',
+          fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.1em',
           background: 'rgba(200,149,108,0.15)',
           border: '1px solid rgba(200,149,108,0.3)',
           color: 'var(--latte)',
@@ -49,10 +53,10 @@ function BlogCard({ blog, delay = 0 }) {
       <div style={{ padding: '1.1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
         {/* Date & stats */}
         <div className="animate-slide-in-bottom stagger-1" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <span style={{ fontSize: '0.68rem', color: 'var(--text-dim)' }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--text-dim)' }}>
             {timeConverter(blog.published_at)}
           </span>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.68rem', color: 'var(--matcha)' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', fontSize: '0.75rem', color: 'var(--matcha)' }}>
             <span className="hover-scale" style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', cursor: 'pointer' }}>
               <BsHeartFill /> {blog.public_reactions_count}
             </span>
@@ -76,10 +80,10 @@ function BlogCard({ blog, delay = 0 }) {
 
         {/* CTA */}
         <div className="animate-slide-in-bottom stagger-4" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto', paddingTop: '0.5rem', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
-          <span style={{ fontSize: '0.68rem', color: 'var(--matcha)', fontWeight: 600 }}>
+          <span style={{ fontSize: '0.75rem', color: 'var(--matcha)', fontWeight: 600 }}>
             ⏱ {blog.reading_time_minutes} min read
           </span>
-          <Link href={blog.url} target="_blank" className="no-underline text-[0.68rem] font-bold text-[#c8956c] flex items-center gap-1 transition-colors duration-200 group-hover:text-pink-500 btn-hover-glow">
+          <Link href={blog.url} target="_blank" className="no-underline text-xs font-bold text-[#c8956c] flex items-center gap-1 transition-colors duration-200 group-hover:text-pink-500 btn-hover-glow">
             ☕ Read More →
           </Link>
         </div>

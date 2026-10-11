@@ -60,7 +60,7 @@ function ContactSection() {
           </div>
 
           <div style={{ padding: '0 1rem' }}>
-            <p className="text-[0.65rem] font-bold text-[#c8956c] uppercase tracking-widest mb-4">Connect with the Barista</p>
+            <p className="text-xs font-bold text-[#c8956c] uppercase tracking-widest mb-4">Connect with the Barista</p>
             <div className="flex flex-wrap items-center gap-4">
               {[
                 { href: personalData.github, Icon: IoLogoGithub, label: 'GitHub' },

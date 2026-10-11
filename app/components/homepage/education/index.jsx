@@ -56,7 +56,7 @@ function Education() {
                   {edu.title}
                 </span>
                 <span className="animate-slide-in-right" style={{
-                  fontSize: '0.65rem', fontWeight: 700,
+                  fontSize: '0.75rem', fontWeight: 700,
                   fontFamily: "'Space Grotesk', sans-serif",
                   color: 'var(--matcha)',
                   background: 'rgba(22,242,179,0.08)',
@@ -76,7 +76,7 @@ function Education() {
               </p>
 
               {i === 0 && (
-                <p className="animate-slide-in-bottom stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.72rem', fontStyle: 'italic', marginTop: '0.4rem', animationDelay: `${i * 0.1 + 0.15}s` }}>
+                <p className="animate-slide-in-bottom stagger-1" style={{ color: 'var(--text-dim)', fontSize: '0.75rem', fontStyle: 'italic', marginTop: '0.4rem', animationDelay: `${i * 0.1 + 0.15}s` }}>
                   ☕ This is where semesters were survived on bad cafeteria coffee and GitHub commits.
                 </p>
               )}

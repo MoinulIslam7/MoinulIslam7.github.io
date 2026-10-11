@@ -43,7 +43,7 @@ const orbitIcons = [
 ].map((icon, i, all) => ({ ...icon, angle: -90 + (360 / all.length) * i }));
 
 function TypedWord() {
-  const [text, setText] = useState('');
+  const [text, setText] = useState(typedWords[0]);
   const [wordIndex, setWordIndex] = useState(0);
   const [deleting, setDeleting] = useState(false);
 
@@ -98,11 +98,22 @@ function HeroSection() {
     return () => observer.disconnect();
   }, []);
 
+  const spotFrame = useRef(0);
+
+  // Batch spotlight updates to one per frame so mouse moves never block input handling.
   const handlePointerMove = (e) => {
-    const rect = e.currentTarget.getBoundingClientRect();
-    e.currentTarget.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
-    e.currentTarget.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
+    const node = e.currentTarget;
+    const { clientX, clientY } = e;
+    if (spotFrame.current) return;
+    spotFrame.current = requestAnimationFrame(() => {
+      spotFrame.current = 0;
+      const rect = node.getBoundingClientRect();
+      node.style.setProperty('--spot-x', `${clientX - rect.left}px`);
+      node.style.setProperty('--spot-y', `${clientY - rect.top}px`);
+    });
   };
+
+  useEffect(() => () => cancelAnimationFrame(spotFrame.current), []);
 
   return (
     <section
@@ -174,7 +185,7 @@ function HeroSection() {
         }}
       />
 
-      <div className="hero-section-shell mx-auto px-8 lg:max-w-[1240px] w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 py-12 lg:py-16 animate-slide-in-left">
+      <div className="hero-section-shell mx-auto px-8 lg:max-w-[1240px] w-full flex flex-col lg:flex-row items-center justify-between gap-10 lg:gap-16 py-12 lg:py-16">
         {/* LEFT — Text content */}
         <div className="hero-content-panel flex-1 flex flex-col items-center lg:items-start text-center lg:text-left z-10" style={{ maxWidth: '600px' }}>
 
@@ -185,7 +196,7 @@ function HeroSection() {
 
         {/* Main H1 - SEO Critical */}
         <h1
-          className="font-heading animate-slide-in-top stagger-1"
+          className="font-heading"
           itemProp="name"
           style={{
             fontSize: 'clamp(2rem, 5vw, 3.4rem)',
@@ -211,8 +222,9 @@ function HeroSection() {
           <span style={{ color: 'var(--matcha)' }}>.</span>
         </h1>
 
-        <p className="hero-typed-line animate-slide-in-top stagger-1" aria-label={`I build ${typedWords.join(', ')}`}>
-          <span aria-hidden="true">&gt; I build <TypedWord /></span>
+        <span className="sr-only">I build {typedWords.join(', ')}</span>
+        <p className="hero-typed-line" aria-hidden="true">
+          &gt; I build <TypedWord />
         </p>
 
         {/* Subtitle - SEO Keywords */}
@@ -305,11 +317,13 @@ function HeroSection() {
           <div className="hero-photo-ring animate-pulse-glow">
             <div className="hero-photo">
               <img
-                src={personalData.profile}
+                src="/Moinul-Islam.webp"
                 alt="Moinul Islam — Full Stack Software Developer based in Dhaka, Bangladesh"
                 itemProp="image"
+                width={600}
+                height={770}
                 style={{ width: '100%', height: '100%', objectFit: 'cover' }}
-                loading="priority"
+                fetchPriority="high"
                 decoding="async"
               />
             </div>

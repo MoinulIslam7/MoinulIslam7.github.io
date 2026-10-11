@@ -18,7 +18,7 @@ const toolList = (tools) => typeof tools === 'string'
 
 const projectImages = (project) => project.gallery?.length ? project.gallery : (project.image ? [project.image] : []);
 
-const labelStyle = { fontSize: '0.62rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '0.5rem' };
+const labelStyle = { fontSize: '0.75rem', fontWeight: 700, letterSpacing: '0.14em', textTransform: 'uppercase', color: 'var(--text-dim)', marginBottom: '0.5rem' };
 
 function Gallery({ images, projectName }) {
   const [active, setActive] = useState(0);
@@ -169,7 +169,7 @@ function ProjectDetails({ project, accent, onClose }) {
               <p style={labelStyle}>Built with</p>
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
                 {tools.map(tool => (
-                  <span key={tool} style={{ fontSize: '0.7rem', fontWeight: 600, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-muted)', padding: '0.2rem 0.65rem', borderRadius: '9999px' }}>{tool}</span>
+                  <span key={tool} style={{ fontSize: '0.75rem', fontWeight: 600, background: 'rgba(255,255,255,0.04)', border: '1px solid rgba(255,255,255,0.08)', color: 'var(--text-muted)', padding: '0.2rem 0.65rem', borderRadius: '9999px' }}>{tool}</span>
                 ))}
               </div>
             </div>
@@ -195,10 +195,10 @@ function ProjectDetails({ project, accent, onClose }) {
         {(project.demo || project.url || project.code) && (
           <div style={{ padding: '0.9rem 1.25rem', display: 'flex', gap: '0.6rem', flexWrap: 'wrap', borderTop: '1px solid var(--border-subtle)', background: 'rgba(255,255,255,0.02)' }}>
             {project.demo && (
-              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '0.72rem', padding: '0.6rem 1.3rem' }}><MdOpenInNew size={15} /> Visit live site</a>
+              <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '0.75rem', padding: '0.6rem 1.3rem' }}><MdOpenInNew size={15} /> Visit live site</a>
             )}
             {(project.url || project.code) && (
-              <a href={project.url || project.code} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '0.72rem', padding: '0.55rem 1.3rem' }}><BsGithub size={15} /> View code</a>
+              <a href={project.url || project.code} target="_blank" rel="noopener noreferrer" className="btn-outline" style={{ fontSize: '0.75rem', padding: '0.55rem 1.3rem' }}><BsGithub size={15} /> View code</a>
             )}
           </div>
         )}
@@ -213,11 +213,7 @@ function ProjectCard({ project, index, accent, onOpen }) {
 
   return (
     <article
-      role="button"
-      tabIndex={0}
-      aria-label={`${project.name}: open details`}
       onClick={open}
-      onKeyDown={e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); } }}
       className="artifact-card animate-fade-up"
       style={{ '--accent': accent.rgb, animationDelay: `${index * 0.08}s` }}
     >
@@ -233,7 +229,9 @@ function ProjectCard({ project, index, accent, onOpen }) {
         <span className="artifact-category">{project.category}</span>
         <h3 className="artifact-title">{project.name}</h3>
         <p className="artifact-summary">{project.summary}</p>
-        <span className="artifact-link">View project <MdArrowForward size={15} /></span>
+        <button type="button" className="artifact-link" onClick={e => { e.stopPropagation(); open(); }}>
+          View project<span className="sr-only"> {project.name}</span> <MdArrowForward size={15} aria-hidden="true" />
+        </button>
       </div>
     </article>
   );

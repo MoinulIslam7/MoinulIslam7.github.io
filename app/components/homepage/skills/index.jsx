@@ -62,7 +62,7 @@ function SkillChip({ skill, accentColor, delay = 0 }) {
       )}
       <span>{skill}</span>
       <span style={{
-        fontSize: '0.55rem',
+        fontSize: '0.75rem',
         fontWeight: 700,
         letterSpacing: '0.1em',
         color: accentColor,
@@ -105,7 +105,7 @@ function Skills() {
           <div key={tier.key} className="animate-slide-in-left" style={{ animationDelay: `${tierIdx * 0.1}s` }}>
             <div className="skill-tier-title hover-glow transition-all duration-300" style={{ color: tier.color }}>
               {tier.label}
-              <span style={{ color: 'var(--text-dim)', fontWeight: 400, fontStyle: 'italic', textTransform: 'none', letterSpacing: 0, fontSize: '0.7rem' }}>
+              <span style={{ color: 'var(--text-dim)', fontWeight: 400, fontStyle: 'italic', textTransform: 'none', letterSpacing: 0, fontSize: '0.75rem' }}>
                 — {tier.desc}
               </span>
             </div>
@@ -126,7 +126,7 @@ function Skills() {
       {/* Marquee remains as a nice extra footer for the section */}
       <div style={{ marginTop: '3rem' }}>
         <p className="animate-slide-in-bottom stagger-1" style={{
-          fontSize: '0.65rem',
+          fontSize: '0.75rem',
           fontWeight: 600,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',

@@ -10,7 +10,7 @@ function Navbar() {
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener('scroll', onScroll);
+    window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
@@ -84,7 +84,7 @@ function Navbar() {
                 className="block no-underline text-[#9ca3af] transition-all duration-200 hover:text-[#c8956c] whitespace-nowrap px-3 py-2"
                 style={{
                   fontFamily: "'Space Grotesk', sans-serif",
-                  fontSize: '0.72rem',
+                  fontSize: '0.75rem',
                   fontWeight: 600,
                   letterSpacing: '0.04em',
                 }}

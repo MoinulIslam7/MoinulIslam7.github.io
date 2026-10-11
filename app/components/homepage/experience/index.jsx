@@ -37,17 +37,17 @@ function Experience() {
                   {/* Arc label & highlight */}
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '0.8rem', flexWrap: 'wrap', gap: '0.5rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                      <span className="level-chip animate-pop-in" style={{ fontSize: '0.6rem', animationDelay: `${i * 0.1}s` }}>
+                      <span className="level-chip animate-pop-in" style={{ fontSize: '0.75rem', animationDelay: `${i * 0.1}s` }}>
                         {arcLabels[experiences.length - 1 - i] || `Arc ${experiences.length - i}`}
                       </span>
                       {isCurrent && (
-                        <span className="quest-badge animate-pulse-glow" style={{ background: 'rgba(22,242,179,0.1)', color: 'var(--matcha)', borderColor: 'rgba(22,242,179,0.3)', fontSize: '0.55rem' }}>
+                        <span className="quest-badge animate-pulse-glow" style={{ background: 'rgba(22,242,179,0.1)', color: 'var(--matcha)', borderColor: 'rgba(22,242,179,0.3)', fontSize: '0.75rem' }}>
                           ⚡ CURRENT QUEST
                         </span>
                       )}
                     </div>
                     <span className="animate-slide-in-right" style={{
-                      fontSize: '0.68rem',
+                      fontSize: '0.75rem',
                       fontWeight: 700,
                       color: isCurrent ? 'var(--matcha)' : 'var(--text-dim)',
                       fontFamily: "'Space Grotesk', sans-serif",
