@@ -65,7 +65,7 @@ function Gallery({ images, projectName }) {
                 opacity: i === active ? 1 : 0.5, transition: 'opacity 0.2s',
               }}
             >
-              <img src={img.src} alt="" loading="lazy" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
+              <img src={img.thumb || img.src} alt="" loading="lazy" decoding="async" style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }} />
             </button>
           ))}
         </div>
@@ -219,7 +219,7 @@ function ProjectCard({ project, index, accent, onOpen }) {
     >
       <div className="artifact-media">
         {project.image?.src ? (
-          <img src={project.image.src} alt={`${project.name} screenshot`} loading="lazy" />
+          <img src={project.image.thumb} alt={`${project.name} screenshot`} width={720} height={400} loading="lazy" decoding="async" />
         ) : (
           <div className="artifact-placeholder" aria-hidden="true">{project.emoji}</div>
         )}

@@ -1,20 +1,53 @@
 // Projects without a real screenshot leave `image` null — the card falls back to
 // its emoji tile, which suits the dark theme better than the stock placeholder art.
-import uttoradhikar from '/public/image/uttoradhikar.jpg';
-import bhumibdMap from '/public/image/bhumibd-map.jpg';
-import bhumibdKhatian from '/public/image/bhumibd-khatian.jpg';
-import poshHome from '/public/image/posh-home.jpg';
-import poshMarketplace from '/public/image/posh-marketplace.jpg';
-import poshVenues from '/public/image/posh-venues.jpg';
-import poshPlanner from '/public/image/posh-planner.jpg';
-import poshInspirations from '/public/image/posh-inspirations.jpg';
-import poshCorporate from '/public/image/posh-corporate.jpg';
-import ghorbdHome from '/public/image/ghorbd-home.jpg';
-import ghorbdListings from '/public/image/ghorbd-listings.jpg';
-import ghorbdMap from '/public/image/ghorbd-map.jpg';
-import ghorbdListing from '/public/image/ghorbd-listing.jpg';
-import ghorbdLand from '/public/image/ghorbd-land.jpg';
-import ghorbdPricing from '/public/image/ghorbd-pricing.jpg';
+import uttoradhikarFull from '/public/image/uttoradhikar.webp';
+import uttoradhikarThumb from '/public/image/thumbs/uttoradhikar.webp';
+import bhumibdMapFull from '/public/image/bhumibd-map.webp';
+import bhumibdMapThumb from '/public/image/thumbs/bhumibd-map.webp';
+import bhumibdKhatianFull from '/public/image/bhumibd-khatian.webp';
+import bhumibdKhatianThumb from '/public/image/thumbs/bhumibd-khatian.webp';
+import poshHomeFull from '/public/image/posh-home.webp';
+import poshHomeThumb from '/public/image/thumbs/posh-home.webp';
+import poshMarketplaceFull from '/public/image/posh-marketplace.webp';
+import poshMarketplaceThumb from '/public/image/thumbs/posh-marketplace.webp';
+import poshVenuesFull from '/public/image/posh-venues.webp';
+import poshVenuesThumb from '/public/image/thumbs/posh-venues.webp';
+import poshPlannerFull from '/public/image/posh-planner.webp';
+import poshPlannerThumb from '/public/image/thumbs/posh-planner.webp';
+import poshInspirationsFull from '/public/image/posh-inspirations.webp';
+import poshInspirationsThumb from '/public/image/thumbs/posh-inspirations.webp';
+import poshCorporateFull from '/public/image/posh-corporate.webp';
+import poshCorporateThumb from '/public/image/thumbs/posh-corporate.webp';
+import ghorbdHomeFull from '/public/image/ghorbd-home.webp';
+import ghorbdHomeThumb from '/public/image/thumbs/ghorbd-home.webp';
+import ghorbdListingsFull from '/public/image/ghorbd-listings.webp';
+import ghorbdListingsThumb from '/public/image/thumbs/ghorbd-listings.webp';
+import ghorbdMapFull from '/public/image/ghorbd-map.webp';
+import ghorbdMapThumb from '/public/image/thumbs/ghorbd-map.webp';
+import ghorbdListingFull from '/public/image/ghorbd-listing.webp';
+import ghorbdListingThumb from '/public/image/thumbs/ghorbd-listing.webp';
+import ghorbdLandFull from '/public/image/ghorbd-land.webp';
+import ghorbdLandThumb from '/public/image/thumbs/ghorbd-land.webp';
+import ghorbdPricingFull from '/public/image/ghorbd-pricing.webp';
+import ghorbdPricingThumb from '/public/image/thumbs/ghorbd-pricing.webp';
+
+// Full-size WebP for the details modal; `thumb` is a 720px copy for cards and gallery previews.
+const shot = (full, thumb) => ({ ...full, thumb: thumb.src });
+const uttoradhikar = shot(uttoradhikarFull, uttoradhikarThumb);
+const bhumibdMap = shot(bhumibdMapFull, bhumibdMapThumb);
+const bhumibdKhatian = shot(bhumibdKhatianFull, bhumibdKhatianThumb);
+const poshHome = shot(poshHomeFull, poshHomeThumb);
+const poshMarketplace = shot(poshMarketplaceFull, poshMarketplaceThumb);
+const poshVenues = shot(poshVenuesFull, poshVenuesThumb);
+const poshPlanner = shot(poshPlannerFull, poshPlannerThumb);
+const poshInspirations = shot(poshInspirationsFull, poshInspirationsThumb);
+const poshCorporate = shot(poshCorporateFull, poshCorporateThumb);
+const ghorbdHome = shot(ghorbdHomeFull, ghorbdHomeThumb);
+const ghorbdListings = shot(ghorbdListingsFull, ghorbdListingsThumb);
+const ghorbdMap = shot(ghorbdMapFull, ghorbdMapThumb);
+const ghorbdListing = shot(ghorbdListingFull, ghorbdListingThumb);
+const ghorbdLand = shot(ghorbdLandFull, ghorbdLandThumb);
+const ghorbdPricing = shot(ghorbdPricingFull, ghorbdPricingThumb);
 
 export const projectsData = [
     {

@@ -83,7 +83,6 @@ export const metadata = {
   verification: {
     google: 'KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs',
   },
-  manifest: '/manifest.json',
   icons: {
     icon: [
       { url: '/favicon.ico' },
@@ -128,9 +127,6 @@ export default function RootLayout({ children }) {
         <link rel="preload" as="image" href="/Moinul-Islam.webp" type="image/webp" fetchPriority="high" />
         <meta name="theme-color" content="#0d0700" />
         <meta name="color-scheme" content="dark" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <StructuredData />
       </head>
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>

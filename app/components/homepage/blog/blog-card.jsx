@@ -5,6 +5,10 @@ import Link from 'next/link';
 import { BsHeartFill } from 'react-icons/bs';
 import { FaCommentAlt } from 'react-icons/fa';
 
+// dev.to serves covers through an image resizer: request card-sized, compressed WebP.
+const devToCover = (url, width) =>
+  url.replace('width=1000,height=420', `width=${width},height=${Math.round(width * 0.42)},quality=70`);
+
 function BlogCard({ blog, delay = 0 }) {
   return (
     <div
@@ -23,10 +27,12 @@ function BlogCard({ blog, delay = 0 }) {
       }}>
         {blog?.cover_image ? (
           <img
-            src={blog.cover_image.replace('width=1000,height=420', 'width=480,height=202')}
+            src={devToCover(blog.cover_image, 400)}
+            srcSet={`${devToCover(blog.cover_image, 400)} 400w, ${devToCover(blog.cover_image, 800)} 800w`}
+            sizes="(max-width: 640px) 92vw, 380px"
             alt={blog.title}
-            width={480}
-            height={202}
+            width={400}
+            height={168}
             loading="lazy"
             decoding="async"
             className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
