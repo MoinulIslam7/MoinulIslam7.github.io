@@ -85,14 +85,16 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/icon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
     shortcut: '/favicon.ico',
     apple: [
-      { url: '/Moinul-Islam.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
+  manifest: '/manifest.json',
   openGraph: {
     title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience',
     description: 'Professional Full Stack Developer specializing in React, Next.js, Node.js, and Python. Building scalable web applications with modern technologies.',
@@ -100,7 +102,7 @@ export const metadata = {
     siteName: 'Moinul Islam Portfolio',
     images: [
       {
-        url: 'https://moinulislam7.github.io/Moinul-Islam.png',
+        url: 'https://moinulislam7.github.io/Moinul-Islam.jpg',
         width: 562,
         height: 721,
         alt: 'Moinul Islam - Full Stack Software Developer Portfolio',
@@ -116,7 +118,7 @@ export const metadata = {
     description: 'Professional Full Stack Developer with 3+ years of experience in modern web technologies. Python | JavaScript | React | Node.js | Next.js',
     site: '@MoinulIslam77',
     creator: '@MoinulIslam77',
-    images: ['https://moinulislam7.github.io/Moinul-Islam.png'],
+    images: ['https://moinulislam7.github.io/Moinul-Islam.jpg'],
   },
 };
 

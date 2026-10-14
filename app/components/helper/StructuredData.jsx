@@ -12,7 +12,7 @@ export default function StructuredData() {
     name: 'Moinul Islam',
     alternateName: 'MoinulIslam7',
     url: SITE_URL,
-    image: `${SITE_URL}Moinul-Islam.png`,
+    image: `${SITE_URL}Moinul-Islam.jpg`,
     jobTitle: 'Full Stack Software Developer',
     description: 'Moinul Islam is a Full Stack Software Developer at Gigalogy with 3+ years of experience building scalable web applications with Python, JavaScript, React, Next.js and Node.js. Based in Dhaka, Bangladesh.',
     email: 'mailto:moinul180180@gmail.com',

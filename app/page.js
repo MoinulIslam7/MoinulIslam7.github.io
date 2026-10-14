@@ -9,17 +9,21 @@ import Projects from "./components/homepage/projects";
 import Skills from "./components/homepage/skills";
 
 async function getBlogs() {
-  const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername.toLowerCase()}`)
+  // A dev.to outage shouldn't break the static build, so fall back to no blog section.
+  try {
+    const res = await fetch(`https://dev.to/api/articles?username=${personalData.devUsername.toLowerCase()}`)
 
-  if (!res.ok) {
-    throw new Error('Failed to fetch data')
+    if (!res.ok) {
+      throw new Error(`dev.to responded ${res.status}`)
+    }
+
+    const data = await res.json();
+
+    return data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
+  } catch (error) {
+    console.warn('Skipping blog section:', error.message);
+    return [];
   }
-
-  const data = await res.json();
-
-  const filtered = data.filter((item) => item?.cover_image).sort(() => Math.random() - 0.5);
-
-  return filtered;
 };
 
 export default async function Home() {
@@ -46,7 +50,7 @@ export default async function Home() {
       <Education />
 
       {/* Chapter 06: Fresh Brews (Blog posts) */}
-      <Blog blogs={blogs} />
+      {blogs.length > 0 && <Blog blogs={blogs} />}
 
       {/* Chapter 07: The Next Quest (Contact) */}
       <ContactSection />
