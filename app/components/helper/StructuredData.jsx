@@ -76,7 +76,7 @@ export default function StructuredData() {
     name: 'Moinul Islam - Full Stack Developer',
     isPartOf: { '@id': `${SITE_URL}#website` },
     mainEntity: { '@id': `${SITE_URL}#person` },
-    dateModified: new Date().toISOString().split('T')[0]
+    dateModified: new Date().toISOString()
   };
 
   return (
