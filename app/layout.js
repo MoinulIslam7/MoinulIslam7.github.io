@@ -25,7 +25,7 @@ const dmSans = DM_Sans({
 
 export const metadata = {
   title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
-  description: 'Moinul Islam, full stack developer in Dhaka. 3+ years building fast, scalable web apps with React, Next.js, Node.js and Python.',
+  description: 'Moinul Islam is a Full Stack Software Developer in Dhaka, Bangladesh with 3+ years building fast, scalable web apps using React, Next.js, Node.js and Python.',
   keywords: [
     'Moinul Islam', 
     'Full Stack Developer',
@@ -95,17 +95,21 @@ export const metadata = {
     ],
   },
   manifest: '/manifest.json',
+  // Hides Google's "Translate this page" link in search results.
+  other: {
+    google: 'notranslate',
+  },
   openGraph: {
-    title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience',
-    description: 'Professional Full Stack Developer specializing in React, Next.js, Node.js, and Python. Building scalable web applications with modern technologies.',
+    title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
+    description: 'Moinul Islam is a Full Stack Software Developer in Dhaka, Bangladesh with 3+ years building fast, scalable web apps using React, Next.js, Node.js and Python.',
     url: 'https://moinulislam7.github.io/',
-    siteName: 'Moinul Islam Portfolio',
+    siteName: 'Moinul Islam',
     images: [
       {
-        url: 'https://moinulislam7.github.io/Moinul-Islam.jpg',
-        width: 562,
-        height: 721,
-        alt: 'Moinul Islam - Full Stack Software Developer Portfolio',
+        url: 'https://moinulislam7.github.io/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Moinul Islam - Full Stack Software Developer in Dhaka, Bangladesh',
         type: 'image/jpeg',
       },
     ],
@@ -114,11 +118,11 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Moinul Islam - Full Stack Developer',
-    description: 'Professional Full Stack Developer with 3+ years of experience in modern web technologies. Python | JavaScript | React | Node.js | Next.js',
+    title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
+    description: 'Moinul Islam is a Full Stack Software Developer in Dhaka, Bangladesh with 3+ years building fast, scalable web apps using React, Next.js, Node.js and Python.',
     site: '@MoinulIslam77',
     creator: '@MoinulIslam77',
-    images: ['https://moinulislam7.github.io/Moinul-Islam.jpg'],
+    images: ['https://moinulislam7.github.io/og-image.jpg'],
   },
 };
 

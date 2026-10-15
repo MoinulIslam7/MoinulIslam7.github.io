@@ -76,6 +76,13 @@ export default function StructuredData() {
     name: 'Moinul Islam - Full Stack Developer',
     isPartOf: { '@id': `${SITE_URL}#website` },
     mainEntity: { '@id': `${SITE_URL}#person` },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}og-image.jpg`,
+      width: 1200,
+      height: 630
+    },
+    image: `${SITE_URL}og-image.jpg`,
     dateModified: new Date().toISOString()
   };
 
