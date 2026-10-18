@@ -3,8 +3,36 @@
 import { skillsData } from "@/utils/data/skills";
 import { skillsImage } from "@/utils/skill-image";
 import Image from "next/image";
-import dynamic from 'next/dynamic';
-const Marquee = dynamic(() => import('react-fast-marquee'), { ssr: false });
+
+// Rendered twice so the CSS loop (translateX -50%) wraps seamlessly.
+function PantryItems({ hidden }) {
+  return (
+    <div className="pantry-marquee__group" aria-hidden={hidden || undefined}>
+      {skillsData.map((skill) => (
+        <div
+          key={skill}
+          className="hover-scale"
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5rem',
+            margin: '0 1.2rem',
+            fontSize: '0.78rem',
+            color: 'var(--text-muted)',
+            fontWeight: 500,
+            whiteSpace: 'nowrap',
+            cursor: 'pointer',
+          }}
+        >
+          {skillsImage(skill)?.src && (
+            <Image src={skillsImage(skill).src} alt={hidden ? '' : skill} width={16} height={16} style={{ opacity: 0.7 }} />
+          )}
+          {skill}
+        </div>
+      ))}
+    </div>
+  );
+}
 
 const tiers = [
   {
@@ -62,7 +90,7 @@ function SkillChip({ skill, accentColor, delay = 0 }) {
       )}
       <span>{skill}</span>
       <span style={{
-        fontSize: '0.55rem',
+        fontSize: '0.75rem',
         fontWeight: 700,
         letterSpacing: '0.1em',
         color: accentColor,
@@ -105,7 +133,7 @@ function Skills() {
           <div key={tier.key} className="animate-slide-in-left" style={{ animationDelay: `${tierIdx * 0.1}s` }}>
             <div className="skill-tier-title hover-glow transition-all duration-300" style={{ color: tier.color }}>
               {tier.label}
-              <span style={{ color: 'var(--text-dim)', fontWeight: 400, fontStyle: 'italic', textTransform: 'none', letterSpacing: 0, fontSize: '0.7rem' }}>
+              <span style={{ color: 'var(--text-dim)', fontWeight: 400, fontStyle: 'italic', textTransform: 'none', letterSpacing: 0, fontSize: '0.75rem' }}>
                 — {tier.desc}
               </span>
             </div>
@@ -126,7 +154,7 @@ function Skills() {
       {/* Marquee remains as a nice extra footer for the section */}
       <div style={{ marginTop: '3rem' }}>
         <p className="animate-slide-in-bottom stagger-1" style={{
-          fontSize: '0.65rem',
+          fontSize: '0.75rem',
           fontWeight: 600,
           letterSpacing: '0.18em',
           textTransform: 'uppercase',
@@ -143,30 +171,12 @@ function Skills() {
           padding: '0.5rem 0',
           background: 'rgba(255,255,255,0.015)',
         }}>
-          <Marquee gradient={false} speed={45} pauseOnHover direction="left">
-            {skillsData.map((skill, id) => (
-              <div
-                key={id}
-                className="hover-scale"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: '0.5rem',
-                  margin: '0 1.2rem',
-                  fontSize: '0.78rem',
-                  color: 'var(--text-muted)',
-                  fontWeight: 500,
-                  whiteSpace: 'nowrap',
-                  cursor: 'pointer',
-                }}
-              >
-                {skillsImage(skill)?.src && (
-                  <Image src={skillsImage(skill).src} alt={skill} width={16} height={16} style={{ opacity: 0.7 }} />
-                )}
-                {skill}
-              </div>
-            ))}
-          </Marquee>
+          <div className="pantry-marquee" style={{ '--marquee-duration': `${skillsData.length * 2.6}s` }}>
+            <div className="pantry-marquee__track">
+              <PantryItems />
+              <PantryItems hidden />
+            </div>
+          </div>
         </div>
       </div>
     </section>

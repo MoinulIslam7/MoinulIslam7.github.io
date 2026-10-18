@@ -7,8 +7,8 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "postbuild": "next-sitemap",
-    "deploy": "next build && touch out/.nojekyll && gh-pages -d out"
+    "build": "next build && node scripts/inline-css.mjs",
+    "deploy": "npm run build && touch out/.nojekyll && gh-pages -d out"
   },
   "dependencies": {
     "@emailjs/browser": "^4.3.1",

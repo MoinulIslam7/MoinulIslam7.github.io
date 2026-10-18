@@ -1,26 +1,22 @@
-// components/StructuredData.tsx
-import Script from 'next/script';
+// components/StructuredData.jsx
+// Rendered as plain <script> tags so the JSON-LD is in the static HTML
+// (next/script injects it client-side, which crawlers may not see).
+
+const SITE_URL = 'https://moinulislam7.github.io/';
 
 export default function StructuredData() {
   const personData = {
     '@context': 'https://schema.org',
     '@type': 'Person',
+    '@id': `${SITE_URL}#person`,
     name: 'Moinul Islam',
-    url: 'https://moinulislam7.github.io/',
-    sameAs: [
-      'https://github.com/MoinulIslam7',
-      'https://www.linkedin.com/in/moinulislam7/',
-      'https://dev.to/MoinulIslam7',
-      'https://x.com/MoinulIslam77',
-      'https://www.facebook.com/MoinulIslamm7/',
-      'https://leetcode.com/u/MoinulIslam7/',
-      'https://stackoverflow.com/users/22913262/moinulislam7'
-    ],
+    alternateName: 'MoinulIslam7',
+    url: SITE_URL,
+    image: `${SITE_URL}Moinul-Islam.jpg`,
     jobTitle: 'Full Stack Software Developer',
-    image: 'https://moinulislam7.github.io/Moinul-Islam.png',
-    email: 'moinul180180@gmail.com',
+    description: 'Moinul Islam is a Full Stack Software Developer at Gigalogy with 3+ years of experience building scalable web applications with Python, JavaScript, React, Next.js and Node.js. Based in Dhaka, Bangladesh.',
+    email: 'mailto:moinul180180@gmail.com',
     telephone: '+8801626248996',
-    description: 'Moinul Islam is a professional Full Stack Software Developer with 3+ years of experience specializing in building scalable web applications. Expert in Python, JavaScript, React, Next.js, Node.js, and modern web technologies.',
     address: {
       '@type': 'PostalAddress',
       addressLocality: 'Dhaka',
@@ -32,36 +28,7 @@ export default function StructuredData() {
     worksFor: {
       '@type': 'Organization',
       name: 'Gigalogy'
-    }
-  };
-
-  const websiteData = {
-    '@context': 'https://schema.org',
-    '@type': 'WebSite',
-    name: 'Moinul Islam Portfolio',
-    alternateName: ['Moinul Islam', 'Moinul.dev', 'MoinulIslam7'],
-    url: 'https://moinulislam7.github.io/',
-    description: 'Professional portfolio of Moinul Islam, Full Stack Software Developer with 3+ years of experience.',
-    potentialAction: {
-      '@type': 'SearchAction',
-      target: {
-        '@type': 'EntryPoint',
-        urlTemplate: 'https://moinulislam7.github.io/'
-      }
-    }
-  };
-
-  const organizationData = {
-    '@context': 'https://schema.org',
-    '@type': 'ProfessionalService',
-    name: 'Moinul Islam - Full Stack Developer',
-    url: 'https://moinulislam7.github.io/',
-    telephone: '+8801626248996',
-    email: 'moinul180180@gmail.com',
-    image: 'https://moinulislam7.github.io/Moinul-Islam.png',
-    areaServed: 'Worldwide',
-    priceRange: '$$',
-    serviceType: ['Web Development', 'Full Stack Development', 'Backend Development', 'Frontend Development'],
+    },
     knowsAbout: [
       'Python',
       'JavaScript',
@@ -75,87 +42,59 @@ export default function StructuredData() {
       'PostgreSQL',
       'MySQL',
       'REST APIs',
-      'Web Development',
       'Full Stack Development'
     ],
-    geo: {
-      '@type': 'GeoCoordinates',
-      latitude: '23.8103',
-      longitude: '90.2506'
-    }
-  };
-
-  const breadcrumbData = {
-    '@context': 'https://schema.org',
-    '@type': 'BreadcrumbList',
-    itemListElement: [
-      {
-        '@type': 'ListItem',
-        position: 1,
-        name: 'Home',
-        item: 'https://moinulislam7.github.io/'
-      },
-      {
-        '@type': 'ListItem',
-        position: 2,
-        name: 'About',
-        item: 'https://moinulislam7.github.io/#about'
-      },
-      {
-        '@type': 'ListItem',
-        position: 3,
-        name: 'Projects',
-        item: 'https://moinulislam7.github.io/#projects'
-      },
-      {
-        '@type': 'ListItem',
-        position: 4,
-        name: 'Skills',
-        item: 'https://moinulislam7.github.io/#skills'
-      },
-      {
-        '@type': 'ListItem',
-        position: 5,
-        name: 'Experience',
-        item: 'https://moinulislam7.github.io/#experience'
-      },
-      {
-        '@type': 'ListItem',
-        position: 6,
-        name: 'Contact',
-        item: 'https://moinulislam7.github.io/#contact'
-      }
+    sameAs: [
+      'https://github.com/MoinulIslam7',
+      'https://www.linkedin.com/in/moinulislam7/',
+      'https://dev.to/MoinulIslam7',
+      'https://x.com/MoinulIslam77',
+      'https://www.facebook.com/MoinulIslamm7/',
+      'https://leetcode.com/u/MoinulIslam7/',
+      'https://stackoverflow.com/users/22913262/moinulislam7'
     ]
   };
 
-  const creativeWorkData = {
+  const websiteData = {
     '@context': 'https://schema.org',
-    '@type': 'CreativeWork',
-    name: 'Full Stack Development Portfolio',
-    description: 'A comprehensive portfolio showcasing projects, experience, and technical expertise in Full Stack Development.',
-    author: personData,
-    datePublished: '2023-01-01',
-    dateModified: new Date().toISOString().split('T')[0],
-    inLanguage: 'en'
+    '@type': 'WebSite',
+    '@id': `${SITE_URL}#website`,
+    name: 'Moinul Islam',
+    alternateName: ['Moinul Islam Portfolio', 'MoinulIslam7'],
+    url: SITE_URL,
+    description: 'Portfolio of Moinul Islam, Full Stack Software Developer based in Dhaka, Bangladesh.',
+    inLanguage: 'en',
+    author: { '@id': `${SITE_URL}#person` },
+    publisher: { '@id': `${SITE_URL}#person` }
+  };
+
+  const profilePageData = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    '@id': `${SITE_URL}#profile`,
+    url: SITE_URL,
+    name: 'Moinul Islam - Full Stack Developer',
+    isPartOf: { '@id': `${SITE_URL}#website` },
+    mainEntity: { '@id': `${SITE_URL}#person` },
+    primaryImageOfPage: {
+      '@type': 'ImageObject',
+      url: `${SITE_URL}og-image.jpg`,
+      width: 1200,
+      height: 630
+    },
+    image: `${SITE_URL}og-image.jpg`,
+    dateModified: new Date().toISOString()
   };
 
   return (
     <>
-      <Script id="ld-json-person" type="application/ld+json">
-        {JSON.stringify(personData)}
-      </Script>
-      <Script id="ld-json-website" type="application/ld+json">
-        {JSON.stringify(websiteData)}
-      </Script>
-      <Script id="ld-json-organization" type="application/ld+json">
-        {JSON.stringify(organizationData)}
-      </Script>
-      <Script id="ld-json-breadcrumb" type="application/ld+json">
-        {JSON.stringify(breadcrumbData)}
-      </Script>
-      <Script id="ld-json-creative-work" type="application/ld+json">
-        {JSON.stringify(creativeWorkData)}
-      </Script>
+      {[personData, websiteData, profilePageData].map((data) => (
+        <script
+          key={data['@id']}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
+        />
+      ))}
     </>
   );
 }

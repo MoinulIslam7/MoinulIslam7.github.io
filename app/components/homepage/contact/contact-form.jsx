@@ -62,7 +62,7 @@ function ContactForm() {
 
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
-          <label className="text-[0.65rem] font-bold text-[#c8956c] uppercase tracking-widest px-1">Name</label>
+          <label className="text-xs font-bold text-[#c8956c] uppercase tracking-widest px-1">Name</label>
           <input
             className="bg-[#1c1007] w-full border border-[#c8956c33] rounded-lg focus:border-[#c8956c] ring-0 outline-0 transition-all duration-300 px-4 py-3 text-[#f5e6d3] text-sm placeholder:text-[#5c4033]"
             type="text"
@@ -76,7 +76,7 @@ function ContactForm() {
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-[0.65rem] font-bold text-[#c8956c] uppercase tracking-widest px-1">Contact Frequency (Email)</label>
+          <label className="text-xs font-bold text-[#c8956c] uppercase tracking-widest px-1">Contact Frequency (Email)</label>
           <input
             className="bg-[#1c1007] w-full border border-[#c8956c33] rounded-lg focus:border-[#c8956c] ring-0 outline-0 transition-all duration-300 px-4 py-3 text-[#f5e6d3] text-sm placeholder:text-[#5c4033]"
             type="email"
@@ -91,12 +91,12 @@ function ContactForm() {
             }}
           />
           {error.email &&
-            <p className="text-[0.65rem] text-red-400 px-1">Invalid frequency detected! (Please use a valid email)</p>
+            <p className="text-xs text-red-400 px-1">Invalid frequency detected! (Please use a valid email)</p>
           }
         </div>
 
         <div className="flex flex-col gap-2">
-          <label className="text-[0.65rem] font-bold text-[#c8956c] uppercase tracking-widest px-1">Project Order / Message</label>
+          <label className="text-xs font-bold text-[#c8956c] uppercase tracking-widest px-1">Project Order / Message</label>
           <textarea
             className="bg-[#1c1007] w-full border border-[#c8956c33] rounded-lg focus:border-[#c8956c] ring-0 outline-0 transition-all duration-300 px-4 py-3 text-[#f5e6d3] text-sm placeholder:text-[#5c4033]"
             placeholder="What's brewing? Describe your project or query here..."
@@ -112,7 +112,7 @@ function ContactForm() {
 
         <div className="flex flex-col gap-4 mt-2">
           {error.required &&
-            <p className="text-[0.65rem] text-red-400 text-center">
+            <p className="text-xs text-red-400 text-center">
               Missing ingredients! (Name, Email, and Message are required)
             </p>
           }

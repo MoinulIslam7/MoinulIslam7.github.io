@@ -12,14 +12,7 @@ import ContactForm from './contact-form';
 
 function ContactSection() {
   return (
-    <section id="contact" style={{ padding: '6rem 0 4rem', position: 'relative' }}>
-      {/* Ambient glow */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', bottom: '0', left: '50%', transform: 'translateX(-50%)',
-        width: '100%', height: '400px',
-        background: 'radial-gradient(circle at center, rgba(168,85,247,0.04) 0%, transparent 70%)',
-        pointerEvents: 'none', zIndex: 0,
-      }} />
+    <section id="contact" className="section-aurora section-aurora--contact" style={{ padding: '6rem 0 4rem', position: 'relative' }}>
 
       <div className="section-header">
         <span className="section-tag">Chapter 07</span>
@@ -67,24 +60,27 @@ function ContactSection() {
           </div>
 
           <div style={{ padding: '0 1rem' }}>
-            <p className="text-[0.65rem] font-bold text-[#c8956c] uppercase tracking-widest mb-4">Connect with the Barista</p>
+            <p className="text-xs font-bold text-[#c8956c] uppercase tracking-widest mb-4">Connect with the Barista</p>
             <div className="flex flex-wrap items-center gap-4">
               {[
-                { href: personalData.github, Icon: IoLogoGithub },
-                { href: personalData.linkedIn, Icon: BiLogoLinkedin },
-                { href: personalData.twitter, Icon: FaXTwitter },
-                { href: personalData.stackOverflow, Icon: FaStackOverflow },
-                { href: personalData.facebook, Icon: FaFacebook },
-                { href: personalData.leetcode, Icon: SiLeetcode },
-                { href: `https://dev.to/${personalData.devUsername}`, Icon: FaDev },
+                { href: personalData.github, Icon: IoLogoGithub, label: 'GitHub' },
+                { href: personalData.linkedIn, Icon: BiLogoLinkedin, label: 'LinkedIn' },
+                { href: personalData.twitter, Icon: FaXTwitter, label: 'Twitter' },
+                { href: personalData.stackOverflow, Icon: FaStackOverflow, label: 'Stack Overflow' },
+                { href: personalData.facebook, Icon: FaFacebook, label: 'Facebook' },
+                { href: personalData.leetcode, Icon: SiLeetcode, label: 'LeetCode' },
+                { href: `https://dev.to/${personalData.devUsername}`, Icon: FaDev, label: 'Dev.to' },
               ].map((social, i) => (
                 <Link
                   key={i}
                   href={social.href}
                   target="_blank"
+                  rel="me noopener noreferrer"
+                  aria-label={social.label}
+                  title={social.label}
                   className="w-10 h-10 rounded-full bg-[#1c1007] border border-[#c8956c33] flex items-center justify-center text-[#c8956c] transition-all duration-300 hover:scale-110 hover:border-[#c8956c] hover:bg-[#c8956c22]"
                 >
-                  <social.Icon size={20} />
+                  <social.Icon size={20} title={social.label} />
                 </Link>
               ))}
             </div>

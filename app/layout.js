@@ -7,6 +7,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Footer from './components/footer';
 import NavbarWrapper from './components/Navbar/NavbarWrapper';
 import StructuredData from './components/helper/StructuredData';
+import MeshBackground from './components/helper/MeshBackground';
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
@@ -23,8 +24,8 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience | Dhaka',
-  description: 'Moinul Islam - Professional Full Stack Software Developer with 3+ years in Python, JavaScript, React, Next.js, Node.js, and scalable web architectures. Specializing in modern web development, REST APIs, and cloud solutions. Based in Dhaka, Bangladesh.',
+  title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
+  description: 'Moinul Islam is a Full Stack Software Developer in Dhaka, Bangladesh with 3+ years building fast, scalable web apps using React, Next.js, Node.js and Python.',
   keywords: [
     'Moinul Islam', 
     'Full Stack Developer',
@@ -57,6 +58,10 @@ export const metadata = {
   metadataBase: new URL('https://moinulislam7.github.io/'),
   alternates: {
     canonical: 'https://moinulislam7.github.io/',
+    languages: {
+      'en': 'https://moinulislam7.github.io/',
+      'x-default': 'https://moinulislam7.github.io/',
+    },
   },
   robots: {
     index: true,
@@ -78,29 +83,34 @@ export const metadata = {
   verification: {
     google: 'KGkr5huMtGJtPFH76Q-CjfDRSZA6zSE3rXsBPzqBPOs',
   },
-  manifest: '/manifest.json',
   icons: {
     icon: [
-      { url: '/favicon.ico' },
-      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.ico', sizes: '16x16 32x32 48x48', type: 'image/x-icon' },
+      { url: '/icon-96.png', sizes: '96x96', type: 'image/png' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
     ],
     shortcut: '/favicon.ico',
     apple: [
-      { url: '/Moinul-Islam.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-touch-icon.png', sizes: '180x180', type: 'image/png' },
     ],
   },
+  manifest: '/manifest.json',
+  // Hides Google's "Translate this page" link in search results.
+  other: {
+    google: 'notranslate',
+  },
   openGraph: {
-    title: 'Moinul Islam - Full Stack Developer | 3+ Years Experience',
-    description: 'Professional Full Stack Developer specializing in React, Next.js, Node.js, and Python. Building scalable web applications with modern technologies.',
+    title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
+    description: 'Moinul Islam is a Full Stack Software Developer in Dhaka, Bangladesh with 3+ years building fast, scalable web apps using React, Next.js, Node.js and Python.',
     url: 'https://moinulislam7.github.io/',
-    siteName: 'Moinul Islam Portfolio',
+    siteName: 'Moinul Islam',
     images: [
       {
-        url: 'https://moinulislam7.github.io/Moinul-Islam.png',
+        url: 'https://moinulislam7.github.io/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Moinul Islam - Full Stack Software Developer Portfolio',
-        type: 'image/png',
+        alt: 'Moinul Islam - Full Stack Software Developer in Dhaka, Bangladesh',
+        type: 'image/jpeg',
       },
     ],
     locale: 'en_US',
@@ -108,11 +118,11 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Moinul Islam - Full Stack Developer',
-    description: 'Professional Full Stack Developer with 3+ years of experience in modern web technologies. Python | JavaScript | React | Node.js | Next.js',
+    title: 'Moinul Islam - Full Stack Developer in Dhaka, Bangladesh',
+    description: 'Moinul Islam is a Full Stack Software Developer in Dhaka, Bangladesh with 3+ years building fast, scalable web apps using React, Next.js, Node.js and Python.',
     site: '@MoinulIslam77',
     creator: '@MoinulIslam77',
-    images: ['https://moinulislam7.github.io/Moinul-Islam.png'],
+    images: ['https://moinulislam7.github.io/og-image.jpg'],
   },
 };
 
@@ -120,16 +130,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${spaceGrotesk.variable} ${dmSans.variable}`}>
       <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="preload" as="image" href="/Moinul-Islam.webp" type="image/webp" fetchPriority="high" />
         <meta name="theme-color" content="#0d0700" />
         <meta name="color-scheme" content="dark" />
-        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <StructuredData />
       </head>
-      <StructuredData />
       <body style={{ fontFamily: "'DM Sans', sans-serif" }}>
         <ToastContainer />
+        <MeshBackground />
         <NavbarWrapper />
         <main className="pt-20 min-h-screen relative z-10">
           {children}

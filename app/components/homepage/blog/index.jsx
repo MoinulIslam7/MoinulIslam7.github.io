@@ -5,14 +5,7 @@ import BlogCard from './blog-card';
 
 function Blog({ blogs }) {
   return (
-    <section id="blogs" className="animate-slide-in-bottom" style={{ padding: '5rem 0', position: 'relative' }}>
-      {/* Ambient glow */}
-      <div aria-hidden="true" style={{
-        position: 'absolute', left: '50%', transform: 'translateX(-50%)',
-        width: '600px', height: '300px',
-        background: 'radial-gradient(ellipse, rgba(200,149,108,0.06) 0%, transparent 70%)',
-        pointerEvents: 'none', zIndex: 0,
-      }} />
+    <section id="blogs" className="section-aurora section-aurora--blog animate-slide-in-bottom" style={{ padding: '5rem 0', position: 'relative' }}>
 
       <div className="section-header animate-fade-up">
         <span className="section-tag animate-pop-in">Chapter 06</span>

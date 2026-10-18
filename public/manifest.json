@@ -1,5 +1,5 @@
 {
-  "name": "Moinul Islam Portfolio",
+  "name": "Moinul Islam",
   "short_name": "Moinul.dev",
   "description": "Professional Full Stack Software Developer Portfolio",
   "start_url": "/",
@@ -8,12 +8,12 @@
   "theme_color": "#c8956c",
   "icons": [
     {
-      "src": "/Moinul-Islam.png",
+      "src": "/icon-192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "/Moinul-Islam.png",
+      "src": "/icon-512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
